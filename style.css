@@ -1,0 +1,20 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    flex-direction: column;
+}
+
+.canvas-frame {
+    width: 720px;
+    height: 480px;
+    background-color: black;
+}
+
+.player {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-color: red;
+}

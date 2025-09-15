@@ -4,11 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="./classes/player/controller.class.js"></script>
+    <script src="./classes/player/inventory.class.js"></script>
+    <script src="./classes/coin.class.js"></script>
+    <script src="./classes/cointype.class.js"></script>
+    <script src="./classes/enemy.class.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./script.js"></script>
     <title>Document</title>
 </head>
 
-<body>
-
+<body onload="init()">
+    <h1>Jump Quest</h1>
+    <canvas id="canvas" class="canvas-frame"></canvas>
+    <div id="player" class="player"></div>
 </body>
 
 </html>
