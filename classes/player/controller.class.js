@@ -23,5 +23,4 @@ document.addEventListener('keydown', function (event) {
         posY += 10.0;
     }
     player.style.transform = `translate(${posX}px, ${posY}px)`;
-    console.log('Key pressed: ' + event.key);
 });
