@@ -1,6 +1,6 @@
 class World {
     character = new Player();
-    enemy = new Enemy();
+    enemies = [new Enemy()];
     clouds = [new Cloud()];
     backgroundObjects = [
         new BackgroundObject("img/Background_City/city 1/1.png"),
@@ -26,19 +26,22 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.backgroundObjects.forEach(backgroundElement => {
-            this.addToMap(backgroundElement);
-        });
-
-        this.ctx.drawImage(this.clouds[0].img, this.clouds[0].posX, this.clouds[0].posY, this.clouds[0].width, this.clouds[0].height);
-        this.ctx.drawImage(this.enemy.img, this.enemy.posX, this.enemy.posY - 30, 128 * 1.4, 128 * 1.4);
-        this.ctx.drawImage(this.character.img, this.character.posX, this.character.posY - 105, 25.6 * 10, 25.6 * 10);
+        this.addObjectToMap(this.backgroundObjects);
+        this.addObjectToMap(this.clouds);
+        this.addObjectToMap(this.enemies);
+        this.addToMap(this.character);
 
         const dpi = window.devicePixelRatio;
         this.ctx.scale(dpi, dpi);
 
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
+    }
+
+    addObjectToMap(o) {
+        o.forEach(element => {
+            this.addToMap(element);
+        });
     }
 
     addToMap(mo) {

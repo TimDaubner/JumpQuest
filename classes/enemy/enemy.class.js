@@ -4,6 +4,8 @@ class Enemy extends MovableObject {
 
         this.posX = 150;
         this.posX += Math.random() * 50;
-        this.posY = 0;
+        this.posY = 60;
+        this.width = 128 * 0.7;
+        this.height = 128 * 0.7;
     }
 }
