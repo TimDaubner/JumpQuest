@@ -27,8 +27,9 @@ class World {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.backgroundObjects.forEach(backgroundElement => {
-            this.ctx.drawImage(backgroundElement.img, backgroundElement.posX, backgroundElement.posY, 300, 155);
+            this.addToMap(backgroundElement);
         });
+
         this.ctx.drawImage(this.clouds[0].img, this.clouds[0].posX, this.clouds[0].posY, this.clouds[0].width, this.clouds[0].height);
         this.ctx.drawImage(this.enemy.img, this.enemy.posX, this.enemy.posY - 30, 128 * 1.4, 128 * 1.4);
         this.ctx.drawImage(this.character.img, this.character.posX, this.character.posY - 105, 25.6 * 10, 25.6 * 10);
@@ -38,5 +39,9 @@ class World {
 
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
+    }
+
+    addToMap(mo) {
+        this.ctx.drawImage(mo.img, mo.posX, mo.posY, mo.width, mo.height);
     }
 }
