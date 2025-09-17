@@ -1,13 +1,9 @@
-let enemyTypes = [];
-
 class Enemy extends MovableObject {
+    constructor() {
+        super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
 
-    takeDamage() {
-        console.log("take damage");
+        this.posX = 150;
+        this.posX += Math.random() * 50;
+        this.posY = 0;
     }
-
-    spareDamage() {
-        console.log("spare damage");
-    }
-
 }

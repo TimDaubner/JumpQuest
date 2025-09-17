@@ -1,5 +1,5 @@
-let posX = 1;
-let posY = 1;
+let posX;
+let posY;
 speed = 2.0;
 
 document.addEventListener('keydown', function (event) {
@@ -22,5 +22,6 @@ document.addEventListener('keydown', function (event) {
     if (event.key == 's') {
         posY += 10.0;
     }
-    player.style.transform = `translate(${posX}px, ${posY}px)`;
+    world.character.posX = posX;
+    world.character.posY = posY;
 });
