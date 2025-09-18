@@ -4,7 +4,7 @@ class Player extends MovableObject {
     posX = 0;
     posY = 22;
     world;
-    speed = 3;
+    speed = 0.7;
 
     IMAGES_IDLE = [
         './img/Player_Anim/Idle/idle_00.png',
@@ -53,19 +53,29 @@ class Player extends MovableObject {
         setInterval(() => {
             if (this.world.controller.RIGHT) {
                 this.posX += this.speed;
+                this.isMirrored = false;
+            }
+            if (this.world.controller.LEFT) {
+                this.posX -= this.speed;
+                this.isMirrored = true;
+            }
+            this.world.camera_x = -this.posX;
+        }, 1000 / 60);
+
+        setInterval(() => {
+            if (this.world.controller.RIGHT) {
                 let i = this.currentImg % this.IMAGES_WALKING.length;
                 let path = this.IMAGES_WALKING[i];
                 this.img = this.imgCache[path];
                 this.currentImg++;
             }
             if (this.world.controller.LEFT) {
-                this.posX -= this.speed;
                 let i = this.currentImg % this.IMAGES_WALKING_R.length;
                 let path = this.IMAGES_WALKING_R[i];
                 this.img = this.imgCache[path];
                 this.currentImg++;
             }
-        }, 1000 / 10);
+        }, 1000 / 11);
     }
     //IDLE 5
     //WALKING 10
