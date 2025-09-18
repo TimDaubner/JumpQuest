@@ -1,6 +1,10 @@
 class Player extends MovableObject {
     width = 25.6 * 5;
     height = 25.6 * 5;
+    posX = 0;
+    posY = 22;
+    world;
+    speed = 3;
 
     IMAGES_IDLE = [
         './img/Player_Anim/Idle/idle_00.png',
@@ -23,26 +27,45 @@ class Player extends MovableObject {
         './img/Player_Anim/Walk/walk_08.png',
         './img/Player_Anim/Walk/walk_09.png',
     ];
+    IMAGES_WALKING_R = [
+        './img/Player_Anim/Walk/walk_00.png',
+        './img/Player_Anim/Walk/walk_01.png',
+        './img/Player_Anim/Walk/walk_02.png',
+        './img/Player_Anim/Walk/walk_03.png',
+        './img/Player_Anim/Walk/walk_04.png',
+        './img/Player_Anim/Walk/walk_05.png',
+        './img/Player_Anim/Walk/walk_06.png',
+        './img/Player_Anim/Walk/walk_07.png',
+        './img/Player_Anim/Walk/walk_08.png',
+        './img/Player_Anim/Walk/walk_09.png',
+    ];
 
     currentImg = 0;
 
     constructor() {
         super().loadImg('./img/Player_Anim/Idle/idle_00.png');
-        this.loadImgs(this.IMAGES_IDLE);
+        this.loadImgs(this.IMAGES_WALKING);
 
         this.animate();
-
-        this.posX = 0;
-        this.posY = 22;
     }
 
     animate() {
         setInterval(() => {
-            let i = this.currentImg % this.IMAGES_IDLE.length;
-            let path = this.IMAGES_IDLE[i];
-            this.img = this.imgCache[path];
-            this.currentImg++;
-        }, 1000 / 8);
+            if (this.world.controller.RIGHT) {
+                this.posX += this.speed;
+                let i = this.currentImg % this.IMAGES_WALKING.length;
+                let path = this.IMAGES_WALKING[i];
+                this.img = this.imgCache[path];
+                this.currentImg++;
+            }
+            if (this.world.controller.LEFT) {
+                this.posX -= this.speed;
+                let i = this.currentImg % this.IMAGES_WALKING_R.length;
+                let path = this.IMAGES_WALKING_R[i];
+                this.img = this.imgCache[path];
+                this.currentImg++;
+            }
+        }, 1000 / 10);
     }
     //IDLE 5
     //WALKING 10

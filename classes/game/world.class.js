@@ -15,13 +15,16 @@ class World {
     ];
     canvas;
     ctx;
+    controller;
 
-    constructor(canvas) {
+    constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.controller = controller;
         //scale up or down
         // this.ctx.scale(6.2, 6.2);
         this.draw();
+        this.setWorld();
     }
 
     draw() {
@@ -36,6 +39,10 @@ class World {
 
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     addObjectToMap(o) {
