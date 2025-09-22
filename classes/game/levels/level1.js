@@ -1,6 +1,6 @@
 let bgo = [];
 const level1 = new Level(
-    [new Enemy(), new Enemy(), new Enemy()],
+    [new Enemy(), new Enemy(), new Enemy(), new EndBoss()],
     [new Cloud(0), new Cloud(299), new Cloud(598)],
     bgo,
 );
