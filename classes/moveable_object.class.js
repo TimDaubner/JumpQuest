@@ -6,6 +6,27 @@ class MovableObject {
     speed = 0.15;
     isMirrored = false;
 
+    acceleration = 0.15;
+    speedY = 0;
+    isGrounded = false;
+
+    applyGravity() {
+        setInterval(() => {
+            if (this.isAboveGround() || this.speedY > 0) {
+                this.posY -= this.speedY;
+                this.speedY -= this.acceleration;
+                this.isGrounded = false;
+            }
+            else {
+                this.isGrounded = true;
+            }
+        }, 1000 / 25)
+    }
+
+    isAboveGround() {
+        return this.posY < 22;
+    }
+
     loadImg(path) {
         this.img = new Image();
         this.img.src = path;
