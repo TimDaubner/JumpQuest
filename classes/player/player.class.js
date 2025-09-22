@@ -5,6 +5,7 @@ class Player extends MovableObject {
     posY = 22;
     world;
     speed = 0.7;
+    adjustValue = 1;
 
     IMAGES_IDLE = [
         './img/Player_Anim/Idle/idle_00.png',
@@ -44,22 +45,28 @@ class Player extends MovableObject {
 
     constructor() {
         super().loadImg('./img/Player_Anim/Idle/idle_00.png');
+        this.loadImgs(this.IMAGES_IDLE);
         this.loadImgs(this.IMAGES_WALKING);
-
         this.animate();
     }
 
     animate() {
         setInterval(() => {
-            if (this.world.controller.RIGHT) {
+            if (this.world.controller.RUN) {
+                this.speed = 1.4;
+            }
+            else {
+                this.speed = 0.7;
+            }
+            if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
                 this.posX += this.speed;
                 this.isMirrored = false;
             }
-            if (this.world.controller.LEFT) {
+            if (this.world.controller.LEFT && this.posX > -100) {
                 this.posX -= this.speed;
                 this.isMirrored = true;
             }
-            this.world.camera_x = -this.posX;
+            this.world.camera_x = -this.posX + 15;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -72,6 +79,15 @@ class Player extends MovableObject {
             if (this.world.controller.LEFT) {
                 let i = this.currentImg % this.IMAGES_WALKING_R.length;
                 let path = this.IMAGES_WALKING_R[i];
+                this.img = this.imgCache[path];
+                this.currentImg++;
+            }
+        }, 1000 / 11);
+
+        setInterval(() => {
+            if (!this.world.controller.RIGHT && !this.world.controller.LEFT) {
+                let i = this.currentImg % this.IMAGES_IDLE.length;
+                let path = this.IMAGES_IDLE[i];
                 this.img = this.imgCache[path];
                 this.currentImg++;
             }

@@ -23,6 +23,7 @@ function init() {
     // }, 2000);
 }
 
+//Controller for Player
 document.addEventListener('keydown', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
         controller.UP = true;
@@ -41,6 +42,9 @@ document.addEventListener('keydown', (event) => {
     }
     if (event.key === 'e' || event.keyCode === 69) {
         controller.THROW = true;
+    }
+    if (event.key === 'shift' || event.keyCode === 16) {
+        controller.RUN = true;
     }
 });
 document.addEventListener('keyup', (event) => {
@@ -61,5 +65,8 @@ document.addEventListener('keyup', (event) => {
     }
     if (event.key === 'e' || event.keyCode === 69) {
         controller.THROW = false;
+    }
+    if (event.key === 'shift' || event.keyCode === 16) {
+        controller.RUN = false;
     }
 });
