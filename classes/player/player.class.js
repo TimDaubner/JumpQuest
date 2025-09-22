@@ -53,7 +53,7 @@ class Player extends MovableObject {
     animate() {
         setInterval(() => {
             if (this.world.controller.RUN) {
-                this.speed = 1.4;
+                this.speed = 10;
             }
             else {
                 this.speed = 0.7;
@@ -70,26 +70,14 @@ class Player extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.world.controller.RIGHT) {
-                let i = this.currentImg % this.IMAGES_WALKING.length;
-                let path = this.IMAGES_WALKING[i];
-                this.img = this.imgCache[path];
-                this.currentImg++;
-            }
-            if (this.world.controller.LEFT) {
-                let i = this.currentImg % this.IMAGES_WALKING_R.length;
-                let path = this.IMAGES_WALKING_R[i];
-                this.img = this.imgCache[path];
-                this.currentImg++;
+            if (this.world.controller.RIGHT || this.world.controller.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
             }
         }, 1000 / 11);
 
         setInterval(() => {
             if (!this.world.controller.RIGHT && !this.world.controller.LEFT) {
-                let i = this.currentImg % this.IMAGES_IDLE.length;
-                let path = this.IMAGES_IDLE[i];
-                this.img = this.imgCache[path];
-                this.currentImg++;
+                this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000 / 11);
     }

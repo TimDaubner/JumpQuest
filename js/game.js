@@ -6,10 +6,10 @@ function init() {
     canvas = document.getElementById('canvas');
 
     // TODO - scaling objects
-    // canvas.width = 720 * 2;
-    // canvas.height = 480 * 2;
-    // canvas.style.width = "720px";
-    // canvas.style.height = "480px";
+    canvas.width = 720 * 2;
+    canvas.height = 480 * 2;
+    canvas.style.width = "720px";
+    canvas.style.height = "480px";
 
     world = new World(canvas, controller);
     posX = world.character.posX
