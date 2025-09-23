@@ -51,7 +51,9 @@ class World {
         if (mo.isMirrored) {
             this.flipImage(mo);
         }
-        this.ctx.drawImage(mo.img, mo.posX, mo.posY, mo.width, mo.height);
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+
         if (mo.isMirrored) {
             this.flipImageBack(mo);
         }

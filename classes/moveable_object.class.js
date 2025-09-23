@@ -60,4 +60,18 @@ class MovableObject {
     jump() {
         this.speedY = 5;
     }
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if (this instanceof Player || this instanceof Enemy) {
+            ctx.beginPath();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.posX, this.posY, this.width, this.height);
+            ctx.stroke();
+        }
+    }
 }

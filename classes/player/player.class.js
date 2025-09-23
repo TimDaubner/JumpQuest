@@ -83,7 +83,7 @@ class Player extends MovableObject {
 
 
         setInterval(() => {
-            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded) {
+            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000 / 11);
