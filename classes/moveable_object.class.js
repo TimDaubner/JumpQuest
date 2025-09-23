@@ -41,15 +41,13 @@ class MovableObject {
     }
 
     moveRight() {
-        setInterval(() => {
-            this.posX += this.speed;
-        }, 1000 / 60);
+        this.isMirrored = false;
+        this.posX += this.speed;
     }
 
     moveLeft() {
-        setInterval(() => {
-            this.posX -= this.speed;
-        }, 1000 / 60);
+        this.isMirrored = true;
+        this.posX -= this.speed;
     }
 
     playAnimation(anim) {
@@ -57,5 +55,9 @@ class MovableObject {
         let path = anim[i];
         this.img = this.imgCache[path];
         this.currentImg++;
+    }
+
+    jump() {
+        this.speedY = 5;
     }
 }

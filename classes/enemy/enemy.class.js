@@ -3,24 +3,24 @@ class Enemy extends MovableObject {
     height = 128 * 0.7;
 
     IMAGES_IDLE = [
-        'img/Enemy_Anim/Idle/idle_r_00.png',
-        'img/Enemy_Anim/Idle/idle_r_01.png',
-        'img/Enemy_Anim/Idle/idle_r_02.png',
-        'img/Enemy_Anim/Idle/idle_r_03.png',
-        'img/Enemy_Anim/Idle/idle_r_04.png',
-        'img/Enemy_Anim/Idle/idle_r_05.png'
+        'img/Enemy_Anim/Idle/idle_00.png',
+        'img/Enemy_Anim/Idle/idle_01.png',
+        'img/Enemy_Anim/Idle/idle_02.png',
+        'img/Enemy_Anim/Idle/idle_03.png',
+        'img/Enemy_Anim/Idle/idle_04.png',
+        'img/Enemy_Anim/Idle/idle_05.png'
     ];
     IMAGES_WALKING = [
-        'img/Enemy_Anim/Walk/walk_r_00.png',
-        'img/Enemy_Anim/Walk/walk_r_01.png',
-        'img/Enemy_Anim/Walk/walk_r_02.png',
-        'img/Enemy_Anim/Walk/walk_r_03.png',
-        'img/Enemy_Anim/Walk/walk_r_04.png',
-        'img/Enemy_Anim/Walk/walk_r_05.png',
-        'img/Enemy_Anim/Walk/walk_r_06.png',
-        'img/Enemy_Anim/Walk/walk_r_07.png',
-        'img/Enemy_Anim/Walk/walk_r_08.png',
-        'img/Enemy_Anim/Walk/walk_r_09.png',
+        'img/Enemy_Anim/Walk/walk_00.png',
+        'img/Enemy_Anim/Walk/walk_01.png',
+        'img/Enemy_Anim/Walk/walk_02.png',
+        'img/Enemy_Anim/Walk/walk_03.png',
+        'img/Enemy_Anim/Walk/walk_04.png',
+        'img/Enemy_Anim/Walk/walk_05.png',
+        'img/Enemy_Anim/Walk/walk_06.png',
+        'img/Enemy_Anim/Walk/walk_07.png',
+        'img/Enemy_Anim/Walk/walk_08.png',
+        'img/Enemy_Anim/Walk/walk_09.png',
     ];
 
     currentImg = 0;
@@ -36,8 +36,9 @@ class Enemy extends MovableObject {
     }
 
     animate() {
-        this.moveLeft();
-
+        setInterval(() => {
+            this.moveLeft();
+        }, 1000 / 60);
         setInterval(() => {
             this.playAnimation(this.IMAGES_WALKING)
         }, 1000 / 6);

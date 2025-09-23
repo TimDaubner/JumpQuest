@@ -55,19 +55,12 @@ class Player extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.world.controller.RUN) {
-                this.speed = 10;
-            }
-            else {
-                this.speed = 0.7;
-            }
+            this.sprint();
             if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
-                this.posX += this.speed;
-                this.isMirrored = false;
+                this.moveRight();
             }
             if (this.world.controller.LEFT && this.posX > -100) {
-                this.posX -= this.speed;
-                this.isMirrored = true;
+                this.moveLeft();
             }
             this.world.camera_x = -this.posX + 15;
         }, 1000 / 60);
@@ -83,7 +76,7 @@ class Player extends MovableObject {
                 this.playAnimation(this.IMAGES_JUMP);
             }
             if (this.world.controller.JUMP && this.isGrounded) {
-                this.speedY = 5;
+                this.jump();
             }
         }, 300);
 
@@ -94,6 +87,15 @@ class Player extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000 / 11);
+    }
+
+    sprint() {
+        if (this.world.controller.RUN && this.isGrounded) {
+            this.speed = 1.4;
+        }
+        else {
+            this.speed = 0.7;
+        }
     }
     //IDLE 5
     //WALKING 10
