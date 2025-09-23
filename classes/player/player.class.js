@@ -1,8 +1,8 @@
 class Player extends MovableObject {
-    width = 25.6 * 5;
-    height = 25.6 * 5;
+    width = 15 * 1.5;
+    height = 35 * 1.5;
     posX = 0;
-    posY = -75;//22
+    posY = 100;
     world;
     speed = 0.7;
     adjustValue = 1;
@@ -45,7 +45,7 @@ class Player extends MovableObject {
     currentImg = 0;
 
     constructor() {
-        super().loadImg('./img/Player_Anim/Idle/idle_00.png');
+        super().loadImg('./img/Player_Anim/Idle/idle_00 (Custom).png');
         this.loadImgs(this.IMAGES_IDLE);
         this.loadImgs(this.IMAGES_WALKING);
         this.loadImgs(this.IMAGES_JUMP);
@@ -82,11 +82,11 @@ class Player extends MovableObject {
 
 
 
-        setInterval(() => {
-            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
-                this.playAnimation(this.IMAGES_IDLE);
-            }
-        }, 1000 / 11);
+        // setInterval(() => {
+        //     if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
+        //         this.playAnimation(this.IMAGES_IDLE);
+        //     }
+        // }, 1000 / 11);
     }
 
     sprint() {
