@@ -1,4 +1,4 @@
-class MovableObject {
+class MovableObject extends DrawableObject {
     posX = 0;
     posY = 0;
     img;
@@ -10,7 +10,8 @@ class MovableObject {
     speedY = 0;
     isGrounded = false;
     energy = 100;
-    isHurt = false;
+
+    lastHit = 0;
 
     offset = {
         top: 0,
@@ -36,19 +37,6 @@ class MovableObject {
         return this.posY < 22;
     }
 
-    loadImg(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImgs(arr) {
-        arr.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imgCache[path] = img;
-        });
-    }
-
     moveRight() {
         this.isMirrored = false;
         this.posX += this.speed;
@@ -70,8 +58,29 @@ class MovableObject {
         this.speedY = 5;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
+    gotHit() {
+        this.energy -= 10;
+        console.log(this.energy);
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+        else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    isHurt() {
+        let timespan = new Date().getTime() - this.lastHit;
+        timespan /= 1000;
+        return timespan < 1;
+    }
+
+    isDead() {
+        return this.energy == 0;
+    }
+
+    isColliding(mo) {
+        return this.posX + this.offset.left + this.width / this.offset.sizeX > mo.posX + mo.offset.left && this.posY + this.offset.top + this.height / this.offset.sizeY > mo.posY + mo.offset.top && this.posX + this.offset.left / 4 < mo.posX + mo.offset.left && this.posY + this.offset.top < mo.posY + mo.offset.top + mo.height / mo.offset.sizeY;
     }
 
     drawFrame(ctx) {
@@ -87,23 +96,6 @@ class MovableObject {
             ctx.rect(this.posX, this.posY, this.width, this.height);
             ctx.stroke();
         }
-    }
-
-    gotHit() {
-        this.isHurt = true;
-        this.energy -= 10;
-        console.log(this.energy);
-        if (this.energy < 0) {
-            this.energy = 0;
-        }
-    }
-
-    isDead() {
-        return this.energy == 0;
-    }
-
-    isColliding(mo) {
-        return this.posX + this.offset.left + this.width / this.offset.sizeX > mo.posX + mo.offset.left && this.posY + this.offset.top + this.height / this.offset.sizeY > mo.posY + mo.offset.top && this.posX + this.offset.left / 4 < mo.posX + mo.offset.left && this.posY + this.offset.top < mo.posY + mo.offset.top + mo.height / mo.offset.sizeY;
     }
 
     //this.posX + this.width = point right point 

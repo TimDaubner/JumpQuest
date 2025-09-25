@@ -122,11 +122,10 @@ class Player extends MovableObject {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             }
-            else if (this.isHurt) {
+            else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                this.isHurt = false;
             }
-        }, 100);
+        }, 1000 / 11);
     }
 
     sprint() {

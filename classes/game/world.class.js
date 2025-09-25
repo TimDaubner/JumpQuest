@@ -33,7 +33,6 @@ class World {
 
         // const dpi = window.devicePixelRatio;
         // this.ctx.scale(dpi, dpi);
-
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
     }
