@@ -1,11 +1,18 @@
 class Player extends MovableObject {
-    width = 15 * 1.5;
-    height = 35 * 1.5;
+    width = 25.6 * 5;
+    height = 25.6 * 5;
     posX = 0;
-    posY = 100;
+    posY = 22;
     world;
     speed = 0.7;
     adjustValue = 1;
+
+    offset = {
+        top: 77,
+        left: 47,
+        sizeX: 6,
+        sizeY: 2.5
+    }
 
     IMAGES_IDLE = [
         './img/Player_Anim/Idle/idle_00.png',
@@ -29,15 +36,34 @@ class Player extends MovableObject {
         './img/Player_Anim/Walk/walk_09.png',
     ];
     IMAGES_JUMP = [
-        'img/Player_Anim/Jump/jump_00.png',
-        'img/Player_Anim/Jump/jump_01.png',
-        'img/Player_Anim/Jump/jump_02.png',
-        'img/Player_Anim/Jump/jump_03.png',
-        'img/Player_Anim/Jump/jump_04.png',
-        'img/Player_Anim/Jump/jump_05.png',
-        'img/Player_Anim/Jump/jump_06.png',
-        'img/Player_Anim/Jump/jump_07.png',
-        'img/Player_Anim/Jump/jump_08.png',
+        './img/Player_Anim/Jump/jump_00.png',
+        './img/Player_Anim/Jump/jump_01.png',
+        './img/Player_Anim/Jump/jump_02.png',
+        './img/Player_Anim/Jump/jump_03.png',
+        './img/Player_Anim/Jump/jump_04.png',
+        './img/Player_Anim/Jump/jump_05.png',
+        './img/Player_Anim/Jump/jump_06.png',
+        './img/Player_Anim/Jump/jump_07.png',
+        './img/Player_Anim/Jump/jump_08.png',
+    ];
+
+    IMAGES_DEAD = [
+        './img/Player_Anim/Dead/dead_00.png',
+        './img/Player_Anim/Dead/dead_01.png',
+        './img/Player_Anim/Dead/dead_02.png',
+        './img/Player_Anim/Dead/dead_03.png',
+        './img/Player_Anim/Dead/dead_04.png',
+        './img/Player_Anim/Dead/dead_05.png',
+        './img/Player_Anim/Dead/dead_06.png',
+        './img/Player_Anim/Dead/dead_07.png',
+        './img/Player_Anim/Dead/dead_08.png'
+    ];
+
+    IMAGES_HURT = [
+        './img/Player_Anim/Hurt/hurt_00.png',
+        './img/Player_Anim/Hurt/hurt_01.png',
+        './img/Player_Anim/Hurt/hurt_02.png',
+        './img/Player_Anim/Hurt/hurt_03.png',
     ];
 
 
@@ -45,12 +71,17 @@ class Player extends MovableObject {
     currentImg = 0;
 
     constructor() {
-        super().loadImg('./img/Player_Anim/Idle/idle_00 (Custom).png');
+        super().loadImg('./img/Player_Anim/Idle/idle_00.png');
         this.loadImgs(this.IMAGES_IDLE);
         this.loadImgs(this.IMAGES_WALKING);
         this.loadImgs(this.IMAGES_JUMP);
+        this.loadImgs(this.IMAGES_HURT);
+        this.loadImgs(this.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
+        console.log(this.width);
+        console.log(this.height);
+
     }
 
     animate() {
@@ -72,6 +103,7 @@ class Player extends MovableObject {
         }, 1000 / 11);
 
         setInterval(() => {
+
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
@@ -80,13 +112,21 @@ class Player extends MovableObject {
             }
         }, 300);
 
+        setInterval(() => {
+            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+        }, 1000 / 11);
 
-
-        // setInterval(() => {
-        //     if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
-        //         this.playAnimation(this.IMAGES_IDLE);
-        //     }
-        // }, 1000 / 11);
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            else if (this.isHurt) {
+                this.playAnimation(this.IMAGES_HURT);
+                this.isHurt = false;
+            }
+        }, 100);
     }
 
     sprint() {

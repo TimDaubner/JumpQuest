@@ -2,6 +2,13 @@ class Enemy extends MovableObject {
     width = 128 * 0.7;
     height = 128 * 0.7;
 
+    offset = {
+        top: 40,
+        left: 34,
+        sizeX: 6,
+        sizeY: 1.8
+    }
+
     IMAGES_IDLE = [
         'img/Enemy_Anim/Idle/idle_00.png',
         'img/Enemy_Anim/Idle/idle_01.png',
@@ -30,7 +37,7 @@ class Enemy extends MovableObject {
         this.animate();
 
         this.posX = 300;
-        this.posX += Math.random() * 200;
+        this.posX += Math.random() * 10;
         this.posY = 60;
         this.speed = 0.15 + Math.random() * 0.25;
     }

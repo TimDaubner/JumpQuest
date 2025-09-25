@@ -17,6 +17,7 @@ class World {
 
         this.draw();
         this.setWorld();
+        this.checkCollisions();
     }
 
     draw() {
@@ -35,6 +36,17 @@ class World {
 
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
+    }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    console.log('Collision with Character', enemy);
+                    this.character.gotHit();
+                }
+            });
+        }, 1000);
     }
 
     setWorld() {
