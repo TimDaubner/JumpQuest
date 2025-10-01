@@ -20,7 +20,7 @@ let coinTypes = [
 ];
 
 let number = 0;
-class Coin {
+class Coin extends DrawableObject {
     name;
     id;
 
