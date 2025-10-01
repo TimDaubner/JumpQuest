@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
 
     lastHit = 0;
+    isCurrentHurt = false;
 
     offset = {
         top: 0,
@@ -55,7 +56,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 5;
+        this.speedY = 4.5;
     }
 
     gotHit() {
@@ -80,26 +81,21 @@ class MovableObject extends DrawableObject {
     }
 
     isColliding(mo) {
-        return this.posX + this.offset.left + this.width / this.offset.sizeX > mo.posX + mo.offset.left && this.posY + this.offset.top + this.height / this.offset.sizeY > mo.posY + mo.offset.top && this.posX + this.offset.left / 4 < mo.posX + mo.offset.left && this.posY + this.offset.top < mo.posY + mo.offset.top + mo.height / mo.offset.sizeY;
-    }
+        const thisLeft = this.posX + this.offset.left;
+        const thisRight = thisLeft + this.width / this.offset.sizeX;
+        const thisTop = this.posY + this.offset.top;
+        const thisBottom = thisTop + this.height / this.offset.sizeY;
 
-    drawFrame(ctx) {
-        if (this instanceof Player || this instanceof Enemy) {
-            ctx.beginPath();
-            ctx.lineWidth = 0.5;
-            ctx.strokeStyle = 'red';
-            ctx.rect(this.posX + this.offset.left, this.posY + this.offset.top, this.width / this.offset.sizeX, this.height / this.offset.sizeY);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.lineWidth = 1;
-            ctx.strokeStyle = 'green';
-            ctx.rect(this.posX, this.posY, this.width, this.height);
-            ctx.stroke();
-        }
-    }
+        const otherLeft = mo.posX + mo.offset.left;
+        const otherRight = otherLeft + mo.width / mo.offset.sizeX;
+        const otherTop = mo.posY + mo.offset.top;
+        const otherBottom = otherTop + mo.height / mo.offset.sizeY;
 
-    //this.posX + this.width = point right point 
-    //this.posX = point left point
-    //this.posY = point top point 
-    //this.posY + this.height = point bottom point 
+        return (
+            thisRight > otherLeft &&
+            thisLeft < otherRight &&
+            thisBottom > otherTop &&
+            thisTop < otherBottom
+        );
+    }
 }

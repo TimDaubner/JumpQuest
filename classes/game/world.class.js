@@ -5,6 +5,14 @@ class World {
     ctx;
     controller;
     camera_x;
+    statusbar_HP = new Statusbar(10, 0, 100);
+    statusbar_ENDURANCE = new Statusbar(25, 1, 100);
+    statusbar_GAS = new Statusbar(40, 2, 5);
+    throwableObjects = [
+        new ThrowableObject(),
+        new ThrowableObject(),
+        new ThrowableObject()
+    ];
 
     constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
@@ -28,8 +36,13 @@ class World {
         this.addObjectToMap(this.level.clouds);
         this.addObjectToMap(this.level.enemies);
         this.addToMap(this.character);
-
         this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusbar_HP);
+        this.addToMap(this.statusbar_ENDURANCE);
+        this.addToMap(this.statusbar_GAS);
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+
 
         // const dpi = window.devicePixelRatio;
         // this.ctx.scale(dpi, dpi);
@@ -40,12 +53,12 @@ class World {
     checkCollisions() {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
+                if (this.character.isColliding(enemy) && !world.character.isHurt()) {
                     console.log('Collision with Character', enemy);
                     this.character.gotHit();
                 }
             });
-        }, 1000);
+        }, 100);
     }
 
     setWorld() {

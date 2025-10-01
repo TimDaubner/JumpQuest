@@ -6,6 +6,7 @@ class Player extends MovableObject {
     world;
     speed = 0.7;
     adjustValue = 1;
+    endurance = 100;
 
     offset = {
         top: 77,
@@ -79,9 +80,6 @@ class Player extends MovableObject {
         this.loadImgs(this.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
-        console.log(this.width);
-        console.log(this.height);
-
     }
 
     animate() {
@@ -107,8 +105,10 @@ class Player extends MovableObject {
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
-            if (this.world.controller.JUMP && this.isGrounded) {
+            if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
                 this.jump();
+                this.endurance -= 25;
+                if (this.endurance < 0) this.endurance = 0;
             }
         }, 300);
 
@@ -124,17 +124,39 @@ class Player extends MovableObject {
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
+                world.statusbar_HP.setPercentage(this.energy);
             }
         }, 1000 / 11);
     }
 
     sprint() {
         if (this.world.controller.RUN && this.isGrounded) {
-            this.speed = 1.4;
+            if (this.endurance > 0 && this.world.controller.LEFT || this.endurance > 0 && this.world.controller.RIGHT) {
+                this.speed = 1.4;
+                this.sprintDrain();
+            }
+            else {
+                this.speed = 0.7;
+            }
         }
         else {
             this.speed = 0.7;
+            this.gainEndurance();
         }
+    }
+
+    sprintDrain() {
+        if (this.endurance > 0) {
+            this.endurance -= 0.5;
+        }
+        world.statusbar_ENDURANCE.setPercentage(this.endurance);
+    }
+
+    gainEndurance() {
+        if (this.endurance < 100 && this.isGrounded) {
+            this.endurance++;
+        }
+        world.statusbar_ENDURANCE.setPercentage(this.endurance);
     }
     //IDLE 5
     //WALKING 10

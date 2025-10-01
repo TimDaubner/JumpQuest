@@ -22,4 +22,19 @@ class DrawableObject {
     draw(ctx) {
         ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
     }
+
+    drawFrame(ctx) {
+        if (this instanceof Player || this instanceof Enemy) {
+            ctx.beginPath();
+            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.posX + this.offset.left, this.posY + this.offset.top, this.width / this.offset.sizeX, this.height / this.offset.sizeY);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.lineWidth = 1;
+            ctx.strokeStyle = 'green';
+            ctx.rect(this.posX, this.posY, this.width, this.height);
+            ctx.stroke();
+        }
+    }
 }
