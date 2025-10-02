@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject {
     acceleration = 0.15;
     speedY = 0;
     isGrounded = false;
-    energy = 100;
+    energy = 10;
 
     lastHit = 0;
     isCurrentHurt = false;
@@ -35,7 +35,12 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.posY < 22;
+        if (this instanceof ThrowableObject) {
+            return true;
+        }
+        else {
+            return this.posY < 22;
+        }
     }
 
     moveRight() {
@@ -54,6 +59,15 @@ class MovableObject extends DrawableObject {
         this.img = this.imgCache[path];
         this.currentImg++;
     }
+    //TODO- death anim stop one take watch Bilder updaten video
+    playDeathAnimation(anim) {
+        let i = this.currentImg % anim.length;
+        let path = anim[i];
+        this.img = this.imgCache[path];
+        if (this.currentImg > anim.length) {
+            this.currentImg++;
+        }
+    }
 
     jump() {
         this.speedY = 4.5;
@@ -61,7 +75,7 @@ class MovableObject extends DrawableObject {
 
     gotHit() {
         this.energy -= 10;
-        console.log(this.energy);
+        // console.log(this.energy);
         if (this.energy < 0) {
             this.energy = 0;
         }
