@@ -120,11 +120,12 @@ class Player extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
+                world.statusbars[0].setPercentage(this.energy);
+                this.playDeathAnimation(this.IMAGES_DEAD);
             }
             else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-                world.statusbar_HP.setPercentage(this.energy);
+                world.statusbars[0].setPercentage(this.energy);
             }
         }, 1000 / 11);
     }
@@ -132,15 +133,15 @@ class Player extends MovableObject {
     sprint() {
         if (this.world.controller.RUN && this.isGrounded) {
             if (this.endurance > 0 && this.world.controller.LEFT || this.endurance > 0 && this.world.controller.RIGHT) {
-                this.speed = 1.4;
+                this.speed = 2.2;
                 this.sprintDrain();
             }
             else {
-                this.speed = 0.7;
+                this.speed = 1.4;
             }
         }
         else {
-            this.speed = 0.7;
+            this.speed = 1.4;
             this.gainEndurance();
         }
     }
@@ -149,14 +150,14 @@ class Player extends MovableObject {
         if (this.endurance > 0) {
             this.endurance -= 0.5;
         }
-        world.statusbar_ENDURANCE.setPercentage(this.endurance);
+        world.statusbars[1].setPercentage(this.endurance);
     }
 
     gainEndurance() {
         if (this.endurance < 100 && this.isGrounded) {
             this.endurance++;
         }
-        world.statusbar_ENDURANCE.setPercentage(this.endurance);
+        world.statusbars[1].setPercentage(this.endurance);
     }
     //IDLE 5
     //WALKING 10

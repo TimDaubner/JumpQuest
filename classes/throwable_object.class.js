@@ -1,72 +1,97 @@
 class ThrowableObject extends MovableObject {
-    posX = 0;
-    posY = 0;
+    posX = 20;
+    posY = 40;
     img;
     imgCache = {};
-    speed = 0.15;
-    isMirrored = false;
-
-    acceleration = 0.15;
-    speedX = 0;
+    width = 50;
+    height = 50;
     speedY = 0;
-    isGrounded = false;
-    energy = 100;
+    // speed = 0.15;
+    // isMirrored = false;
 
-    lastHit = 0;
-    isCurrentHurt = false;
+    // acceleration = 0.15;
+    // speedX = 0;
+    // isGrounded = false;
+    // energy = 100;
 
-    offset = {
-        top: 0,
-        left: 0,
-        sizeX: 1,
-        sizeY: 1
+    // lastHit = 0;
+    // isCurrentHurt = false;
+
+    // offset = {
+    //     top: 0,
+    //     left: 0,
+    //     sizeX: 1,
+    //     sizeY: 1
+    // }
+
+    IMAGES_RANGEATTACK = [
+        './img/Objects/box1.png',
+    ];
+
+    constructor(posX, posY) {
+        super().loadImg(this.IMAGES_RANGEATTACK[0]);
+        this.throw(posX + this.posX, posY + this.posY);
     }
 
-    applyGravity() {
+    throw(posX, posY) {
+        let isDirection = world.character.isMirrored;
+        this.posX = posX;
+        this.posY = posY;
+        this.speedY = 2;
+        this.applyGravity();
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.posY -= this.speedY;
-                this.speedY -= this.acceleration;
-                this.isGrounded = false;
+            if (isDirection) {
+                this.posX -= 4;
             }
             else {
-                this.isGrounded = true;
+                this.posX += 4;
             }
-        }, 1000 / 25)
+        }, 1000 / 60);
     }
 
-    isAboveGround() {
-        return this.posY < 22;
-    }
+    // applyGravity() {
+    //     setInterval(() => {
+    //         if (this.isAboveGround() || this.speedY > 0) {
+    //             this.posY -= this.speedY;
+    //             this.speedY -= this.acceleration;
+    //             this.isGrounded = false;
+    //         }
+    //         else {
+    //             this.isGrounded = true;
+    //         }
+    //     }, 1000 / 25)
+    // }
 
-    moveRight() {
-        this.isMirrored = false;
-        this.posX += this.speed;
-    }
+    // isAboveGround() {
+    //     return this.posY < 22;
+    // }
 
-    moveLeft() {
-        this.isMirrored = true;
-        this.posX -= this.speed;
-    }
+    // moveRight() {
+    //     this.isMirrored = false;
+    //     this.posX += this.speed;
+    // }
 
-    playAnimation(anim) {
-        let i = this.currentImg % anim.length;
-        let path = anim[i];
-        this.img = this.imgCache[path];
-        this.currentImg++;
-    }
+    // moveLeft() {
+    //     this.isMirrored = true;
+    //     this.posX -= this.speed;
+    // }
 
-    jump() {
-        this.speedY = 5;
-    }
+    // playAnimation(anim) {
+    //     let i = this.currentImg % anim.length;
+    //     let path = anim[i];
+    //     this.img = this.imgCache[path];
+    //     this.currentImg++;
+    // }
 
-    isColliding(mo) {
-        return this.posX + this.offset.left + this.width / this.offset.sizeX > mo.posX + mo.offset.left && this.posY + this.offset.top + this.height / this.offset.sizeY > mo.posY + mo.offset.top && this.posX + this.offset.left / 4 < mo.posX + mo.offset.left && this.posY + this.offset.top < mo.posY + mo.offset.top + mo.height / mo.offset.sizeY;
-    }
+    // jump() {
+    //     this.speedY = 5;
+    // }
 
-    throw() {
-        //TODO-spawn fireball
-    }
+    // isColliding(mo) {
+    //     return this.posX + this.offset.left + this.width / this.offset.sizeX > mo.posX + mo.offset.left && this.posY + this.offset.top + this.height / this.offset.sizeY > mo.posY + mo.offset.top && this.posX + this.offset.left / 4 < mo.posX + mo.offset.left && this.posY + this.offset.top < mo.posY + mo.offset.top + mo.height / mo.offset.sizeY;
+    // }
+
+
 
     //this.posX + this.width = point right point 
     //this.posX = point left point

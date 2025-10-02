@@ -4,6 +4,9 @@ body {
     align-items: center;
     height: 90vh;
     flex-direction: column;
+    background-image: url('./img/Background_City/city 4/10.png');
+    background-position: center;
+    background-size: cover;
 }
 
 .canvas-frame {

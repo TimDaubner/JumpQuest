@@ -5,13 +5,19 @@ class World {
     ctx;
     controller;
     camera_x;
-    statusbar_HP = new Statusbar(10, 0, 100);
-    statusbar_ENDURANCE = new Statusbar(25, 1, 100);
-    statusbar_GAS = new Statusbar(40, 2, 5);
+    statusbars = [
+        new Statusbar(10, 10, 0, 100),
+        new Statusbar(10, 25, 1, 100),
+        new Statusbar(10, 40, 2, 5),
+        new Statusbar(3, 10, 3, 10),
+        new Statusbar(150, 10, 4, 10),
+        new Statusbar(180, 10, 5, 10),
+        new Statusbar(210, 10, 6, 10),
+        new Statusbar(4, 40, 7, 7),
+    ];
     throwableObjects = [
-        new ThrowableObject(),
-        new ThrowableObject(),
-        new ThrowableObject()
+    ];
+    collectableObjects = [
     ];
 
     constructor(canvas, controller) {
@@ -26,6 +32,14 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.createCollectables();
+        this.run();
+    }
+
+    createCollectables() {
+        for (let i = 0; i < 55; i++) {
+            this.collectableObjects.push(new CollectableObject(200, 25, 0));
+        }
     }
 
     draw() {
@@ -36,10 +50,10 @@ class World {
         this.addObjectToMap(this.level.clouds);
         this.addObjectToMap(this.level.enemies);
         this.addToMap(this.character);
+        this.addObjectToMap(this.collectableObjects);
+        this.addObjectToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusbar_HP);
-        this.addToMap(this.statusbar_ENDURANCE);
-        this.addToMap(this.statusbar_GAS);
+        this.addObjectToMap(this.statusbars);
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);
 
@@ -50,15 +64,33 @@ class World {
         requestAnimationFrame(function () { self.draw(); });
     }
 
-    checkCollisions() {
+    run() {
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy) && !world.character.isHurt()) {
-                    console.log('Collision with Character', enemy);
-                    this.character.gotHit();
-                }
-            });
+            this.checkCollisions();
+            this.checkThrowObjects();
         }, 100);
+    }
+
+    checkCollisions() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.character.isColliding(enemy) && !world.character.isHurt()) {
+                // console.log('Collision with Character', enemy);
+                this.character.gotHit();
+            }
+        });
+        this.collectableObjects.forEach((collectable) => {
+            if (this.character.isColliding(collectable)) {
+                collectable.width = 0;
+                collectable.height = 0;
+            }
+        });
+    }
+
+    checkThrowObjects() {
+        if (controller.THROW) {
+            let attack = new ThrowableObject(this.character.posX, this.character.posY);
+            this.throwableObjects.push(attack);
+        }
     }
 
     setWorld() {
