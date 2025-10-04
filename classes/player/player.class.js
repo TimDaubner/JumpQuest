@@ -131,9 +131,17 @@ class Player extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }, 1000 / 11);
+
+        setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+            }
+            else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+                world.statusbar_HP.setPercentage(this.energy);
+            }
+        }, 1000 / 11);
     }
-
-
 
     sprint() {
         if (this.world.controller.RUN && this.isGrounded) {

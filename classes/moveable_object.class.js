@@ -60,6 +60,15 @@ class MovableObject extends DrawableObject {
         this.img = this.imgCache[path];
         this.currentImg++;
     }
+    //TODO- death anim stop one take watch Bilder updaten video
+    playDeathAnimation(anim) {
+        let i = this.currentImg % anim.length;
+        let path = anim[i];
+        this.img = this.imgCache[path];
+        if (this.currentImg > anim.length) {
+            this.currentImg++;
+        }
+    }
 
     playDeathAnimation(anim) {
         let i = this.currentImg % anim.length;
