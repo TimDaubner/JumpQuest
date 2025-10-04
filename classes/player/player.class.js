@@ -93,8 +93,8 @@ class Player extends MovableObject {
                 world.statusbars[0].setPercentage(this.energy);
             }
         }, 1000 / 10);
+        if (this.isDead()) return;
         setInterval(() => {
-            if (this.isDead()) return;
             this.sprint();
             if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
                 this.moveRight();
@@ -106,7 +106,6 @@ class Player extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isDead()) return;
             if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
@@ -114,7 +113,6 @@ class Player extends MovableObject {
 
         setInterval(() => {
 
-            if (this.isDead()) return;
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
             }
@@ -126,19 +124,8 @@ class Player extends MovableObject {
         }, 300);
 
         setInterval(() => {
-            if (this.isDead()) return;
             if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
                 this.playAnimation(this.IMAGES_IDLE);
-            }
-        }, 1000 / 11);
-
-        setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            }
-            else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                world.statusbar_HP.setPercentage(this.energy);
             }
         }, 1000 / 11);
     }
