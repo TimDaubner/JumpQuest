@@ -26,7 +26,7 @@ class World {
         this.controller = controller;
 
         //scale up or down
-        this.ctx.scale(6.2, 6.2);
+        this.ctx.scale(6.2, 6.4);
         createBackground();
 
         this.draw();

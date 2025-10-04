@@ -33,7 +33,15 @@
 
 <body onload="init()">
     <h1>Jump Quest</h1>
-    <canvas id="canvas" class="canvas-frame"></canvas>
+    <div class="container" id="container">
+        <div class="buttons">
+            <button onclick="startGame()" class="start-btn"></button>
+            <button onclick="openSettings()" class="settings-btn"></button>
+            <button onclick="exitGame()" class="exit-btn"></button>
+        </div>
+    </div>
+    <canvas id="canvas" class="canvas-frame">
+    </canvas>
 </body>
 
 </html>

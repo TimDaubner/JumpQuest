@@ -65,15 +65,6 @@ class MovableObject extends DrawableObject {
         let i = this.currentImg % anim.length;
         let path = anim[i];
         this.img = this.imgCache[path];
-        if (anim.length - 1 > i) {
-            this.currentImg++;
-        }
-    }
-
-    playDeathAnimation(anim) {
-        let i = this.currentImg % anim.length;
-        let path = anim[i];
-        this.img = this.imgCache[path];
         if (anim.length - 1 > i)
             this.currentImg++;
     }
