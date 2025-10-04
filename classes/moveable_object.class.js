@@ -13,6 +13,7 @@ class MovableObject extends DrawableObject {
 
     lastHit = 0;
     isCurrentHurt = false;
+    isReallyDead = false;
 
     offset = {
         top: 0,
@@ -59,14 +60,13 @@ class MovableObject extends DrawableObject {
         this.img = this.imgCache[path];
         this.currentImg++;
     }
-    //TODO- death anim stop one take watch Bilder updaten video
+
     playDeathAnimation(anim) {
         let i = this.currentImg % anim.length;
         let path = anim[i];
         this.img = this.imgCache[path];
-        if (this.currentImg > anim.length) {
+        if (anim.length - 1 > i)
             this.currentImg++;
-        }
     }
 
     jump() {
