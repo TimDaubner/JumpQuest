@@ -5,7 +5,7 @@ let isRunning = false;
 let intervals = [];
 
 function init() {
-
+    SoundHub.playLoop(SoundHub.BACKGROUND);
     // character.src = '../img/Player_Anim/Idle/idle_00.png';
     // setTimeout(() => {
 

@@ -19,6 +19,8 @@ class World {
     ];
     collectableObjects = [
     ];
+    punches = [
+    ];
 
     constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
@@ -54,6 +56,7 @@ class World {
         this.addToMap(this.character);
         this.addObjectToMap(this.collectableObjects);
         this.addObjectToMap(this.throwableObjects);
+        this.addObjectToMap(this.punches);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectToMap(this.statusbars);
         this.ctx.translate(this.camera_x, 0);
@@ -101,7 +104,8 @@ class World {
     checkPunchHit() {
         if (this.controller.ATTACK && !this.character.isDead()) {
             console.log("ATTACK");
-            let currentAttack = new Attack();
+            let currentAttack = new Attack(this.character.posX, this.character.posY);
+            this.punches.push = currentAttack;
 
             this.level.enemies.forEach((enemy) => {
                 if (currentAttack.isColliding(enemy)) {

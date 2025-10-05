@@ -1,15 +1,19 @@
 class Attack extends DrawableObject {
+    //TODO - Punch Attack
+
+    posX = 20;
+    posY = 40;
+    img;
+    imgCache = {};
     width = 100;
     height = 100;
-    img = './img/Objects/box2.png'
-    offset = {
-        top: 0,
-        left: 50,
-        sizeX: 1,
-        sizeY: 1
-    }
+
+    IMAGES_ATTACK = [
+        './img/Objects/box2.png'
+    ]
+
     constructor() {
-        super();
+        super().loadImg(this.IMAGES_ATTACK[0]);
         this.loadImg(this.img);
     }
 
