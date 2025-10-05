@@ -19,20 +19,26 @@ class BackgroundObject extends MovableObject {
 
     moveLeft(width) {
         setInterval(() => {
-            if (this.posX <= -width) {
-                this.posX = width - 1 + this.posX;
+            if (isRunning) {
+
+                if (this.posX <= -width) {
+                    this.posX = width - 1 + this.posX;
+                }
+                this.posX -= this.speed;
             }
-            this.posX -= this.speed;
         }, 1000 / 60);
     }
 
     moveRight(width) {
         setInterval(() => {
-            if (this.posX >= width) {
-                this.posX = -width + 1 + this.posX;
+            if (isRunning) {
 
+                if (this.posX >= width) {
+                    this.posX = -width + 1 + this.posX;
+
+                }
+                this.posX += this.speed;
             }
-            this.posX += this.speed;
         }, 1000 / 60);
     }
 

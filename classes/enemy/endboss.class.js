@@ -40,7 +40,9 @@ class EndBoss extends MovableObject {
         // this.moveLeft();
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_IDLE)
+            if (isRunning) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
         }, 1000 / 6);
     }
 }

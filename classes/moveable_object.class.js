@@ -24,13 +24,16 @@ class MovableObject extends DrawableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {
-                this.posY -= this.speedY;
-                this.speedY -= this.acceleration;
-                this.isGrounded = false;
-            }
-            else {
-                this.isGrounded = true;
+            if (isRunning) {
+
+                if (this.isAboveGround() || this.speedY > 0) {
+                    this.posY -= this.speedY;
+                    this.speedY -= this.acceleration;
+                    this.isGrounded = false;
+                }
+                else {
+                    this.isGrounded = true;
+                }
             }
         }, 1000 / 25)
     }

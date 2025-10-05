@@ -1,14 +1,10 @@
 let canvas;
 let world;
 let controller = new Controller();
+let isRunning = false;
 
 function init() {
-    canvas = document.getElementById('canvas');
 
-    canvas.width = 720 * 2;
-    canvas.height = 480 * 2;
-    canvas.style.width = "720px";
-    canvas.style.height = "480px";
     // character.src = '../img/Player_Anim/Idle/idle_00.png';
     // setTimeout(() => {
 
@@ -16,11 +12,29 @@ function init() {
     // }, 2000);
 }
 
+function pauseGame() {
+    isRunning = false;
+}
+
+function runGame() {
+    isRunning = true;
+}
+
 function startGame() {
+    isRunning = true;
+    canvas = document.getElementById('canvas');
+
+    canvas.width = 720 * 2;
+    canvas.height = 480 * 2;
+    canvas.style.width = "720px";
+    canvas.style.height = "480px";
     document.getElementById('container').classList.add('d_none');
     world = new World(canvas, controller);
-    posX = world.character.posX
-    posY = world.character.posY
+    posX = world.character.posX;
+    posY = world.character.posY;
+}
+function restartGame() {
+    isRunning = false;
 }
 
 //Controller for Player

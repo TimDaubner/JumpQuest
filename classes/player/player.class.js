@@ -84,54 +84,69 @@ class Player extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (this.isDead()) {
-                world.statusbars[0].setPercentage(this.energy);
-                this.playDeathAnimation(this.IMAGES_DEAD);
-            }
-            else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-                world.statusbars[0].setPercentage(this.energy);
+            if (isRunning) {
+
+                if (this.isDead()) {
+                    world.statusbars[0].setPercentage(this.energy);
+                    this.playDeathAnimation(this.IMAGES_DEAD);
+                }
+                else if (this.isHurt()) {
+                    this.playAnimation(this.IMAGES_HURT);
+                    world.statusbars[0].setPercentage(this.energy);
+                }
             }
         }, 1000 / 10);
         setInterval(() => {
-            if (this.isDead()) return;
+            if (isRunning) {
 
-            this.sprint();
-            if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
-                this.moveRight();
+                if (this.isDead()) return;
+
+                this.sprint();
+                if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
+                    this.moveRight();
+                }
+                if (this.world.controller.LEFT && this.posX > -100) {
+                    this.moveLeft();
+                }
+                this.world.camera_x = -this.posX + 15;
             }
-            if (this.world.controller.LEFT && this.posX > -100) {
-                this.moveLeft();
-            }
-            this.world.camera_x = -this.posX + 15;
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.isDead()) return;
+            if (isRunning) {
 
-            if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
-                this.playAnimation(this.IMAGES_WALKING);
+                if (this.isDead()) return;
+
+                if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
             }
         }, 1000 / 11);
 
         setInterval(() => {
-            if (this.isDead()) return;
+            if (isRunning) {
 
-            if (this.isAboveGround()) {
-                this.playAnimation(this.IMAGES_JUMP);
-            }
-            if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
-                this.jump();
-                this.endurance -= 25;
-                if (this.endurance < 0) this.endurance = 0;
+                if (this.isDead()) return;
+
+                if (this.isAboveGround()) {
+                    this.playAnimation(this.IMAGES_JUMP);
+                }
+                if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
+                    this.jump();
+                    this.endurance -= 25;
+                    if (this.endurance < 0) this.endurance = 0;
+                }
             }
         }, 300);
 
         setInterval(() => {
-            if (this.isDead()) return;
+            if (isRunning) {
 
-            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
-                this.playAnimation(this.IMAGES_IDLE);
+                if (this.isDead()) return;
+
+                if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
             }
         }, 1000 / 11);
     }

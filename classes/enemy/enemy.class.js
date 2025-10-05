@@ -44,10 +44,16 @@ class Enemy extends MovableObject {
 
     animate() {
         setInterval(() => {
-            this.moveLeft();
+            if (isRunning) {
+
+                this.moveLeft();
+            }
         }, 1000 / 60);
         setInterval(() => {
-            this.playAnimation(this.IMAGES_WALKING)
+            if (isRunning) {
+
+                this.playAnimation(this.IMAGES_WALKING);
+            }
         }, 1000 / 6);
     }
 }
