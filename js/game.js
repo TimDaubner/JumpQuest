@@ -5,12 +5,17 @@ let isRunning = false;
 let intervals = [];
 
 function init() {
-    SoundHub.playLoop(SoundHub.BACKGROUND);
     // character.src = '../img/Player_Anim/Idle/idle_00.png';
     // setTimeout(() => {
 
     //     ctx.drawImage(character, -75, -50, 225, 200);
     // }, 2000);
+    let buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener("click", function () {
+            SoundHub.playOne(SoundHub.BUTTON);
+        });
+    });
 }
 
 function pauseGame() {
@@ -22,6 +27,7 @@ function runGame() {
 }
 
 function startGame() {
+    SoundHub.playLoop(SoundHub.BACKGROUND);
     canvas = document.getElementById('canvas');
     canvas.classList.add('black');
     canvas.width = 720 * 2;

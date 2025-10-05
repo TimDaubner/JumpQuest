@@ -1,12 +1,13 @@
 class SoundHub {
     static BACKGROUND = new Audio('./audio/sound/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
+    static BUTTON = new Audio('./audio/sound/407720__airblock__vcr_click.wav');
 
-    static allSounds = [SoundHub.BACKGROUND];
+    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON];
 
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
-        sound.volume = 0.2;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
+        sound.volume = 1;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
         sound.currentTime = 0;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
         sound.play();  // Spielt das übergebene Sound-Objekt ab
     }
