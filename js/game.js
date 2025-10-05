@@ -21,7 +21,6 @@ function runGame() {
 }
 
 function startGame() {
-    isRunning = true;
     canvas = document.getElementById('canvas');
 
     canvas.width = 720 * 2;
@@ -32,9 +31,16 @@ function startGame() {
     world = new World(canvas, controller);
     posX = world.character.posX;
     posY = world.character.posY;
+    isRunning = true;
 }
 function restartGame() {
     isRunning = false;
+
+    world = null;
+    canvas = null;
+
+    controller = new Controller();
+    startGame();
 }
 
 //Controller for Player
