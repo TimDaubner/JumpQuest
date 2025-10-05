@@ -71,6 +71,7 @@ class World {
             if (isRunning) {
                 this.checkCollisions();
                 this.checkThrowObjects();
+                this.checkPunchHit();
             }
         }, 100));
     }
@@ -91,10 +92,29 @@ class World {
     }
 
     checkThrowObjects() {
-        if (controller.THROW) {
+        if (controller.THROW && !this.character.isDead()) {
             let attack = new ThrowableObject(this.character.posX, this.character.posY);
             this.throwableObjects.push(attack);
         }
+    }
+
+    checkPunchHit() {
+        if (this.controller.ATTACK && !this.character.isDead()) {
+            console.log("ATTACK");
+            let currentAttack = new Attack();
+
+            this.level.enemies.forEach((enemy) => {
+                if (currentAttack.isColliding(enemy)) {
+                    console.log("ATTACK HIT");
+                }
+            });
+        }
+        this.collectableObjects.forEach((collectable) => {
+            if (this.character.isColliding(collectable)) {
+                collectable.width = 0;
+                collectable.height = 0;
+            }
+        });
     }
 
     setWorld() {

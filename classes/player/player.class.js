@@ -7,6 +7,7 @@ class Player extends MovableObject {
     speed = 0.7;
     adjustValue = 1;
     endurance = 100;
+    isAttacking = false;
 
     offset = {
         top: 77,
@@ -67,6 +68,15 @@ class Player extends MovableObject {
         './img/Player_Anim/Hurt/hurt_03.png',
     ];
 
+    IMAGES_ATTACK = [
+        './img/Player_Anim/Punch/punch_00.png',
+        './img/Player_Anim/Punch/punch_01.png',
+        './img/Player_Anim/Punch/punch_02.png',
+        './img/Player_Anim/Punch/punch_03.png',
+        './img/Player_Anim/Punch/punch_04.png',
+        './img/Player_Anim/Punch/punch_05.png',
+    ];
+
 
 
     currentImg = 0;
@@ -77,6 +87,7 @@ class Player extends MovableObject {
         this.loadImgs(this.IMAGES_WALKING);
         this.loadImgs(this.IMAGES_JUMP);
         this.loadImgs(this.IMAGES_HURT);
+        this.loadImgs(this.IMAGES_ATTACK);
         this.loadImgs(this.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
@@ -94,8 +105,11 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_HURT);
                     world.statusbars[0].setPercentage(this.energy);
                 }
+                else if (this.world.controller.ATTACK) {
+                    this.playAttackAnimation(this.IMAGES_ATTACK);
+                }
             }
-        }, 1000 / 10));
+        }, 1000 / 12));
         intervals.push(setInterval(() => {
             if (isRunning) {
 
@@ -180,6 +194,14 @@ class Player extends MovableObject {
         }
         world.statusbars[1].setPercentage(this.endurance);
     }
+
+    // checkPunchDuration() {
+    //     if () {
+    //         let timespan = new Date().getTime() - this.lastHit;
+    //         timespan /= 1000;
+    //         return timespan < 2;
+    //     }
+    // }
     //IDLE 5
     //WALKING 10
 }

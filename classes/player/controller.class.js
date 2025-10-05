@@ -5,6 +5,7 @@ class Controller {
     DOWN = false;
     JUMP = false;
     THROW = false;
+    ATTACK = false;
     RUN = false;
 }
 

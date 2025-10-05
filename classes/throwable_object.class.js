@@ -39,9 +39,9 @@ class ThrowableObject extends MovableObject {
         this.posY = posY;
         this.speedY = 2;
         this.applyGravity();
+        if (this.isDead()) return;
         intervals.push(setInterval(() => {
             if (isRunning) {
-
                 if (isDirection) {
                     this.posX -= 4;
                 }
