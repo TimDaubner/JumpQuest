@@ -39,7 +39,7 @@ class ThrowableObject extends MovableObject {
         this.posY = posY;
         this.speedY = 2;
         this.applyGravity();
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (isDirection) {
@@ -49,7 +49,7 @@ class ThrowableObject extends MovableObject {
                     this.posX += 4;
                 }
             }
-        }, 1000 / 60);
+        }, 1000 / 60));
     }
 
     // applyGravity() {

@@ -83,7 +83,7 @@ class Player extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isDead()) {
@@ -95,14 +95,14 @@ class Player extends MovableObject {
                     world.statusbars[0].setPercentage(this.energy);
                 }
             }
-        }, 1000 / 10);
-        setInterval(() => {
+        }, 1000 / 10));
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isDead()) return;
 
                 this.sprint();
-                if (this.world.controller.RIGHT && level1.levelEndX > this.posX) {
+                if (this.world.controller.RIGHT && this.world.level.levelEndX > this.posX) {
                     this.moveRight();
                 }
                 if (this.world.controller.LEFT && this.posX > -100) {
@@ -110,9 +110,9 @@ class Player extends MovableObject {
                 }
                 this.world.camera_x = -this.posX + 15;
             }
-        }, 1000 / 60);
+        }, 1000 / 60));
 
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isDead()) return;
@@ -121,9 +121,9 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
-        }, 1000 / 11);
+        }, 1000 / 11));
 
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isDead()) return;
@@ -137,9 +137,9 @@ class Player extends MovableObject {
                     if (this.endurance < 0) this.endurance = 0;
                 }
             }
-        }, 300);
+        }, 300));
 
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isDead()) return;
@@ -148,7 +148,7 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_IDLE);
                 }
             }
-        }, 1000 / 11);
+        }, 1000 / 11));
     }
 
     sprint() {

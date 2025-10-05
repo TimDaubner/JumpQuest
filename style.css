@@ -83,3 +83,8 @@ body {
 .d_none {
     display: none;
 }
+
+.black {
+    background-image: none;
+    background-color: black;
+}

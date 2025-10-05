@@ -23,7 +23,7 @@ class MovableObject extends DrawableObject {
     }
 
     applyGravity() {
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.isAboveGround() || this.speedY > 0) {
@@ -35,7 +35,7 @@ class MovableObject extends DrawableObject {
                     this.isGrounded = true;
                 }
             }
-        }, 1000 / 25)
+        }, 1000 / 25));
     }
 
     isAboveGround() {

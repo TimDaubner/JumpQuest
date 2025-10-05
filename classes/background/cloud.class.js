@@ -10,7 +10,7 @@ class Cloud extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
 
                 if (this.posX <= -297) {
@@ -18,6 +18,6 @@ class Cloud extends MovableObject {
                 }
                 this.posX -= this.speed;
             }
-        }, 1000 / 60);
+        }, 1000 / 60));
     }
 }

@@ -2,6 +2,7 @@ let canvas;
 let world;
 let controller = new Controller();
 let isRunning = false;
+let intervals = [];
 
 function init() {
 
@@ -22,7 +23,7 @@ function runGame() {
 
 function startGame() {
     canvas = document.getElementById('canvas');
-
+    canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
     canvas.style.width = "720px";
@@ -35,7 +36,9 @@ function startGame() {
 }
 function restartGame() {
     isRunning = false;
-
+    intervals.forEach(interval => {
+        clearInterval(interval);
+    });
     world = null;
     canvas = null;
 

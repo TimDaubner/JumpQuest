@@ -1,68 +1,17 @@
 let bgo = [];
-const level1 = new Level(
-    [
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new Enemy(),
-        new EndBoss()],
-    [new Cloud(0), new Cloud(299), new Cloud(598)],
-    bgo,
-);
+function createLevel1() {
+    createBackground();
+
+    return new Level(
+        [
+            // you can make a loop if you want instead of 50x new Enemy()
+            ...Array.from({ length: 60 }, () => new Enemy()),
+            new EndBoss()
+        ],
+        [new Cloud(0), new Cloud(299), new Cloud(598)],
+        bgo
+    );
+}
 
 function createBackground() {
     for (let i = -1; i < 10; i++) {
@@ -76,5 +25,4 @@ function createBackground() {
         bgo.push(new BackgroundObject("img/Background_City/city 1/10_shops.png", 299 * i, 0, false, null, 0));
         bgo.push(new BackgroundObject("img/Background_City/city 1/9_smallsmog.png", 299 * i, 0, true, "right", 0.05));
     }
-
 }

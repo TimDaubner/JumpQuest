@@ -1,6 +1,6 @@
 class World {
     character = new Player();
-    level = level1;
+    level;
     canvas;
     ctx;
     controller;
@@ -25,8 +25,10 @@ class World {
         this.canvas = canvas;
         this.controller = controller;
 
+        this.level = createLevel1();
+
         //scale up or down
-        this.ctx.scale(6.2, 6.4);
+        this.ctx.scale(6.2, 6.2);
         createBackground();
 
         this.draw();
@@ -65,12 +67,12 @@ class World {
     }
 
     run() {
-        setInterval(() => {
+        intervals.push(setInterval(() => {
             if (isRunning) {
                 this.checkCollisions();
                 this.checkThrowObjects();
             }
-        }, 100);
+        }, 100));
     }
 
     checkCollisions() {
