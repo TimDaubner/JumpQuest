@@ -125,7 +125,7 @@ class World {
 
     checkThrowObjects() {
 
-        if (controller.THROW && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 25) {
+        if (controller.THROW && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 24) {
             let attack = new ThrowableObject(this.character.posX, this.character.posY);
             this.throwableObjects.push(attack);
             this.character.gas -= 25;

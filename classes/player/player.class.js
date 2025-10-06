@@ -14,7 +14,7 @@ class Player extends MovableObject {
         top: 77,
         left: 47,
         sizeX: 6,
-        sizeY: 2.5
+        sizeY: 3
     }
 
     IMAGES_IDLE = [
