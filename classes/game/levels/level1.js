@@ -1,6 +1,8 @@
 let enemies = [];
 let bgo = [];
 function createLevel1() {
+    enemies = [];
+    bgo = [];
     createBackground(10);
     createEnemies(60);
 

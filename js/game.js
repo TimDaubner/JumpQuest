@@ -78,7 +78,7 @@ document.addEventListener('keydown', (event) => {
     if (event.key === 'e' && 'shift' || event.keyCode === 69 && event.keyCode === 16) {
         controller.ATTACK = true;
     }
-    else if (event.key === 'e' || event.keyCode === 69) {
+    else if (event.key === 'e' && event.key !== 'shift' || event.keyCode === 69 && event.keyCode !== 16) {
         controller.THROW = true;
     }
     else if (event.key === 'shift' || event.keyCode === 16) {
