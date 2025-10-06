@@ -1,20 +1,26 @@
+let enemies = [];
 let bgo = [];
 function createLevel1() {
-    createBackground();
+    createBackground(10);
+    createEnemies(60);
 
     return new Level(
+        enemies,
+        [new Cloud(0), new Cloud(299), new Cloud(598)],
+        bgo,
         [
-            // you can make a loop if you want instead of 50x new Enemy()
-            ...Array.from({ length: 60 }, () => new Enemy()),
             new EndBoss()
         ],
-        [new Cloud(0), new Cloud(299), new Cloud(598)],
-        bgo
     );
 }
 
-function createBackground() {
-    for (let i = -1; i < 10; i++) {
+function createEnemies(times) {
+    for (let i = 0; i < times; i++) {
+        enemies.push(new Enemy(i));
+    }
+}
+function createBackground(times) {
+    for (let i = -1; i < times; i++) {
         bgo.push(new BackgroundObject("img/Background_City/city 1/1_bg.png", 299 * i, 0, false, null, 0));
         bgo.push(new BackgroundObject("img/Background_City/city 1/2_sun.png", 299 * i, 0, false, null, 0));
         bgo.push(new BackgroundObject("img/Background_City/city 1/4_shadow_skyline.png", 299 * i, 0, false, null, 0));

@@ -1,7 +1,7 @@
 class Enemy extends MovableObject {
     width = 128 * 0.7;
     height = 128 * 0.7;
-
+    id;
     offset = {
         top: 40,
         left: 34,
@@ -31,11 +31,11 @@ class Enemy extends MovableObject {
     ];
 
     currentImg = 0;
-    constructor() {
+    constructor(id) {
         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
         this.loadImgs(this.IMAGES_WALKING);
         this.animate();
-
+        this.id = id;
         this.posX = 750;
         this.posX += Math.random() * 8500;
         this.posY = 60;

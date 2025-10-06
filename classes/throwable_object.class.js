@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
     posX = 20;
-    posY = 40;
+    posY = 50;
     img;
     imgCache = {};
     width = 50;
@@ -37,16 +37,16 @@ class ThrowableObject extends MovableObject {
         let isDirection = world.character.isMirrored;
         this.posX = posX;
         this.posY = posY;
-        this.speedY = 2;
+        this.speedY = 1;
         this.applyGravity();
         if (this.isDead()) return;
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (isDirection) {
-                    this.posX -= 4;
+                    this.posX -= 1;
                 }
                 else {
-                    this.posX += 4;
+                    this.posX += 1;
                 }
             }
         }, 1000 / 60));

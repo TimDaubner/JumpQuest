@@ -82,7 +82,6 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !world.character.isHurt()) {
-                // console.log('Collision with Character', enemy);
                 this.character.gotHit();
             }
         });
@@ -91,6 +90,14 @@ class World {
                 collectable.width = 0;
                 collectable.height = 0;
             }
+        });
+        this.level.enemies.forEach((enemy, index) => {
+            this.throwableObjects.forEach(throwableObject => {
+                if (throwableObject.isColliding(enemy)) {
+                    this.level.enemies.splice(index, 1);
+                    console.log('Collision with Character', enemy);
+                }
+            });
         });
     }
 
