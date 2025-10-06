@@ -5,6 +5,7 @@ class World {
     ctx;
     controller;
     camera_x;
+    score = 15;
     statusbars = [
         new Statusbar(10, 10, 0, 100),
         new Statusbar(10, 25, 1, 100),
@@ -66,9 +67,9 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);
 
-
-        // const dpi = window.devicePixelRatio;
-        // this.ctx.scale(dpi, dpi);
+        this.ctx.font = "8px Arial";
+        this.ctx.fillStyle = "white";
+        this.ctx.fillText(this.score || 0, 162, 18);
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
     }
@@ -97,10 +98,11 @@ class World {
                     this.statusbars[2].setPercentage(100);
                     this.collectableObjects.splice(index, 1);
                 }
-                // else if (collectable.id == 0) {
-                //     console.log("coin");
-                //     this.collectableObjects.splice(index, 1);
-                // }
+                else if (collectable.id == 0) {
+                    console.log("coin");
+                    this.collectableObjects.splice(index, 1);
+                    this.score++;
+                }
             }
         });
         this.level.enemies.forEach((enemy, index) => {

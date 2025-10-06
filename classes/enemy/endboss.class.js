@@ -7,7 +7,7 @@ class EndBoss extends MovableObject {
         sizeX: 6,
         sizeY: 1.8
     }
-    energy = 1000;
+    energy = 500;
     IMAGES_IDLE = [
         './img/Boss/Idle/idle_r_00.png',
         './img/Boss/Idle/idle_r_01.png',

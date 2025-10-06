@@ -7,6 +7,7 @@ class Controller {
     THROW = false;
     ATTACK = false;
     RUN = false;
+    BUY = false;
 }
 
 

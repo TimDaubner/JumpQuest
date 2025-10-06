@@ -108,7 +108,7 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_HURT);
                     world.statusbars[0].setPercentage(this.energy);
                 }
-                else if (this.world.controller.THROW && this.gas > 25) {
+                else if (this.world.controller.THROW && this.gas > 24) {
                     this.playAttackAnimation(this.IMAGES_ATTACK);
                 }
             }
@@ -162,6 +162,11 @@ class Player extends MovableObject {
 
                 if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
                     this.playAnimation(this.IMAGES_IDLE);
+                }
+                if (this.world.controller.BUY && this.world.score > 14 && this.gas != 100) {
+                    world.statusbars[2].setPercentage(100);
+                    this.gas = 100;
+                    this.world.score -= 15;
                 }
             }
         }, 1000 / 11));

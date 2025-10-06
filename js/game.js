@@ -85,6 +85,9 @@ document.addEventListener('keydown', (event) => {
     else if (event.key === 'shift' || event.keyCode === 16) {
         controller.RUN = true;
     }
+    if (event.key === 'b') {
+        controller.BUY = true;
+    }
 });
 document.addEventListener('keyup', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
@@ -110,5 +113,8 @@ document.addEventListener('keyup', (event) => {
     }
     else if (event.key === 'shift' || event.keyCode === 16) {
         controller.RUN = false;
+    }
+    if (event.key === 'b') {
+        controller.BUY = false;
     }
 });
