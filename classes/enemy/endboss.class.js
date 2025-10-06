@@ -57,6 +57,11 @@ class EndBoss extends MovableObject {
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (this.checkPlayerDistance() && !world.character.isDead()) {
+                    if (!this.oneTime) {
+                        world.statusbars.push(new Statusbar(124, 144, 8, 100));
+                        this.oneTime = true;
+                    }
+                    world.statusbars[8].setPercentage(this.energy / 5);
                     if (this.checkPlayerSide()) {
                         this.posX += 1.2;
                         this.isMirrored = true;
@@ -81,7 +86,7 @@ class EndBoss extends MovableObject {
         }, 5000);
         this.isHit = true;
     }
-
+    oneTime = false;
     checkPlayerDistance() {
         return (this.posX - world.character.posX) < 100;
     }

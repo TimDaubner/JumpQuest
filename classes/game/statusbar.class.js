@@ -8,6 +8,7 @@ class Statusbar extends DrawableObject {
         './img/Objects/crystal.png',
         './img/Objects/key.png',
         './img/Objects/sprayer.png',
+        './img/GUI/PNG/Main_UI/Boss_HP_Bar_2.png'
     ];
 
     percentage = 100;
