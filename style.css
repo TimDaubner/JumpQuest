@@ -17,6 +17,20 @@ body {
     background-image: url('./img/Background_City/city 1/11.png');
     background-size: cover;
     background-position: bottom;
+    border-radius: 24px;
+}
+
+.canvas-outerframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 760px;
+    height: 520px;
+    background-color: black;
+    z-index: 0;
+    background-image: url('./img/GUI/PNG/Level_Menu/Window.png');
+    background-position: center;
+    border-radius: 24px;
 }
 
 .player {

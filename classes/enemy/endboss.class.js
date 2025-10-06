@@ -37,7 +37,7 @@ class EndBoss extends MovableObject {
         this.loadImgs(this.IMAGES_WALKING);
         this.animate();
 
-        this.posX = 100;
+        this.posX = 2600;
         this.posX += Math.random() * 200;
         this.posY = 25;
         this.speed = 0.15 + Math.random() * 0.25;
