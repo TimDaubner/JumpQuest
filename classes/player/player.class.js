@@ -95,12 +95,14 @@ class Player extends MovableObject {
     }
 
     animate() {
+        let oneTime = false;
         intervals.push(setInterval(() => {
             if (isRunning) {
-
                 if (this.isDead()) {
+                    if (!oneTime) SoundHub.playOne(SoundHub.DEATH);
                     world.statusbars[0].setPercentage(this.energy);
                     this.playDeathAnimation(this.IMAGES_DEAD);
+                    oneTime = true;
                 }
                 else if (this.isHurt()) {
                     this.playAnimation(this.IMAGES_HURT);
@@ -113,7 +115,6 @@ class Player extends MovableObject {
         }, 1000 / 12));
         intervals.push(setInterval(() => {
             if (isRunning) {
-
                 if (this.isDead()) return;
 
                 this.sprint();

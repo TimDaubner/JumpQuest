@@ -46,7 +46,7 @@ class EndBoss extends MovableObject {
     animate() {
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.checkPlayerDistance() || this.checkPlayerSide()) {
+                if (this.checkPlayerDistance() && !world.character.isDead() || this.checkPlayerSide() && !world.character.isDead()) {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
                 else {
@@ -56,7 +56,7 @@ class EndBoss extends MovableObject {
         }, 1000 / 6));
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.checkPlayerDistance()) {
+                if (this.checkPlayerDistance() && !world.character.isDead()) {
                     if (this.checkPlayerSide()) {
                         this.posX += 1.2;
                         this.isMirrored = true;

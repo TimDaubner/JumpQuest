@@ -85,11 +85,14 @@ class MovableObject extends DrawableObject {
 
     gotHit() {
         this.energy -= 10;
+
         // console.log(this.energy);
         if (this.energy < 0) {
             this.energy = 0;
         }
         else {
+            let rnd = Math.round(Math.random());
+            SoundHub.playOne(SoundHub.NOISE[rnd]);
             this.lastHit = new Date().getTime();
         }
     }

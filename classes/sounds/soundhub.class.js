@@ -1,8 +1,13 @@
 class SoundHub {
-    static BACKGROUND = new Audio('./audio/sound/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
-    static BUTTON = new Audio('./audio/sound/407720__airblock__vcr_click.wav');
+    static BACKGROUND = new Audio('./audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
+    static BUTTON = new Audio('./audio/sound/menu/407720__airblock__vcr_click.wav');
+    static NOISE = [
+        new Audio('./audio/sound/player/377560__yudena__argh_woman_bymondfisch89.ogg'),
+        new Audio('./audio/sound/player/377561__yudena__ah_woman_bymondfisch89.ogg'),
+    ];
+    static DEATH = new Audio('./audio/sound/player/678733__alesiadavina__female-horror-pain-sound-vol-003.wav');
 
-    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON];
+    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH];
 
 
     // Spielt eine einzelne Audiodatei ab
