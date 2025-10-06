@@ -1,6 +1,8 @@
 class CollectableObject extends MovableObject {
+    id;
     IMAGE_COLLECTABLE = [
         './img/Objects/coin.png',
+        './img/Objects/sprayer.png',
         './img/Objects/crystal.png',
         './img/Objects/key.png',
         './img/Objects/heart.png'
@@ -8,6 +10,7 @@ class CollectableObject extends MovableObject {
 
     constructor(posX, posY, img) {
         super();
+        this.id = img;
         this.loadImg(this.IMAGE_COLLECTABLE[img]);
         this.posX = posX;
         this.posX += Math.random() * 2500;

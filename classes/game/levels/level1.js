@@ -10,15 +10,13 @@ function createLevel1() {
         enemies,
         [new Cloud(0), new Cloud(299), new Cloud(598)],
         bgo,
-        [
-            new EndBoss()
-        ],
     );
 }
 
 function createEnemies(times) {
+    enemies.push(new EndBoss());
     for (let i = 0; i < times; i++) {
-        enemies.push(new Enemy(i));
+        enemies.push(new Enemy(i, 750));
     }
 }
 function createBackground(times) {

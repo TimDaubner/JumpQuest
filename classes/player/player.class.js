@@ -7,6 +7,7 @@ class Player extends MovableObject {
     speed = 0.7;
     adjustValue = 1;
     endurance = 100;
+    gas = 100;
     isAttacking = false;
 
     offset = {
@@ -105,7 +106,7 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_HURT);
                     world.statusbars[0].setPercentage(this.energy);
                 }
-                else if (this.world.controller.ATTACK) {
+                else if (this.world.controller.THROW && this.gas > 25) {
                     this.playAttackAnimation(this.IMAGES_ATTACK);
                 }
             }

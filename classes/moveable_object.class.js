@@ -9,7 +9,7 @@ class MovableObject extends DrawableObject {
     acceleration = 0.15;
     speedY = 0;
     isGrounded = false;
-    energy = 10;
+    energy = 100;
 
     lastHit = 0;
     isCurrentHurt = false;

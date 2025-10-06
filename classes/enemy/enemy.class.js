@@ -33,12 +33,12 @@ class Enemy extends MovableObject {
     ];
 
     currentImg = 0;
-    constructor(id) {
+    constructor(id, posX) {
         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
         this.loadImgs(this.IMAGES_WALKING);
         this.animate();
         this.id = id;
-        this.posX = 750;
+        this.posX = posX;
         this.posX += Math.random() * 8500;
         this.posY = 60;
         this.speed = 0.15 + Math.random() * 0.5;
@@ -63,7 +63,7 @@ class Enemy extends MovableObject {
         setInterval(() => {
             if (this.isHit)
                 this.isHit = false;
-        }, 5000);
+        }, 2000);
         this.isHit = true;
     }
 }

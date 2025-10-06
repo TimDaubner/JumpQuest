@@ -39,6 +39,7 @@ function startGame() {
     posX = world.character.posX;
     posY = world.character.posY;
     isRunning = true;
+    spawnEnemy();
 }
 function restartGame() {
     isRunning = false;

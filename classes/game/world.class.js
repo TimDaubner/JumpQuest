@@ -8,7 +8,7 @@ class World {
     statusbars = [
         new Statusbar(10, 10, 0, 100),
         new Statusbar(10, 25, 1, 100),
-        new Statusbar(10, 40, 2, 5),
+        new Statusbar(10, 40, 2, 100),
         new Statusbar(3, 10, 3, 10),
         new Statusbar(150, 10, 4, 10),
         new Statusbar(180, 10, 5, 10),
@@ -43,6 +43,10 @@ class World {
     createCollectables() {
         for (let i = 0; i < 55; i++) {
             this.collectableObjects.push(new CollectableObject(200, 25, 0));
+            // console.log(i % 10);
+            if (i % 10 == 9) {
+                this.collectableObjects.push(new CollectableObject(200, 25, 1));
+            }
         }
     }
 
@@ -85,15 +89,26 @@ class World {
                 this.character.gotHit();
             }
         });
-        this.collectableObjects.forEach((collectable) => {
+        this.collectableObjects.forEach((collectable, index) => {
             if (this.character.isColliding(collectable)) {
-                collectable.width = 0;
-                collectable.height = 0;
+                if (collectable.id == 1 && this.character.gas < 100) {
+                    console.log("gas");
+                    this.character.gas = 100;
+                    this.statusbars[2].setPercentage(100);
+                    this.collectableObjects.splice(index, 1);
+                }
+                // else if (collectable.id == 0) {
+                //     console.log("coin");
+                //     this.collectableObjects.splice(index, 1);
+                // }
             }
         });
         this.level.enemies.forEach((enemy, index) => {
             this.throwableObjects.forEach(throwableObject => {
                 if (throwableObject.isColliding(enemy)) {
+                    if (enemy.energy <= 0) {
+                        this.level.enemies.splice(index, 1);
+                    }
                     if (!enemy.isHit) {
                         enemy.energy -= 50;
                     }
@@ -101,16 +116,18 @@ class World {
                         this.level.enemies.splice(index, 1);
                     }
                     enemy.stopHit();
-                    console.log('Collision with Character', enemy);
                 }
             });
         });
     }
 
     checkThrowObjects() {
-        if (controller.THROW && !this.character.isDead() && this.character.endurance >= 100) {
+
+        if (controller.THROW && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 25) {
             let attack = new ThrowableObject(this.character.posX, this.character.posY);
             this.throwableObjects.push(attack);
+            this.character.gas -= 25;
+            this.statusbars[2].setPercentage(this.character.gas);
         }
     }
 
@@ -126,12 +143,6 @@ class World {
                 }
             });
         }
-        this.collectableObjects.forEach((collectable) => {
-            if (this.character.isColliding(collectable)) {
-                collectable.width = 0;
-                collectable.height = 0;
-            }
-        });
     }
 
     setWorld() {

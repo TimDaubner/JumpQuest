@@ -24,7 +24,7 @@ class DrawableObject {
     }
 
     drawFrame(ctx) {
-        if (this instanceof Player || this instanceof Enemy) {
+        if (this instanceof Player || this instanceof Enemy || this instanceof EndBoss) {
             ctx.beginPath();
             ctx.lineWidth = 0.5;
             ctx.strokeStyle = 'red';

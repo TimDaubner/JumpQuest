@@ -1,7 +1,13 @@
 class EndBoss extends MovableObject {
     width = 128 * 1;
     height = 128 * 1;
-
+    offset = {
+        top: 55,
+        left: 57,
+        sizeX: 6,
+        sizeY: 1.8
+    }
+    energy = 1000;
     IMAGES_IDLE = [
         './img/Boss/Idle/idle_r_00.png',
         './img/Boss/Idle/idle_r_01.png',
@@ -28,21 +34,65 @@ class EndBoss extends MovableObject {
     constructor() {
         super().loadImg(this.IMAGES_IDLE[0]);
         this.loadImgs(this.IMAGES_IDLE);
+        this.loadImgs(this.IMAGES_WALKING);
         this.animate();
 
-        this.posX = 2600;
+        this.posX = 100;
         this.posX += Math.random() * 200;
         this.posY = 25;
         this.speed = 0.15 + Math.random() * 0.25;
     }
 
     animate() {
-        // this.moveLeft();
-
         intervals.push(setInterval(() => {
             if (isRunning) {
-                this.playAnimation(this.IMAGES_IDLE);
+                if (this.checkPlayerDistance() || this.checkPlayerSide()) {
+                    this.playAnimation(this.IMAGES_WALKING);
+                }
+                else {
+                    this.playAnimation(this.IMAGES_IDLE);
+                }
             }
         }, 1000 / 6));
+        intervals.push(setInterval(() => {
+            if (isRunning) {
+                if (this.checkPlayerDistance()) {
+                    if (this.checkPlayerSide()) {
+                        this.posX += 1.2;
+                        this.isMirrored = true;
+                    }
+                    else {
+                        this.posX -= 1.2;
+                        this.isMirrored = false;
+                    }
+                }
+                else if (this.checkPlayerSide()) {
+                    this.posX += 1.2;
+                    this.isMirrored = true;
+                }
+            }
+        }, 1000 / 6));
+    }
+
+    stopHit() {
+        setInterval(() => {
+            if (this.isHit)
+                this.isHit = false;
+        }, 5000);
+        this.isHit = true;
+    }
+
+    checkPlayerDistance() {
+        return (this.posX - world.character.posX) < 100;
+    }
+
+    checkPlayerSide() {
+        if (this.posX < world.character.posX) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }
