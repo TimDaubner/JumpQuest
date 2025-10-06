@@ -94,7 +94,13 @@ class World {
         this.level.enemies.forEach((enemy, index) => {
             this.throwableObjects.forEach(throwableObject => {
                 if (throwableObject.isColliding(enemy)) {
-                    this.level.enemies.splice(index, 1);
+                    if (!enemy.isHit) {
+                        enemy.energy -= 50;
+                    }
+                    if (enemy.energy <= 0) {
+                        this.level.enemies.splice(index, 1);
+                    }
+                    enemy.stopHit();
                     console.log('Collision with Character', enemy);
                 }
             });

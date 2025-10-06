@@ -2,12 +2,14 @@ class Enemy extends MovableObject {
     width = 128 * 0.7;
     height = 128 * 0.7;
     id;
+    isHit = false;
     offset = {
         top: 40,
         left: 34,
         sizeX: 6,
         sizeY: 1.8
     }
+    energy = 100;
 
     IMAGES_IDLE = [
         'img/Enemy_Anim/Idle/idle_00.png',
@@ -55,5 +57,13 @@ class Enemy extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 1000 / 6));
+    }
+
+    stopHit() {
+        setInterval(() => {
+            if (this.isHit)
+                this.isHit = false;
+        }, 5000);
+        this.isHit = true;
     }
 }
