@@ -27,7 +27,7 @@ body {
     width: 760px;
     height: 520px;
     background-color: black;
-    z-index: 0;
+    z-index: 1;
     background-image: url('./img/GUI/PNG/Level_Menu/Window.png');
     background-position: center;
     border-radius: 24px;
@@ -38,6 +38,17 @@ body {
     width: 64px;
     height: 64px;
     background-color: red;
+}
+
+.settings {
+    position: absolute;
+    z-index: 1;
+    top: 185px;
+    width: 765px;
+    height: 523px;
+    background-color: black;
+    border-radius: 24px;
+    display: none;
 }
 
 .container {

@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 
-    <script src="./classes/sounds/soundhub.class.js"></script>
     <script src="./classes/drawable_object.class.js"></script>
     <script src="./classes/moveable_object.class.js"></script>
     <script src="./classes/collectable_object.class.js"></script>
@@ -23,6 +22,7 @@
     <script src="./classes/throwable_object.class.js"></script>
     <script src="./classes/game/levels/level1.js"></script>
     <script src="./classes/enemy/spawner.js"></script>
+    <script src="./classes/sounds/soundhub.class.js"></script>
     <!-- <script src="./classes/collectable/cointype.class.js"></script>
     <script src="./classes/collectable/coin.class.js"></script>
     <script src="./classes/player/inventory.class.js"></script> -->
@@ -43,13 +43,17 @@
             <button onclick="exitGame()" class="exit-btn"></button>
         </div>
     </div>
-    <div class="canvas-outerframe">
+    <div id="canvas_outerframe" class="canvas-outerframe">
         <canvas id="canvas" class="canvas-frame">
         </canvas>
+        <section id="settings" class="settings">
     </div>
+    </section>
     <button onclick="pauseGame()">pause</button>
     <button onclick="runGame()">run</button>
     <button onclick="restartGame()">restart</button>
+    <button onclick="fullscreenMode()">fullscreen</button>
+    <button onclick="SoundHub.pauseAll()">sound</button>
 </body>
 
 </html>

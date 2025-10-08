@@ -3,13 +3,13 @@ let world;
 let controller = new Controller();
 let isRunning = false;
 let intervals = [];
+let isFullscreen = false;
+let isSoundOn = true;
+
 
 function init() {
-    // character.src = '../img/Player_Anim/Idle/idle_00.png';
-    // setTimeout(() => {
+    canvas = document.getElementById('canvas');
 
-    //     ctx.drawImage(character, -75, -50, 225, 200);
-    // }, 2000);
     let buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -28,7 +28,6 @@ function runGame() {
 
 function startGame() {
     SoundHub.playLoop(SoundHub.BACKGROUND);
-    canvas = document.getElementById('canvas');
     canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
@@ -59,6 +58,24 @@ function openSettings() {
 function exitGame() {
     console.log("exit game");
 }
+
+function fullscreenMode() {
+    if (isFullscreen) {
+        isFullscreen = false;
+    }
+    else {
+        isFullscreen = true;
+        let frame = document.getElementById('canvas_outerframe');
+        frame.requestFullscreen();
+        canvas.width = document.body.clientWidth; //document.width is obsolete
+        canvas.height = document.body.clientHeight;
+    }
+}
+
+function soundToggle() {
+    SoundHub.pauseAll();
+}
+
 //Controller for Player
 document.addEventListener('keydown', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {

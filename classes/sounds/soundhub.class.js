@@ -1,4 +1,7 @@
 class SoundHub {
+    static bgVolume = 0.05;
+    static otherVolume = 0.75;
+    static soundCurrentTime = 0;
     static BACKGROUND = new Audio('./audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
     static BUTTON = new Audio('./audio/sound/menu/407720__airblock__vcr_click.wav');
     static NOISE = [
@@ -12,24 +15,45 @@ class SoundHub {
 
     // Spielt eine einzelne Audiodatei ab
     static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
-        sound.volume = 1;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
-        sound.currentTime = 0;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
-        sound.play();  // Spielt das übergebene Sound-Objekt ab
+        if (isSoundOn) {
+            sound.volume = 0.1;
+            SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume; // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
+            sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
+            sound.play();  // Spielt das übergebene Sound-Objekt ab
+        }
     }
 
     static playLoop(sound) {
-        sound.loop = true;
-        sound.volume = 0.05;  // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
-        sound.currentTime = 0;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
-        sound.play();  // Spielt das übergebene Sound-Objekt ab
+        if (isSoundOn) {
+            sound.loop = true;
+            // sound.volume = this.bgVolume;
+            SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
+            sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
+            sound.play();  // Spielt das übergebene Sound-Objekt ab
+        }
     }
 
 
     // Pausiert das Abspielen aller Audiodateien
     static pauseAll() {
-        SoundHub.allSounds.forEach(sound => {
-            sound.pause();  // Pausiert jedes Audio in der Liste
-        });
+        if (isSoundOn) {
+
+            isSoundOn = false;
+            SoundHub.allSounds.forEach(sound => {
+                if (sound.length > 1) {
+                    for (let i = 0; i < sound.length; i++) {
+                        sound[i].pause();
+                    }
+                }
+                else {
+                    sound.pause();  // Pausiert jedes Audio in der Liste
+                }
+            });
+        }
+        else {
+            isSoundOn = true;
+            SoundHub.playOne(SoundHub.BACKGROUND);
+        }
     }
 
 
