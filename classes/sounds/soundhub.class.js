@@ -9,8 +9,14 @@ class SoundHub {
         new Audio('./audio/sound/player/377561__yudena__ah_woman_bymondfisch89.ogg'),
     ];
     static DEATH = new Audio('./audio/sound/player/678733__alesiadavina__female-horror-pain-sound-vol-003.wav');
+    static COIN = [
+        new Audio('./audio/sound/collect/423337__dsg__clad-quarter-6.wav'),
+        new Audio('./audio/sound/collect/423344__dsg__silver-quarter-7.wav'),
+    ]
+    static SPRAY = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
 
-    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH];
+
+    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY];
 
 
     // Spielt eine einzelne Audiodatei ab
@@ -37,29 +43,31 @@ class SoundHub {
     // Pausiert das Abspielen aller Audiodateien
     static pauseAll() {
         if (isSoundOn) {
-
-            isSoundOn = false;
-            SoundHub.allSounds.forEach(sound => {
-                if (sound.length > 1) {
-                    for (let i = 0; i < sound.length; i++) {
-                        sound[i].pause();
-                    }
-                }
-                else {
-                    sound.pause();  // Pausiert jedes Audio in der Liste
-                }
-            });
+            this.stopAllSounds();
         }
         else {
             isSoundOn = true;
-            SoundHub.playOne(SoundHub.BACKGROUND);
+            SoundHub.playLoop(SoundHub.BACKGROUND);
         }
     }
 
+    static stopAllSounds() {
+        isSoundOn = false;
+        SoundHub.allSounds.forEach(sound => {
+            if (sound.length > 1) {
+                for (let i = 0; i < sound.length; i++) {
+                    sound[i].pause();
+                }
+            }
+            else {
+                sound.pause();
+            }
+        });
+    }
 
-    // Pausiert das Abspielen einer einzelnen Audiodatei
+
     static pauseOne(sound) {
-        sound.pause();  // Pausiert das übergebene Audio
+        sound.pause();
     }
 
 

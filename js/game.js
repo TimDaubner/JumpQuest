@@ -47,6 +47,7 @@ function restartGame() {
     });
     world = null;
     canvas = null;
+    canvas = document.getElementById('canvas');
 
     controller = new Controller();
     startGame();

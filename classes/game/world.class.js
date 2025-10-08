@@ -5,16 +5,16 @@ class World {
     ctx;
     controller;
     camera_x;
-    score = 15;
+    score = 0;
     statusbars = [
         new Statusbar(10, 10, 0, 100),
-        new Statusbar(10, 25, 1, 100),
-        new Statusbar(10, 40, 2, 100),
-        new Statusbar(3, 10, 3, 10),
+        new Statusbar(10, 20, 1, 100),
+        new Statusbar(10, 30, 2, 100),
+        new Statusbar(3, 7, 3, 10),
         new Statusbar(150, 10, 4, 10),
-        new Statusbar(180, 10, 5, 10),
-        new Statusbar(210, 10, 6, 10),
-        new Statusbar(4, 40, 7, 7),
+        // new Statusbar(180, 10, 5, 10),
+        // new Statusbar(210, 10, 6, 10),
+        new Statusbar(4, 27, 7, 7),
     ];
     throwableObjects = [
     ];
@@ -42,7 +42,7 @@ class World {
     }
 
     createCollectables() {
-        for (let i = 0; i < 55; i++) {
+        for (let i = 0; i < 100; i++) {
             this.collectableObjects.push(new CollectableObject(200, 25, 0));
             // console.log(i % 10);
             if (i % 10 == 9) {
@@ -97,11 +97,13 @@ class World {
                     this.character.gas = 100;
                     this.statusbars[2].setPercentage(100);
                     this.collectableObjects.splice(index, 1);
+                    SoundHub.playOne(SoundHub.SPRAY);
                 }
                 else if (collectable.id == 0) {
-                    console.log("coin");
                     this.collectableObjects.splice(index, 1);
                     this.score++;
+                    let rnd = Math.round(Math.random());
+                    SoundHub.playOne(SoundHub.COIN[rnd]);
                 }
             }
         });

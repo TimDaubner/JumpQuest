@@ -19,10 +19,19 @@ class Statusbar extends DrawableObject {
         this.posX = posX;
         this.posY = posY;
         this.width = percentage;
-        this.height = 10;
+        this.height = this.checkHeight(img);
     }
 
     setPercentage(percentage) {
         this.width = percentage;
+    }
+
+    checkHeight(img) {
+        if ('./img/Objects/heart.png' === this.IMAGE_BARS[img] || './img/Objects/coin.png' === this.IMAGE_BARS[img] || './img/Objects/sprayer.png' === this.IMAGE_BARS[img]) {
+            return 10;
+        }
+        else {
+            return 5;
+        }
     }
 }
