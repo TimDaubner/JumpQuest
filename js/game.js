@@ -60,6 +60,7 @@ function exitGame() {
     console.log("exit game");
 }
 
+//TODO-FullscreenMode
 function fullscreenMode() {
     if (isFullscreen) {
         isFullscreen = false;
@@ -72,6 +73,11 @@ function fullscreenMode() {
         canvas.height = document.body.clientHeight;
     }
 }
+
+//TODO-MenuHandling
+//TODO-Responsive
+//TODO-JSDOCS
+//TODO-Responsive / Mobile
 
 function soundToggle() {
     SoundHub.pauseAll();
