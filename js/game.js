@@ -33,8 +33,8 @@ function startGame() {
     canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
-    canvas.style.width = "720px";
-    canvas.style.height = "480px";
+    // canvas.style.width = "720px";
+    // canvas.style.height = "480px";
     document.getElementById('container').classList.add('d_none');
     world = new World(canvas, controller);
     posX = world.character.posX;
@@ -72,8 +72,8 @@ function fullscreenHandler() {
     if (document.fullscreenElement === canvas) {
         console.log("ENTER FULLSCREEN");
         isFullscreen = true;
-        canvas.style.width = screen.width;
-        canvas.style.height = screen.height;
+        // canvas.style.width = screen.width;
+        // canvas.style.height = screen.height;
         canvas.style.borderRadius = '0';
         canvas.width = screen.width * 2;
         canvas.height = screen.height * 2;
@@ -81,8 +81,9 @@ function fullscreenHandler() {
     } else {
         console.log("EXIT FULLSCREEN");
         isFullscreen = false;
-        canvas.style.width = "720px";
-        canvas.style.height = "480px";
+        canvas.width = 720 * 2;
+        canvas.height = 480 * 2;
+        world.ctx.scale(6.2, 6.2);
     }
 }
 
