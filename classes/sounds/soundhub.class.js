@@ -29,6 +29,7 @@ class SoundHub {
             SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume; // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
             sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
             sound.play();  // Spielt das übergebene Sound-Objekt ab
+            if (sound != SoundHub.BUTTON) this.cachedSound = sound;
         }
     }
 
@@ -39,6 +40,7 @@ class SoundHub {
             SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
             sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
             sound.play();  // Spielt das übergebene Sound-Objekt ab
+            if (sound != SoundHub.BUTTON) this.cachedSound = sound;
         }
     }
 
@@ -50,7 +52,7 @@ class SoundHub {
         }
         else {
             isSoundOn = true;
-            SoundHub.playLoop(SoundHub.BACKGROUND);
+            SoundHub.playLoop(this.cachedSound);
         }
     }
 
