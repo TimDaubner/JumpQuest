@@ -29,7 +29,6 @@ function runGame() {
 
 function startGame() {
     SoundHub.playLoop(SoundHub.BACKGROUND);
-    SoundHub.playLoop(SoundHub.BACKGROUND2);
     canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
@@ -44,6 +43,8 @@ function startGame() {
 }
 
 function restartGame() {
+    SoundHub.stopAllSounds();
+    isSoundOn = true;
     isRunning = false;
     intervals.forEach(interval => {
         clearInterval(interval);

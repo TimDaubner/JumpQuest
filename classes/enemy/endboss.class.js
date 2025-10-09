@@ -76,7 +76,6 @@ class EndBoss extends MovableObject {
                         if (!this.oneTime) {
                             world.statusbars.push(new Statusbar(124, 144, 8, 100));
                             SoundHub.pauseOne(SoundHub.BACKGROUND);
-                            SoundHub.pauseOne(SoundHub.BACKGROUND2);
                             SoundHub.playLoop(SoundHub.BOSS);
                             this.oneTime = true;
                         }
@@ -114,7 +113,6 @@ class EndBoss extends MovableObject {
                 world.endScreen.push(new EndScreen(90, 55, 0));
                 SoundHub.pauseOne(SoundHub.BOSS);
                 SoundHub.pauseOne(SoundHub.BACKGROUND);
-                SoundHub.pauseOne(SoundHub.BACKGROUND2);
                 SoundHub.playOne(SoundHub.WON);
             }, 2500);
         }

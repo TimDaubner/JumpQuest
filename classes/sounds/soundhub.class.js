@@ -3,7 +3,6 @@ class SoundHub {
     static otherVolume = 0.75;
     static soundCurrentTime = 0;
     static BACKGROUND = new Audio('./audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
-    static BACKGROUND2 = new Audio('./audio/sound/background/502896__bolkmar__future-city-ambience.wav');
     static BUTTON = new Audio('./audio/sound/menu/407720__airblock__vcr_click.wav');
     static NOISE = [
         new Audio('./audio/sound/player/377560__yudena__argh_woman_bymondfisch89.ogg'),
@@ -22,7 +21,7 @@ class SoundHub {
 
     static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
 
-
+    static cachedSound;
     // Spielt eine einzelne Audiodatei ab
     static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
         if (isSoundOn) {
@@ -52,14 +51,13 @@ class SoundHub {
         else {
             isSoundOn = true;
             SoundHub.playLoop(SoundHub.BACKGROUND);
-            SoundHub.playLoop(SoundHub.BACKGROUND2);
         }
     }
 
     static stopAllSounds() {
         isSoundOn = false;
         SoundHub.allSounds.forEach(sound => {
-            if (sound.length > 1) {
+            if (sound.length > 0) {
                 for (let i = 0; i < sound.length; i++) {
                     sound[i].pause();
                 }
@@ -68,6 +66,8 @@ class SoundHub {
                 sound.pause();
             }
         });
+        this.pauseOne(SoundHub.BACKGROUND);
+        this.pauseOne(SoundHub.BOSS);
     }
 
 
