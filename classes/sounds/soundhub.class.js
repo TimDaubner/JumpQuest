@@ -3,6 +3,7 @@ class SoundHub {
     static otherVolume = 0.75;
     static soundCurrentTime = 0;
     static BACKGROUND = new Audio('./audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
+    static BACKGROUND2 = new Audio('./audio/sound/background/502896__bolkmar__future-city-ambience.wav');
     static BUTTON = new Audio('./audio/sound/menu/407720__airblock__vcr_click.wav');
     static NOISE = [
         new Audio('./audio/sound/player/377560__yudena__argh_woman_bymondfisch89.ogg'),
@@ -14,9 +15,12 @@ class SoundHub {
         new Audio('./audio/sound/collect/423344__dsg__silver-quarter-7.wav'),
     ]
     static SPRAY = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
+    static BOSS = new Audio('./audio/sound/endgame/595840__lagmusics__heavy-metal-looping.mp3');
+    static WON = new Audio('./audio/sound/endgame/719854__phoenix_the_maker__game-music-001.wav');
+    static LOOSE = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
 
 
-    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY];
+    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
 
 
     // Spielt eine einzelne Audiodatei ab
@@ -48,6 +52,7 @@ class SoundHub {
         else {
             isSoundOn = true;
             SoundHub.playLoop(SoundHub.BACKGROUND);
+            SoundHub.playLoop(SoundHub.BACKGROUND2);
         }
     }
 

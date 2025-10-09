@@ -22,7 +22,11 @@ class World {
     ];
     punches = [
     ];
-
+    endScreen = [
+        // new EndScreen(200, 10, 1),
+    ];
+    wonGame = false;
+    oneTime = false;
     constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -64,6 +68,7 @@ class World {
         this.addObjectToMap(this.punches);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectToMap(this.statusbars);
+        this.addObjectToMap(this.endScreen);
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);
 
@@ -86,7 +91,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && !world.character.isHurt()) {
+            if (this.character.isColliding(enemy) && !enemy.isDead && !world.character.isHurt()) {
                 this.character.gotHit();
             }
         });
@@ -111,13 +116,13 @@ class World {
             this.throwableObjects.forEach(throwableObject => {
                 if (throwableObject.isColliding(enemy)) {
                     if (enemy.energy <= 0) {
-                        this.level.enemies.splice(index, 1);
+                        enemy.playDeathAnimation(index);
                     }
                     if (!enemy.isHit) {
                         enemy.energy -= 50;
                     }
                     if (enemy.energy <= 0) {
-                        this.level.enemies.splice(index, 1);
+                        enemy.playDeathAnimation(index);
                     }
                     enemy.stopHit();
                 }

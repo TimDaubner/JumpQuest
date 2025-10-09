@@ -103,6 +103,11 @@ class Player extends MovableObject {
                     world.statusbars[0].setPercentage(this.energy);
                     this.playDeathAnimation(this.IMAGES_DEAD);
                     oneTime = true;
+                    world.endScreen.push(new EndScreen(90, 55, 1));
+                    setTimeout(() => {
+                        isRunning = false;
+                        SoundHub.playOne(SoundHub.LOOSE);
+                    }, 2500)
                 }
                 else if (this.isHurt()) {
                     this.playAnimation(this.IMAGES_HURT);
