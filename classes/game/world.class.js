@@ -138,7 +138,7 @@ class World {
     checkPunchHit() {
         if (this.controller.ATTACK && !this.character.isDead()) {
             console.log("ATTACK");
-            let currentAttack = new Attack(this.character.posX, this.character.posY);
+            let currentAttack = new Attack(this.character.posX + 50, this.character.posY);
             this.punches.push = currentAttack;
 
             this.level.enemies.forEach((enemy) => {
@@ -164,7 +164,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
 
         if (mo.isMirrored) {
             this.flipImageBack(mo);

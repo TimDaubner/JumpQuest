@@ -1,20 +1,30 @@
 class Attack extends DrawableObject {
     //TODO - Punch Attack
 
-    posX = 20;
-    posY = 40;
+    posX = 0;
+    posY = 0;
     img;
     imgCache = {};
-    width = 100;
-    height = 100;
+    width = 20;
+    height = 20;
+    offset = {
+        top: 0,
+        left: 100,
+        sizeX: 1,
+        sizeY: 1
+    }
+
 
     IMAGES_ATTACK = [
         './img/Objects/box2.png'
     ]
 
-    constructor() {
-        super().loadImg(this.IMAGES_ATTACK[0]);
-        this.loadImg(this.img);
+    constructor(posX, posY) {
+        super();
+        this.posX = posX;
+        this.posY = posY;
+        // super().loadImg(this.IMAGES_ATTACK[0]);
+        // this.loadImg(this.img);
     }
 
     isColliding(mo) {

@@ -148,12 +148,19 @@ class Player extends MovableObject {
                     this.playAnimation(this.IMAGES_JUMP);
                 }
                 if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
-                    this.jump();
                     this.endurance -= 25;
                     if (this.endurance < 0) this.endurance = 0;
                 }
             }
         }, 300));
+        intervals.push(setInterval(() => {
+            if (isRunning) {
+                if (this.isDead()) return;
+                if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
+                    this.jump();
+                }
+            }
+        }, 10));
 
         intervals.push(setInterval(() => {
             if (isRunning) {

@@ -7,6 +7,7 @@ let isFullscreen = false;
 let isSoundOn = true;
 
 
+
 function init() {
     canvas = document.getElementById('canvas');
 
@@ -40,6 +41,7 @@ function startGame() {
     isRunning = true;
     spawnEnemy();
 }
+
 function restartGame() {
     isRunning = false;
     intervals.forEach(interval => {
@@ -60,17 +62,36 @@ function exitGame() {
     console.log("exit game");
 }
 
-//TODO-FullscreenMode
-function fullscreenMode() {
-    if (isFullscreen) {
-        isFullscreen = false;
-    }
-    else {
+document.addEventListener('fullscreenchange', fullscreenHandler);
+document.addEventListener('webkitfullscreenchange', fullscreenHandler);
+document.addEventListener('mozfullscreenchange', fullscreenHandler);
+document.addEventListener('MSFullscreenChange', fullscreenHandler);
+
+function fullscreenHandler() {
+    if (document.fullscreenElement === canvas) {
+        console.log("ENTER FULLSCREEN");
         isFullscreen = true;
-        let frame = document.getElementById('canvas_outerframe');
-        frame.requestFullscreen();
-        canvas.width = document.body.clientWidth; //document.width is obsolete
-        canvas.height = document.body.clientHeight;
+        canvas.style.width = screen.width;
+        canvas.style.height = screen.height;
+        canvas.style.borderRadius = '0';
+        canvas.width = screen.width * 2;
+        canvas.height = screen.height * 2;
+        world.ctx.scale(14, 14);
+    } else {
+        console.log("EXIT FULLSCREEN");
+        isFullscreen = false;
+        canvas.style.width = "720px";
+        canvas.style.height = "480px";
+    }
+}
+
+function fullscreenMode() {
+    if (!isFullscreen) {
+        canvas.requestFullscreen().catch(err => {
+            console.error("Failed to enter fullscreen:", err);
+        });
+    } else {
+        document.exitFullscreen();
     }
 }
 
