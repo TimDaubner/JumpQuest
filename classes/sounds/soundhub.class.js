@@ -22,6 +22,7 @@ class SoundHub {
     static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
 
     static cachedSound;
+    static test;
     // Spielt eine einzelne Audiodatei ab
     static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
         if (isSoundOn) {
