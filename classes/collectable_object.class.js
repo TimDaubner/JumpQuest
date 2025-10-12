@@ -16,8 +16,19 @@ class CollectableObject extends MovableObject {
         this.posX += Math.random() * 2500;
         this.posY = posY;
         this.posY += Math.random() * 75 - 1;
-        this.width = 10;
+        this.checkSprayer(img);
         this.height = 10;
+    }
+
+
+    checkSprayer(img) {
+        if (img === 1) {
+            this.width = 7;
+            console.log("Sprayer");
+        }
+        else {
+            this.width = 10;
+        }
     }
     //  constructor() {
     //         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');

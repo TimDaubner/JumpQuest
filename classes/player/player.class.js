@@ -9,7 +9,7 @@ class Player extends MovableObject {
     endurance = 100;
     gas = 100;
     isAttacking = false;
-
+    oneTime = false;
     offset = {
         top: 77,
         left: 47,
@@ -95,19 +95,19 @@ class Player extends MovableObject {
     }
 
     animate() {
-        let oneTime = false;
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (this.isDead()) {
-                    if (!oneTime) SoundHub.playOne(SoundHub.DEATH);
+                    if (!this.oneTime) SoundHub.playOne(SoundHub.DEATH);
                     world.statusbars[0].setPercentage(this.energy);
                     this.playDeathAnimation(this.IMAGES_DEAD);
-                    oneTime = true;
                     world.endScreen.push(new EndScreen(90, 55, 1));
                     setTimeout(() => {
                         isRunning = false;
+                        SoundHub.pauseOne(SoundHub.BACKGROUND);
                         SoundHub.playOne(SoundHub.LOOSE);
                     }, 2500)
+                    this.oneTime = true;
                 }
                 else if (this.isHurt()) {
                     this.playAnimation(this.IMAGES_HURT);

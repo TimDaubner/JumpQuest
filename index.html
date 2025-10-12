@@ -24,9 +24,6 @@
     <script src="./classes/enemy/spawner.js"></script>
     <script src="./classes/sounds/soundhub.class.js"></script>
     <script src="./classes/game/endscreen.js"></script>
-    <!-- <script src="./classes/collectable/cointype.class.js"></script>
-    <script src="./classes/collectable/coin.class.js"></script>
-    <script src="./classes/player/inventory.class.js"></script> -->
 
     <script src="./js/game.js"></script>
     <script src="./script.js"></script>
@@ -35,26 +32,27 @@
 </head>
 
 
-<body onload="init()">
+<body id="body" onload="init()">
     <h1>Jump Quest</h1>
-    <div class="container" id="container">
-        <div class="buttons">
-            <button onclick="startGame()" class="start-btn"></button>
-            <button onclick="openSettings()" class="settings-btn"></button>
-            <button onclick="exitGame()" class="exit-btn"></button>
+    <div id="canvas_outerframe" class="canvas-outerframe">
+        <canvas id="canvas" class="canvas-frame"></canvas>
+
+        <div class="upper-right">
+            <button onclick="pauseGame()">pause</button>
+            <button onclick="runGame()">run</button>
+            <button onclick="restartGame()">restart</button>
+            <button onclick="fullscreenMode()">fullscreen</button>
+            <button onclick="SoundHub.pauseAll()">sound</button>
+        </div>
+        <div class="container" id="container">
+            <div class="buttons">
+                <button onclick="startGame()" class="start-btn"></button>
+                <button onclick="openSettings()" class="settings-btn"></button>
+                <button onclick="exitGame()" class="exit-btn"></button>
+            </div>
         </div>
     </div>
-    <div id="canvas_outerframe" class="canvas-outerframe">
-        <canvas id="canvas" class="canvas-frame">
-        </canvas>
-        <section id="settings" class="settings">
     </div>
-    </section>
-    <button onclick="pauseGame()">pause</button>
-    <button onclick="runGame()">run</button>
-    <button onclick="restartGame()">restart</button>
-    <button onclick="fullscreenMode()">fullscreen</button>
-    <button onclick="SoundHub.pauseAll()">sound</button>
 </body>
 
 </html>

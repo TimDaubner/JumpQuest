@@ -16,13 +16,13 @@ class SoundHub {
     static SPRAY = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
     static BOSS = new Audio('./audio/sound/endgame/595840__lagmusics__heavy-metal-looping.mp3');
     static WON = new Audio('./audio/sound/endgame/719854__phoenix_the_maker__game-music-001.wav');
-    static LOOSE = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
+    static LOOSE = new Audio('./audio/sound/background/502896__bolkmar__future-city-ambience.wav');
 
 
     static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
 
     static cachedSound;
-    static test;
+
     // Spielt eine einzelne Audiodatei ab
     static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
         if (isSoundOn) {
