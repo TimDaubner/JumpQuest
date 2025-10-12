@@ -11,13 +11,17 @@ body {
     background-image: url('./img/Background_City/city 4/10.png');
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    margin: 0;
+    background-color: black;
+    /* fallback for empty/transparent parts */
+    /* height: 100vh; */
 }
 
 canvas {
     display: block;
-    width: 720px;
-    height: 480px;
+    width: min(100vw, 720px);
+    height: auto;
+    aspect-ratio: 720 / 480;
     background-image: url('./img/Background_City/city 1/11.png');
 }
 
@@ -160,7 +164,7 @@ canvas {
 }
 
 
-@media only screen and (max-height: 768px) {
+@media only screen and (max-height: 1000px) {
     canvas {
         height: 100vh;
     }

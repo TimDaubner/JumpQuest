@@ -73,8 +73,10 @@ function fullscreenHandler() {
     if (document.fullscreenElement === canvas) {
         console.log("ENTER FULLSCREEN");
         isFullscreen = true;
-        // canvas.style.width = screen.width;
-        // canvas.style.height = screen.height;
+        document.getElementById('upper_right').classList.add('d_none');
+        document.getElementById('container').classList.add('d_none');
+        document.getElementById('maintext').classList.add('d_none');
+        document.getElementById('canvas_outerframe').classList.add('d_none');
         canvas.style.borderRadius = '0';
         canvas.width = screen.width * 2;
         canvas.height = screen.height * 2;
@@ -85,11 +87,16 @@ function fullscreenHandler() {
         canvas.width = 720 * 2;
         canvas.height = 480 * 2;
         world.ctx.scale(6.2, 6.2);
+        document.getElementById('upper_right').classList.remove('d_none');
+        // document.getElementById('container').classList.remove('d_none');
+        document.getElementById('maintext').classList.remove('d_none');
+        document.getElementById('canvas_outerframe').classList.remove('d_none');
     }
 }
 
 function fullscreenMode() {
     if (!isFullscreen) {
+        canvas.style.borderRadius = '0';
         canvas.requestFullscreen().catch(err => {
             console.error("Failed to enter fullscreen:", err);
         });
