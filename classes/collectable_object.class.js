@@ -20,7 +20,6 @@ class CollectableObject extends MovableObject {
         this.height = 10;
     }
 
-
     checkSprayer(img) {
         if (img === 1) {
             this.width = 7;
@@ -30,15 +29,4 @@ class CollectableObject extends MovableObject {
             this.width = 10;
         }
     }
-    //  constructor() {
-    //         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
-    //         this.loadImgs(this.IMAGES_WALKING);
-    //         this.animate();
-
-    //         this.posX = 300;
-    //         this.posX += Math.random() * 10;
-    //         this.posY = 60;
-    //         this.speed = 0.15 + Math.random() * 0.25;
-    //     }
-
 }

@@ -6,8 +6,6 @@ let intervals = [];
 let isFullscreen = false;
 let isSoundOn = true;
 
-
-
 function init() {
     canvas = document.getElementById('canvas');
 
@@ -32,8 +30,6 @@ function startGame() {
     canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
-    // canvas.style.width = "720px";
-    // canvas.style.height = "480px";
     document.getElementById('container').classList.add('d_none');
     world = new World(canvas, controller);
     posX = world.character.posX;
@@ -56,6 +52,7 @@ function restartGame() {
     controller = new Controller();
     startGame();
 }
+
 function openSettings() {
     console.log("Volume settings, credits and controls for game");
 }
@@ -71,27 +68,33 @@ document.addEventListener('MSFullscreenChange', fullscreenHandler);
 
 function fullscreenHandler() {
     if (document.fullscreenElement === canvas) {
-        console.log("ENTER FULLSCREEN");
         isFullscreen = true;
-        document.getElementById('upper_right').classList.add('d_none');
-        document.getElementById('container').classList.add('d_none');
-        document.getElementById('maintext').classList.add('d_none');
-        document.getElementById('canvas_outerframe').classList.add('d_none');
+        add_D_None();
         canvas.style.borderRadius = '0';
         canvas.width = screen.width * 2;
         canvas.height = screen.height * 2;
         world.ctx.scale(14, 14);
     } else {
-        console.log("EXIT FULLSCREEN");
         isFullscreen = false;
         canvas.width = 720 * 2;
         canvas.height = 480 * 2;
         world.ctx.scale(6.2, 6.2);
-        document.getElementById('upper_right').classList.remove('d_none');
-        // document.getElementById('container').classList.remove('d_none');
-        document.getElementById('maintext').classList.remove('d_none');
-        document.getElementById('canvas_outerframe').classList.remove('d_none');
+        remove_D_None();
     }
+}
+
+function add_D_None() {
+    document.getElementById('upper_right').classList.add('d_none');
+    document.getElementById('container').classList.add('d_none');
+    document.getElementById('maintext').classList.add('d_none');
+    document.getElementById('canvas_outerframe').classList.add('d_none');
+}
+
+function remove_D_None() {
+    document.getElementById('upper_right').classList.remove('d_none');
+    // document.getElementById('container').classList.remove('d_none');
+    document.getElementById('maintext').classList.remove('d_none');
+    document.getElementById('canvas_outerframe').classList.remove('d_none');
 }
 
 function fullscreenMode() {
@@ -114,7 +117,6 @@ function soundToggle() {
     SoundHub.pauseAll();
 }
 
-//Controller for Player
 document.addEventListener('keydown', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
         controller.UP = true;
@@ -144,6 +146,7 @@ document.addEventListener('keydown', (event) => {
         controller.BUY = true;
     }
 });
+
 document.addEventListener('keyup', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
         controller.UP = false;

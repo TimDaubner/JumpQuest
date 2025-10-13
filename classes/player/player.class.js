@@ -97,25 +97,7 @@ class Player extends MovableObject {
     animate() {
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.isDead()) {
-                    if (!this.oneTime) SoundHub.playOne(SoundHub.DEATH);
-                    world.statusbars[0].setPercentage(this.energy);
-                    this.playDeathAnimation(this.IMAGES_DEAD);
-                    world.endScreen.push(new EndScreen(90, 55, 1));
-                    setTimeout(() => {
-                        isRunning = false;
-                        SoundHub.pauseOne(SoundHub.BACKGROUND);
-                        SoundHub.playOne(SoundHub.LOOSE);
-                    }, 2500)
-                    this.oneTime = true;
-                }
-                else if (this.isHurt()) {
-                    this.playAnimation(this.IMAGES_HURT);
-                    world.statusbars[0].setPercentage(this.energy);
-                }
-                else if (this.world.controller.THROW && this.gas > 24) {
-                    this.playAttackAnimation(this.IMAGES_ATTACK);
-                }
+                checkDeadHurtOrThrowing()
             }
         }, 1000 / 12));
         intervals.push(setInterval(() => {
@@ -182,6 +164,32 @@ class Player extends MovableObject {
                 }
             }
         }, 1000 / 11));
+    }
+
+    checkDeadHurtOrThrowing() {
+        if (this.isDead()) {
+            this.playerIsDead();
+        }
+        else if (this.isHurt()) {
+            this.playAnimation(this.IMAGES_HURT);
+            world.statusbars[0].setPercentage(this.energy);
+        }
+        else if (this.world.controller.THROW && this.gas > 24) {
+            this.playAttackAnimation(this.IMAGES_ATTACK);
+        }
+    }
+
+    playerIsDead() {
+        if (!this.oneTime) SoundHub.playOne(SoundHub.DEATH);
+        world.statusbars[0].setPercentage(this.energy);
+        this.playDeathAnimation(this.IMAGES_DEAD);
+        world.endScreen.push(new EndScreen(90, 55, 1));
+        setTimeout(() => {
+            isRunning = false;
+            SoundHub.pauseOne(SoundHub.BACKGROUND);
+            SoundHub.playOne(SoundHub.LOOSE);
+        }, 2500)
+        this.oneTime = true;
     }
 
     sprint() {

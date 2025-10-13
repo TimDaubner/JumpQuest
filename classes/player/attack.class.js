@@ -1,5 +1,4 @@
 class Attack extends DrawableObject {
-    //TODO - Punch Attack
 
     posX = 0;
     posY = 0;
@@ -23,8 +22,6 @@ class Attack extends DrawableObject {
         super();
         this.posX = posX;
         this.posY = posY;
-        // super().loadImg(this.IMAGES_ATTACK[0]);
-        // this.loadImg(this.img);
     }
 
     isColliding(mo) {

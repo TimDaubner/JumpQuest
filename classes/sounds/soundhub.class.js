@@ -23,13 +23,12 @@ class SoundHub {
 
     static cachedSound;
 
-    // Spielt eine einzelne Audiodatei ab
-    static playOne(sound) {  // instrumentId nur wichtig für die Visualisierung
+    static playOne(sound) {
         if (isSoundOn) {
             sound.volume = 0.1;
-            SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume; // Setzt die Lautstärke auf 0.2 = 20% / 1 = 100%
-            sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
-            sound.play();  // Spielt das übergebene Sound-Objekt ab
+            SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
+            sound.currentTime = this.soundCurrentTime;
+            sound.play();
             if (sound != SoundHub.BUTTON) this.cachedSound = sound;
         }
     }
@@ -37,16 +36,13 @@ class SoundHub {
     static playLoop(sound) {
         if (isSoundOn) {
             sound.loop = true;
-            // sound.volume = this.bgVolume;
             SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
-            sound.currentTime = this.soundCurrentTime;  // Startet ab einer bestimmten stelle (0=Anfang/ 5 = 5 sec.)
-            sound.play();  // Spielt das übergebene Sound-Objekt ab
+            sound.currentTime = this.soundCurrentTime;
+            sound.play();
             if (sound != SoundHub.BUTTON) this.cachedSound = sound;
         }
     }
 
-
-    // Pausiert das Abspielen aller Audiodateien
     static pauseAll() {
         if (isSoundOn) {
             this.stopAllSounds();
@@ -73,19 +69,14 @@ class SoundHub {
         this.pauseOne(SoundHub.BOSS);
     }
 
-
     static pauseOne(sound) {
         sound.pause();
     }
 
-
-    // ##########################################################################################################################
-    // ################################################  Sound Slider - BONUS !  ################################################
-    // Setzt die Lautstärke für alle Audiodateien
-    static objSetVolume(sounds) {  // sounds ist das array: allSounds welches hier als Parameter ankommt
-        let volumeValue = document.getElementById('volume').value;  // Holt den aktuellen Lautstärkewert aus dem Inputfeld
+    static objSetVolume(sounds) {
+        let volumeValue = document.getElementById('volume').value;
         sounds.forEach(sound => {
-            sound.volume = volumeValue;  // Setzt die Lautstärke für jedes Audio wie im Slider angegeben
+            sound.volume = volumeValue;
         });
     }
 }
