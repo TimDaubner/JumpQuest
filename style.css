@@ -94,15 +94,6 @@ canvas {
 }
 
 .container .buttons {
-    background-color: rgba(255, 0, 0, 0.5);
-    /* temporary debug color */
-    border: 2px solid white;
-    /* position: absolute;
-    top: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 0.5rem;
-    width: 650px;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,6 +151,30 @@ canvas {
     z-index: 9999;
     text-align: center;
     flex-direction: column;
+}
+
+.instructions {
+    position: absolute;
+    top: 25vh;
+    width: 25%;
+    height: 30%;
+    background-color: white;
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.close-btn {
+    border-radius: 24px;
+    border: none;
+    background-color: black;
+    color: white;
+}
+
+.close-btn:hover {
+    background-color: white;
+    color: black;
 }
 
 .d_none {

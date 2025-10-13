@@ -41,8 +41,7 @@
         <canvas id="canvas" class="canvas-frame"></canvas>
 
         <div class="upper-right" id="upper_right">
-            <button onclick="pauseGame()">pause</button>
-            <button onclick="runGame()">run</button>
+            <button id="pause" onclick="pauseGame()">pause</button>
             <button onclick="restartGame()">restart</button>
             <button onclick="fullscreenMode()">fullscreen</button>
             <button onclick="SoundHub.pauseAll()">sound</button>
@@ -50,8 +49,15 @@
         <div class="container" id="container">
             <div class="buttons">
                 <button onclick="startGame()" class="start-btn"></button>
-                <button onclick="openSettings()" class="settings-btn"></button>
-                <button onclick="exitGame()" class="exit-btn"></button>
+                <button onclick="openInstructions()" class="settings-btn"></button>
+            </div>
+            <div id="instructions" class="instructions d_none">
+                <button onclick="closeInstructions()" class="close-btn">X</button>
+                <h2>Instructions</h2>
+                <p>W,S,A,D to Move</p>
+                <p>Left Shift + E to shoot fireball</p>
+                <p>Space to jump</p>
+                <p>B to buy gas for sprayer</p>
             </div>
         </div>
     </div>

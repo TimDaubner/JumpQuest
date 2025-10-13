@@ -32,16 +32,23 @@ function getSoundForAllBtns() {
     buttons.forEach(button => {
         button.addEventListener("click", function () {
             SoundHub.playOne(SoundHub.BUTTON);
+            button.blur();
         });
     });
 }
 
 function pauseGame() {
-    isRunning = false;
+    if (isRunning) {
+        isRunning = false;
+        document.getElementById('pause').innerHTML = 'run';
+    }
+    else {
+        isRunning = true;
+        document.getElementById('pause').innerHTML = 'pause';
+    }
 }
 
 function runGame() {
-    isRunning = true;
 }
 
 function startGame() {
@@ -72,7 +79,12 @@ function restartGame() {
     startGame();
 }
 
-function openSettings() {
+function openInstructions() {
+    document.getElementById('instructions').classList.remove('d_none');
+}
+
+function closeInstructions() {
+    document.getElementById('instructions').classList.add('d_none');
 }
 
 function exitGame() {
