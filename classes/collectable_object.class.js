@@ -23,7 +23,6 @@ class CollectableObject extends MovableObject {
     checkSprayer(img) {
         if (img === 1) {
             this.width = 7;
-            console.log("Sprayer");
         }
         else {
             this.width = 10;

@@ -12,8 +12,6 @@ class World {
         new Statusbar(10, 30, 2, 100),
         new Statusbar(3, 7, 3, 10),
         new Statusbar(150, 10, 4, 10),
-        // new Statusbar(180, 10, 5, 10),
-        // new Statusbar(210, 10, 6, 10),
         new Statusbar(4, 27, 7, 7),
     ];
     throwableObjects = [
@@ -23,10 +21,10 @@ class World {
     punches = [
     ];
     endScreen = [
-        // new EndScreen(200, 10, 1),
     ];
     wonGame = false;
     oneTime = false;
+
     constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -34,13 +32,11 @@ class World {
 
         this.level = createLevel1();
 
-        //scale up or down
         this.ctx.scale(6.2, 6.2);
         createBackground();
 
         this.draw();
         this.setWorld();
-        this.checkCollisions();
         this.createCollectables();
         this.run();
     }
@@ -48,7 +44,6 @@ class World {
     createCollectables() {
         for (let i = 0; i < 100; i++) {
             this.collectableObjects.push(new CollectableObject(200, 25, 0));
-            // console.log(i % 10);
             if (i % 10 == 9) {
                 this.collectableObjects.push(new CollectableObject(200, 25, 1));
             }
@@ -59,6 +54,22 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
+        this.bunchOfObjectsToMap();
+
+        this.ctx.translate(-this.camera_x, 0);
+
+        this.addObjectToMap(this.statusbars);
+        this.addObjectToMap(this.endScreen);
+
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+
+        this.coinCounter();
+        let self = this;
+        requestAnimationFrame(function () { self.draw(); });
+    }
+
+    bunchOfObjectsToMap() {
         this.addObjectToMap(this.level.backgroundObjects);
         this.addObjectToMap(this.level.clouds);
         this.addObjectToMap(this.level.enemies);
@@ -66,68 +77,82 @@ class World {
         this.addObjectToMap(this.collectableObjects);
         this.addObjectToMap(this.throwableObjects);
         this.addObjectToMap(this.punches);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addObjectToMap(this.statusbars);
-        this.addObjectToMap(this.endScreen);
-        this.ctx.translate(this.camera_x, 0);
-        this.ctx.translate(-this.camera_x, 0);
+    }
 
+    coinCounter() {
         this.ctx.font = "8px Arial";
         this.ctx.fillStyle = "white";
         this.ctx.fillText(this.score || 0, 162, 18);
-        let self = this;
-        requestAnimationFrame(function () { self.draw(); });
     }
 
     run() {
         intervals.push(setInterval(() => {
             if (isRunning) {
-                this.checkCollisions();
                 this.checkThrowObjects();
                 this.checkPunchHit();
+                this.checkCollisions();
             }
         }, 100));
     }
 
     checkCollisions() {
+        this.checkCollectableItemsCollisions();
+        this.checkThrowableObjectHitEnemy();
+        this.checkEnemyCollisions();
+    }
+
+    checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead && !world.character.isHurt()) {
                 this.character.gotHit();
             }
         });
+    }
+
+    checkCollectableItemsCollisions() {
         this.collectableObjects.forEach((collectable, index) => {
             if (this.character.isColliding(collectable)) {
-                if (collectable.id == 1 && this.character.gas < 100) {
-                    console.log("gas");
-                    this.character.gas = 100;
-                    this.statusbars[2].setPercentage(100);
-                    this.collectableObjects.splice(index, 1);
-                    SoundHub.playOne(SoundHub.SPRAY);
-                }
-                else if (collectable.id == 0) {
-                    this.collectableObjects.splice(index, 1);
-                    this.score++;
-                    let rnd = Math.round(Math.random());
-                    SoundHub.playOne(SoundHub.COIN[rnd]);
-                }
+                this.checkGasOrCoin(collectable, index);
             }
         });
+    }
+
+    checkThrowableObjectHitEnemy() {
         this.level.enemies.forEach((enemy, index) => {
             this.throwableObjects.forEach(throwableObject => {
                 if (throwableObject.isColliding(enemy)) {
-                    if (enemy.energy <= 0) {
-                        enemy.playDeathAnimation(index);
-                    }
-                    if (!enemy.isHit) {
-                        enemy.energy -= 50;
-                    }
-                    if (enemy.energy <= 0) {
-                        enemy.playDeathAnimation(index);
-                    }
+                    this.checkEnemyReaction(enemy, index);
                     enemy.stopHit();
                 }
             });
         });
+    }
+
+    checkEnemyReaction(enemy, index) {
+        if (enemy.energy <= 0) {
+            enemy.playDeathAnimation(index);
+        }
+        if (!enemy.isHit) {
+            enemy.energy -= 50;
+        }
+        if (enemy.energy <= 0) {
+            enemy.playDeathAnimation(index);
+        }
+    }
+
+    checkGasOrCoin(collectable, index) {
+        if (collectable.id == 1 && this.character.gas < 100) {
+            this.character.gas = 100;
+            this.statusbars[2].setPercentage(100);
+            this.collectableObjects.splice(index, 1);
+            SoundHub.playOne(SoundHub.SPRAY);
+        }
+        else if (collectable.id == 0) {
+            this.collectableObjects.splice(index, 1);
+            this.score++;
+            let rnd = Math.round(Math.random());
+            SoundHub.playOne(SoundHub.COIN[rnd]);
+        }
     }
 
     checkThrowObjects() {
@@ -142,13 +167,11 @@ class World {
 
     checkPunchHit() {
         if (this.controller.ATTACK && !this.character.isDead()) {
-            console.log("ATTACK");
             let currentAttack = new Attack(this.character.posX + 50, this.character.posY);
             this.punches.push = currentAttack;
 
             this.level.enemies.forEach((enemy) => {
                 if (currentAttack.isColliding(enemy)) {
-                    console.log("ATTACK HIT");
                 }
             });
         }

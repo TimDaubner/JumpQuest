@@ -92,14 +92,79 @@ class Player extends MovableObject {
         this.loadImgs(this.IMAGES_DEAD);
         this.animate();
         this.applyGravity();
+        this.setWorldCorners();
+        this.playerJump();
     }
 
     animate() {
         intervals.push(setInterval(() => {
-            if (isRunning) {
-                checkDeadHurtOrThrowing()
-            }
+            this.checkDeadHurtOrThrowing()
         }, 1000 / 12));
+
+        intervals.push(setInterval(() => {
+            this.playerIsWalking();
+        }, 1000 / 11));
+
+        intervals.push(setInterval(() => {
+            this.checkPlayerIsJumping();
+        }, 300));
+
+        intervals.push(setInterval(() => {
+            this.checkWalkingAndBuy();
+        }, 1000 / 11));
+    }
+
+    checkWalkingAndBuy() {
+        if (isRunning) {
+            if (this.isDead()) return;
+
+            if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+            if (this.world.controller.BUY && this.world.score > 14 && this.gas != 100) {
+                world.statusbars[2].setPercentage(100);
+                this.gas = 100;
+                this.world.score -= 15;
+            }
+        }
+    }
+
+    playerJump() {
+        intervals.push(setInterval(() => {
+            if (isRunning) {
+                if (this.isDead()) return;
+                if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
+                    this.jump();
+                }
+            }
+        }, 10));
+    }
+
+    checkPlayerIsJumping() {
+        if (isRunning) {
+            if (this.isDead()) return;
+
+            if (this.isAboveGround()) {
+                this.playAnimation(this.IMAGES_JUMP);
+            }
+            if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
+                this.endurance -= 25;
+                if (this.endurance < 0) this.endurance = 0;
+            }
+        }
+    }
+
+    playerIsWalking() {
+        if (isRunning) {
+            if (this.isDead()) return;
+
+            if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }
+    }
+
+    setWorldCorners() {
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (this.isDead()) return;
@@ -114,68 +179,20 @@ class Player extends MovableObject {
                 this.world.camera_x = -this.posX + 15;
             }
         }, 1000 / 60));
-
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-
-                if (this.isDead()) return;
-
-                if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
-                    this.playAnimation(this.IMAGES_WALKING);
-                }
-            }
-        }, 1000 / 11));
-
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-
-                if (this.isDead()) return;
-
-                if (this.isAboveGround()) {
-                    this.playAnimation(this.IMAGES_JUMP);
-                }
-                if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
-                    this.endurance -= 25;
-                    if (this.endurance < 0) this.endurance = 0;
-                }
-            }
-        }, 300));
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-                if (this.isDead()) return;
-                if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
-                    this.jump();
-                }
-            }
-        }, 10));
-
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-
-                if (this.isDead()) return;
-
-                if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
-                    this.playAnimation(this.IMAGES_IDLE);
-                }
-                if (this.world.controller.BUY && this.world.score > 14 && this.gas != 100) {
-                    world.statusbars[2].setPercentage(100);
-                    this.gas = 100;
-                    this.world.score -= 15;
-                }
-            }
-        }, 1000 / 11));
     }
 
     checkDeadHurtOrThrowing() {
-        if (this.isDead()) {
-            this.playerIsDead();
-        }
-        else if (this.isHurt()) {
-            this.playAnimation(this.IMAGES_HURT);
-            world.statusbars[0].setPercentage(this.energy);
-        }
-        else if (this.world.controller.THROW && this.gas > 24) {
-            this.playAttackAnimation(this.IMAGES_ATTACK);
+        if (isRunning) {
+            if (this.isDead()) {
+                this.playerIsDead();
+            }
+            else if (this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT);
+                world.statusbars[0].setPercentage(this.energy);
+            }
+            else if (this.world.controller.THROW && this.gas > 24) {
+                this.playAttackAnimation(this.IMAGES_ATTACK);
+            }
         }
     }
 
@@ -221,14 +238,4 @@ class Player extends MovableObject {
         }
         world.statusbars[1].setPercentage(this.endurance);
     }
-
-    // checkPunchDuration() {
-    //     if () {
-    //         let timespan = new Date().getTime() - this.lastHit;
-    //         timespan /= 1000;
-    //         return timespan < 2;
-    //     }
-    // }
-    //IDLE 5
-    //WALKING 10
 }

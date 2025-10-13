@@ -49,7 +49,6 @@ class EndBoss extends MovableObject {
         this.loadImgs(this.IMAGES_DEATH);
         this.animate();
 
-        // this.posX = 2600;
         this.posX = 2600;
         this.posX += Math.random() * 200;
         this.posY = 25;
@@ -57,6 +56,41 @@ class EndBoss extends MovableObject {
     }
 
     animate() {
+        this.checkPlayerIsDead();
+        intervals.push(setInterval(() => {
+            if (isRunning) {
+                if (!this.isDead) {
+                    if (this.checkPlayerDistance() && !world.character.isDead()) {
+                        this.reactionWhenPlayerInRange();
+                    }
+                    else if (this.checkPlayerSide()) {
+                        this.posX += 1.2;
+                        this.isMirrored = true;
+                    }
+                }
+            }
+        }, 1000 / 6));
+    }
+
+    reactionWhenPlayerInRange() {
+        if (!this.oneTime) {
+            world.statusbars.push(new Statusbar(124, 144, 8, 100));
+            SoundHub.pauseOne(SoundHub.BACKGROUND);
+            SoundHub.playLoop(SoundHub.BOSS);
+            this.oneTime = true;
+        }
+        world.statusbars[world.statusbars.length - 1].setPercentage(this.energy / 10);
+        if (this.checkPlayerSide()) {
+            this.posX += 1.2;
+            this.isMirrored = true;
+        }
+        else {
+            this.posX -= 1.2;
+            this.isMirrored = false;
+        }
+    }
+
+    checkPlayerIsDead() {
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (!this.isDead) {
@@ -65,33 +99,6 @@ class EndBoss extends MovableObject {
                     }
                     else {
                         this.playAnimation(this.IMAGES_IDLE);
-                    }
-                }
-            }
-        }, 1000 / 6));
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-                if (!this.isDead) {
-                    if (this.checkPlayerDistance() && !world.character.isDead()) {
-                        if (!this.oneTime) {
-                            world.statusbars.push(new Statusbar(124, 144, 8, 100));
-                            SoundHub.pauseOne(SoundHub.BACKGROUND);
-                            SoundHub.playLoop(SoundHub.BOSS);
-                            this.oneTime = true;
-                        }
-                        world.statusbars[world.statusbars.length - 1].setPercentage(this.energy / 10);
-                        if (this.checkPlayerSide()) {
-                            this.posX += 1.2;
-                            this.isMirrored = true;
-                        }
-                        else {
-                            this.posX -= 1.2;
-                            this.isMirrored = false;
-                        }
-                    }
-                    else if (this.checkPlayerSide()) {
-                        this.posX += 1.2;
-                        this.isMirrored = true;
                     }
                 }
             }
@@ -106,16 +113,20 @@ class EndBoss extends MovableObject {
             this.currentImg++;
         }
         else {
-            this.isDead = true;
-            setTimeout(() => {
-                world.level.enemies.splice(index, 1);
-                isRunning = false;
-                world.endScreen.push(new EndScreen(90, 55, 0));
-                SoundHub.pauseOne(SoundHub.BOSS);
-                SoundHub.pauseOne(SoundHub.BACKGROUND);
-                SoundHub.playOne(SoundHub.WON);
-            }, 2500);
+            this.stopGamePlaying(index);
         }
+    }
+
+    stopGamePlaying(index) {
+        this.isDead = true;
+        setTimeout(() => {
+            world.level.enemies.splice(index, 1);
+            isRunning = false;
+            world.endScreen.push(new EndScreen(90, 55, 0));
+            SoundHub.pauseOne(SoundHub.BOSS);
+            SoundHub.pauseOne(SoundHub.BACKGROUND);
+            SoundHub.playOne(SoundHub.WON);
+        }, 2500);
     }
 
     stopHit() {

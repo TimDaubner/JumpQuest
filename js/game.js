@@ -54,11 +54,9 @@ function restartGame() {
 }
 
 function openSettings() {
-    console.log("Volume settings, credits and controls for game");
 }
 
 function exitGame() {
-    console.log("exit game");
 }
 
 document.addEventListener('fullscreenchange', fullscreenHandler);
