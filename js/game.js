@@ -11,6 +11,7 @@ function init() {
     canvas = document.getElementById('canvas');
     overlay = document.getElementById('landscape-protection');
     if (isProbablyMobile()) {
+        document.getElementById('h1').classList.add('d_none');
         if (screen.orientation.angle === 0) {
             overlay.classList.remove('d_none');
         }
