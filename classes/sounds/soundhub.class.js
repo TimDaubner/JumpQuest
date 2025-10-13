@@ -2,21 +2,21 @@ class SoundHub {
     static bgVolume = 0.05;
     static otherVolume = 0.75;
     static soundCurrentTime = 0;
-    static BACKGROUND = new Audio('./audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
-    static BUTTON = new Audio('./audio/sound/menu/407720__airblock__vcr_click.wav');
+    static BACKGROUND = new Audio('../audio/sound/background/774225__crashbulb__75-bpm-glitch-hop-percussion-loop-piano-break-4-bar-loop.wav');
+    static BUTTON = new Audio('../audio/sound/menu/407720__airblock__vcr_click.wav');
     static NOISE = [
-        new Audio('./audio/sound/player/377560__yudena__argh_woman_bymondfisch89.ogg'),
-        new Audio('./audio/sound/player/377561__yudena__ah_woman_bymondfisch89.ogg'),
+        new Audio('../audio/sound/player/377560__yudena__argh_woman_bymondfisch89.ogg'),
+        new Audio('../audio/sound/player/377561__yudena__ah_woman_bymondfisch89.ogg'),
     ];
     static DEATH = new Audio('./audio/sound/player/678733__alesiadavina__female-horror-pain-sound-vol-003.wav');
     static COIN = [
-        new Audio('./audio/sound/collect/423337__dsg__clad-quarter-6.wav'),
-        new Audio('./audio/sound/collect/423344__dsg__silver-quarter-7.wav'),
+        new Audio('../audio/sound/collect/423337__dsg__clad-quarter-6.wav'),
+        new Audio('../audio/sound/collect/423344__dsg__silver-quarter-7.wav'),
     ]
-    static SPRAY = new Audio('./audio/sound/collect/244657__dsg__pop-5.flac');
-    static BOSS = new Audio('./audio/sound/endgame/595840__lagmusics__heavy-metal-looping.mp3');
-    static WON = new Audio('./audio/sound/endgame/719854__phoenix_the_maker__game-music-001.wav');
-    static LOOSE = new Audio('./audio/sound/background/502896__bolkmar__future-city-ambience.wav');
+    static SPRAY = new Audio('../audio/sound/collect/244657__dsg__pop-5.flac');
+    static BOSS = new Audio('../audio/sound/endgame/595840__lagmusics__heavy-metal-looping.mp3');
+    static WON = new Audio('../audio/sound/endgame/719854__phoenix_the_maker__game-music-001.wav');
+    static LOOSE = new Audio('../audio/sound/background/502896__bolkmar__future-city-ambience.wav');
 
 
     static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
