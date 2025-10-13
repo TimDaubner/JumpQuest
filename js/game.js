@@ -1,4 +1,5 @@
 let canvas;
+let overlay;
 let world;
 let controller = new Controller();
 let isRunning = false;
@@ -8,7 +9,25 @@ let isSoundOn = true;
 
 function init() {
     canvas = document.getElementById('canvas');
+    overlay = document.getElementById('landscape-protection');
+    if (isProbablyMobile()) {
+        if (screen.orientation.angle === 0) {
+            overlay.classList.remove('d_none');
+        }
+        else {
+            overlay.classList.add('d_none');
+        }
+    }
+    getSoundForAllBtns();
+}
 
+function isProbablyMobile() {
+    return (
+        'ontouchstart' in window || navigator.maxTouchPoints > 0
+    ) && window.innerWidth < 900;
+}
+
+function getSoundForAllBtns() {
     let buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
         button.addEventListener("click", function () {
@@ -84,15 +103,12 @@ function fullscreenHandler() {
 function add_D_None() {
     document.getElementById('upper_right').classList.add('d_none');
     document.getElementById('container').classList.add('d_none');
-    document.getElementById('maintext').classList.add('d_none');
-    document.getElementById('canvas_outerframe').classList.add('d_none');
+    document.getElementById('h1').classList.add('d_none');
 }
 
 function remove_D_None() {
     document.getElementById('upper_right').classList.remove('d_none');
-    // document.getElementById('container').classList.remove('d_none');
-    document.getElementById('maintext').classList.remove('d_none');
-    document.getElementById('canvas_outerframe').classList.remove('d_none');
+    document.getElementById('h1').classList.remove('d_none');
 }
 
 function fullscreenMode() {
@@ -106,8 +122,15 @@ function fullscreenMode() {
     }
 }
 
-//TODO-MenuHandling
-//TODO-Responsive
+screen.orientation.addEventListener('change', () => {
+    if (screen.orientation.type == 'landscape-primary') {
+        overlay.classList.add('d_none');
+    }
+    else {
+        overlay.classList.remove('d_none');
+    }
+});
+
 //TODO-JSDOCS
 //TODO-Responsive / Mobile
 

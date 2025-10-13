@@ -29,7 +29,6 @@ class SoundHub {
             SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
             sound.currentTime = this.soundCurrentTime;
             sound.play();
-            if (sound != SoundHub.BUTTON) this.cachedSound = sound;
         }
     }
 
@@ -39,7 +38,7 @@ class SoundHub {
             SoundHub.BACKGROUND ? sound.volume = this.bgVolume : sound.volume = this.otherVolume;
             sound.currentTime = this.soundCurrentTime;
             sound.play();
-            if (sound != SoundHub.BUTTON) this.cachedSound = sound;
+            this.cachedSound = sound;
         }
     }
 
