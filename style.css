@@ -135,6 +135,12 @@ p {
     padding: 64px;
     cursor: default;
 }
+.upper-right img {
+    width: 24px;
+    height: 24px;
+    margin-top: 8px;
+}
+
 
 .upper-right button {
     padding: 0.5rem;

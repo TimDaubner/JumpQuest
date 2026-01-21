@@ -56,21 +56,6 @@ function startGame() {
     spawnEnemy();
 }
 
-function restartGame() {
-    SoundHub.stopAllSounds();
-    isSoundOn = true;
-    isRunning = false;
-    intervals.forEach(interval => {
-        clearInterval(interval);
-    });
-    world = null;
-    canvas = null;
-    canvas = document.getElementById('canvas');
-
-    controller = new Controller();
-    startGame();
-}
-
 function openInstructions() {
     document.getElementById('instructions').classList.remove('d_none');
 }
@@ -137,10 +122,6 @@ screen.orientation.addEventListener('change', () => {
 
 //TODO-JSDOCS
 //TODO-Responsive / Mobile
-
-function soundToggle() {
-    SoundHub.pauseAll();
-}
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
