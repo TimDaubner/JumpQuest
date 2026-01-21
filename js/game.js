@@ -38,21 +38,12 @@ function getSoundForAllBtns() {
     });
 }
 
-function pauseGame() {
-    if (isRunning) {
-        isRunning = false;
-        document.getElementById('pause').innerHTML = 'run';
-    }
-    else {
-        isRunning = true;
-        document.getElementById('pause').innerHTML = 'pause';
-    }
-}
-
 function runGame() {
 }
 
 function startGame() {
+    let menu = document.getElementById('burgermenu');
+    menu.classList.remove('d_none');
     SoundHub.playLoop(SoundHub.BACKGROUND);
     canvas.classList.add('black');
     canvas.width = 720 * 2;

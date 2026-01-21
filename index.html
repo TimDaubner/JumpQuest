@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./css/fonts.css">
 
     <script src="./classes/drawable_object.class.js"></script>
     <script src="./classes/moveable_object.class.js"></script>
@@ -26,6 +27,7 @@
     <script src="./classes/game/endscreen.js"></script>
 
     <script src="./js/game.js"></script>
+    <script src="./js/ui.js"></script>
     <link rel="shortcut icon" href="./img/Objects/sprayer.png" type="image/x-icon">
     <title>Jump Quest</title>
 </head>
@@ -36,31 +38,32 @@
         <h1>ROTATE DEVICE</h1>
         <h2>Change to Landscape Mode!</h2>
     </div>
-    <h1 id="h1">Jump Quest</h1>
+    <h1 id="h1" class="rock-salt-regular">Jump Quest</h1>
     <div id="canvas_outerframe" class="canvas-outerframe">
         <canvas id="canvas" class="canvas-frame"></canvas>
-
-        <div class="upper-right" id="upper_right">
-            <button id="pause" onclick="pauseGame()">pause</button>
-            <button onclick="restartGame()">restart</button>
-            <button onclick="fullscreenMode()">fullscreen</button>
-            <button onclick="SoundHub.pauseAll()">sound</button>
+        <div class="menu " id="burgermenu" onclick="openMenu(event)"><img  src="img/GUI/PNG/google/menu.svg" alt="">
+            <div class="upper-right d_none" id="menu" onclick="event.stopPropagation()">
+                <button class="rock-salt-regular" id="pause" onclick="pauseGame()">pause</button>
+                <button class="rock-salt-regular" onclick="restartGame()">restart</button>
+                <button class="rock-salt-regular" onclick="fullscreenMode()">fullscreen</button>
+                <button class="rock-salt-regular" onclick="SoundHub.pauseAll()">sound</button>
+            </div>
         </div>
         <div class="container" id="container">
             <div class="buttons">
-                <button onclick="startGame()" class="start-btn"></button>
+                <button onclick="startGame()" class="start-btn rock-salt-regular">START</button>
                 <button onclick="openInstructions()" class="settings-btn"></button>
-            </div>
-            <div id="instructions" class="instructions d_none">
-                <button onclick="closeInstructions()" class="close-btn">X</button>
-                <h2>Instructions</h2>
-                <p>W,S,A,D to Move</p>
-                <p>Left Shift + E to shoot fireball</p>
-                <p>Space to jump</p>
-                <p>B to buy gas for sprayer</p>
             </div>
         </div>
     </div>
+    </div>
+    <div id="instructions" class="instructions d_none rock-salt-regular">
+        <button onclick="closeInstructions()" class="close-btn"></button>
+        <h2>Instructions</h2>
+        <p>W,S,A,D to Move</p>
+        <p>Left Shift + E to shoot fireball</p>
+        <p>Space to jump</p>
+        <p>B to buy gas for sprayer</p>
     </div>
 
 </body>
