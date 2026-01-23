@@ -98,7 +98,7 @@ class World {
         intervals.push(setInterval(() => {
             if (isRunning) {
                 this.checkThrowObjects();
-                this.checkPunchHit();
+                // this.checkPunchHit();
                 this.checkCollisions();
             }
         }, 100));
@@ -165,8 +165,8 @@ class World {
     }
 
     checkThrowObjects() {
-
-        if (controller.THROW && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 24) {
+        if (controller.ATTACK && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 24) {
+            SoundHub.playOne(SoundHub.FIREBALL[0]);
             let attack = new ThrowableObject(this.character.posX, this.character.posY);
             this.throwableObjects.push(attack);
             this.character.gas -= 25;
@@ -174,17 +174,17 @@ class World {
         }
     }
 
-    checkPunchHit() {
-        if (this.controller.ATTACK && !this.character.isDead()) {
-            let currentAttack = new Attack(this.character.posX + 50, this.character.posY);
-            this.punches.push = currentAttack;
+    // checkPunchHit() {
+    //     if (this.controller.ATTACK && !this.character.isDead() && this.character.endurance >= 100) {
+    //         let currentAttack = new Attack(this.character.posX + 50, this.character.posY);
+    //         this.punches.push = currentAttack;
 
-            this.level.enemies.forEach((enemy) => {
-                if (currentAttack.isColliding(enemy)) {
-                }
-            });
-        }
-    }
+    //         this.level.enemies.forEach((enemy) => {
+    //             if (currentAttack.isColliding(enemy)) {
+    //             }
+    //         });
+    //     }
+    // }
 
     setWorld() {
         this.character.world = this;

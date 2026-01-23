@@ -139,13 +139,10 @@ document.addEventListener('keydown', (event) => {
     if (event.key === ' ' || event.keyCode === 32) {
         controller.JUMP = true;
     }
-    if (event.key === 'e' && 'shift' || event.keyCode === 69 && event.keyCode === 16) {
+    if (event.key === 'e' || event.keyCode === 69) {
         controller.ATTACK = true;
     }
-    else if (event.key === 'e' && event.key !== 'shift' || event.keyCode === 69 && event.keyCode !== 16) {
-        controller.THROW = true;
-    }
-    else if (event.key === 'shift' || event.keyCode === 16) {
+    if (event.key === 'shift' || event.keyCode === 16) {
         controller.RUN = true;
     }
     if (event.key === 'b') {
@@ -169,13 +166,10 @@ document.addEventListener('keyup', (event) => {
     if (event.key === ' ' || event.keyCode === 32) {
         controller.JUMP = false;
     }
-    if (event.key === 'e' && 'shift' || event.keyCode === 69 && event.keyCode === 16) {
+    if (event.key === 'e' || event.keyCode === 69) {
         controller.ATTACK = false;
     }
-    else if (event.key === 'e' || event.keyCode === 69) {
-        controller.THROW = false;
-    }
-    else if (event.key === 'shift' || event.keyCode === 16) {
+    if (event.key === 'shift' || event.keyCode === 16) {
         controller.RUN = false;
     }
     if (event.key === 'b') {

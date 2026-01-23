@@ -18,8 +18,12 @@ class SoundHub {
     static WON = new Audio('classes/sounds/sound/endgame/pheonix.wav');
     static LOOSE = new Audio('classes/sounds/sound/background/ambiencecity.wav');
 
+    static FIREBALL = [
+        new Audio('classes/sounds/sound/player/fireball_spawn.wav')
+    ];
 
-    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE];
+
+    static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE, SoundHub.FIREBALL];
 
     static cachedSound;
 

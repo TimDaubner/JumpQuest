@@ -98,17 +98,17 @@ class Player extends MovableObject {
 
     animate() {
         intervals.push(setInterval(() => {
-            this.checkDeadHurtOrThrowing()
+            this.checkDeadHurtOrThrowing();
         }, 1000 / 12));
-
+        
         intervals.push(setInterval(() => {
             this.playerIsWalking();
         }, 1000 / 11));
-
+        
         intervals.push(setInterval(() => {
             this.checkPlayerIsJumping();
         }, 300));
-
+        
         intervals.push(setInterval(() => {
             this.checkWalkingAndBuy();
         }, 1000 / 11));
@@ -116,7 +116,7 @@ class Player extends MovableObject {
 
     checkWalkingAndBuy() {
         if (isRunning) {
-            if (this.isDead()) return;
+            if (this.isDead() || this.isHurt()) return;
 
             if (!this.world.controller.RIGHT && !this.world.controller.LEFT && this.isGrounded || this.world.controller.RIGHT && this.world.controller.LEFT) {
                 this.playAnimation(this.IMAGES_IDLE);
@@ -132,7 +132,7 @@ class Player extends MovableObject {
     playerJump() {
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.isDead()) return;
+                if (this.isDead() || this.isHurt()) return;
                 if (this.world.controller.JUMP && this.isGrounded && this.endurance > 24) {
                     this.jump();
                 }
@@ -142,7 +142,7 @@ class Player extends MovableObject {
 
     checkPlayerIsJumping() {
         if (isRunning) {
-            if (this.isDead()) return;
+            if (this.isDead() || this.isHurt()) return;
 
             if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMP);
@@ -156,14 +156,14 @@ class Player extends MovableObject {
 
     playerIsWalking() {
         if (isRunning) {
-            if (this.isDead()) return;
-
+            if (this.isDead() || this.isHurt()) return;
+            
             if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }
     }
-
+    
     setWorldCorners() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -190,7 +190,7 @@ class Player extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT);
                 world.statusbars[0].setPercentage(this.energy);
             }
-            else if (this.world.controller.THROW && this.gas > 24) {
+            else if (this.world.controller.ATTACK && this.gas >= 100) {
                 this.playAttackAnimation(this.IMAGES_ATTACK);
             }
         }
