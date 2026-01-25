@@ -52,7 +52,7 @@ class EndBoss extends MovableObject {
         this.posX = 2600;
         this.posX += Math.random() * 200;
         this.posY = 25;
-        this.speed = 0.15 + Math.random() * 0.25;
+        this.speed = 0.4 + Math.random() * 0.25;
     }
 
     animate() {
@@ -64,7 +64,7 @@ class EndBoss extends MovableObject {
                         this.reactionWhenPlayerInRange();
                     }
                     else if (this.checkPlayerSide()) {
-                        this.posX += 1.2;
+                        this.posX += Math.random() * 10;
                         this.isMirrored = true;
                     }
                 }
@@ -78,14 +78,15 @@ class EndBoss extends MovableObject {
             SoundHub.pauseOne(SoundHub.BACKGROUND);
             SoundHub.playLoop(SoundHub.BOSS);
             this.oneTime = true;
+            spawnLateGameEnemy();
         }
         world.statusbars[world.statusbars.length - 1].setPercentage(this.energy / 10);
         if (this.checkPlayerSide()) {
-            this.posX += 1.2;
+            this.posX += Math.random() * 10;
             this.isMirrored = true;
         }
         else {
-            this.posX -= 1.2;
+            this.posX -= Math.random() * 10;
             this.isMirrored = false;
         }
     }
@@ -119,6 +120,7 @@ class EndBoss extends MovableObject {
 
     stopGamePlaying(index) {
         this.isDead = true;
+        world.statusbars[world.statusbars.length - 1].setPercentage(0);
         setTimeout(() => {
             world.level.enemies.splice(index, 1);
             isRunning = false;
@@ -138,7 +140,7 @@ class EndBoss extends MovableObject {
     }
 
     checkPlayerDistance() {
-        return (this.posX - world.character.posX) < 100;
+        return (this.posX - world.character.posX) < 275;
     }
 
     checkPlayerSide() {

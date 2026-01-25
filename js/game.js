@@ -44,7 +44,6 @@ function runGame() {
 function startGame() {
     let menu = document.getElementById('burgermenu');
     menu.classList.remove('d_none');
-    SoundHub.playLoop(SoundHub.BACKGROUND);
     canvas.classList.add('black');
     canvas.width = 720 * 2;
     canvas.height = 480 * 2;
@@ -54,6 +53,17 @@ function startGame() {
     posY = world.character.posY;
     isRunning = true;
     spawnEnemy();
+    if (localStorage.getItem("cacheSound")) {
+        const cacheSound = JSON.parse(localStorage.getItem("cacheSound"));
+        if (!cacheSound) {
+            SoundHub.pauseAll();
+            this.toggleSoundImg();
+
+        }
+        else {
+            SoundHub.playLoop(SoundHub.BACKGROUND);
+        }
+    }
 }
 
 function openInstructions() {

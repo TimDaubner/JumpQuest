@@ -60,6 +60,7 @@ function soundToggle() {
 document.getElementById('soundBtn').addEventListener('click', () => {
     SoundHub.pauseAll();
     this.toggleSoundImg();
+    localStorage.setItem("cacheSound", JSON.stringify(isSoundOn));
 });
 
 function toggleSoundImg() {

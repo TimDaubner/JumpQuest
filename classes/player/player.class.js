@@ -128,7 +128,7 @@ class Player extends MovableObject {
             }
         }
     }
-
+    
     playerJump() {
         intervals.push(setInterval(() => {
             if (isRunning) {

@@ -11,6 +11,7 @@ class Enemy extends MovableObject {
         sizeY: 1.8
     }
     energy = 100;
+    isInsverse = false;
 
     IMAGES_IDLE = [
         './img/Enemy_Anim/Idle/idle_00.png',
@@ -41,8 +42,9 @@ class Enemy extends MovableObject {
     ];
 
     currentImg = 0;
-    constructor(id, posX) {
+    constructor(id, posX, isInverse = false) {
         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
+        this.isInverse = isInverse;
         this.loadImgs(this.IMAGES_WALKING);
         this.loadImgs(this.IMAGES_DEATH);
         this.animate();
@@ -56,37 +58,42 @@ class Enemy extends MovableObject {
     animate() {
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.energy > 0) this.moveLeft();
+                if (this.isInverse) {
+                    if (this.energy > 0)this.moveRight();
+                }
+                else{
+                    if (this.energy > 0) this.moveLeft();
+                }
             }
         }, 1000 / 60));
-        intervals.push(setInterval(() => {
-            if (isRunning) {
-                if (this.energy > 0)
-                    this.playAnimation(this.IMAGES_WALKING);
-            }
-        }, 1000 / 6));
+intervals.push(setInterval(() => {
+    if (isRunning) {
+        if (this.energy > 0)
+            this.playAnimation(this.IMAGES_WALKING);
+    }
+}, 1000 / 6));
     }
 
-    playDeathAnimation(index) {
-        let i = this.currentImg % this.IMAGES_DEATH.length;
-        let path = this.IMAGES_DEATH[i];
-        this.img = this.imgCache[path];
-        if (this.IMAGES_DEATH.length - 1 > i) {
-            this.currentImg++;
-        }
-        else {
-            this.isDead = true;
-            setTimeout(() => {
-                world.level.enemies.splice(index, 1);
-            }, 2500);
-        }
+playDeathAnimation(index) {
+    let i = this.currentImg % this.IMAGES_DEATH.length;
+    let path = this.IMAGES_DEATH[i];
+    this.img = this.imgCache[path];
+    if (this.IMAGES_DEATH.length - 1 > i) {
+        this.currentImg++;
     }
+    else {
+        this.isDead = true;
+        setTimeout(() => {
+            world.level.enemies.splice(index, 1);
+        }, 2500);
+    }
+}
 
-    stopHit() {
-        setInterval(() => {
-            if (this.isHit)
-                this.isHit = false;
-        }, 2000);
-        this.isHit = true;
-    }
+stopHit() {
+    setInterval(() => {
+        if (this.isHit)
+            this.isHit = false;
+    }, 2000);
+    this.isHit = true;
+}
 }

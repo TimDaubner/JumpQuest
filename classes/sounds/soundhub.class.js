@@ -52,7 +52,7 @@ class SoundHub {
         }
         else {
             isSoundOn = true;
-            SoundHub.playLoop(this.cachedSound);
+            SoundHub.playLoop(SoundHub.BACKGROUND);
         }
     }
 

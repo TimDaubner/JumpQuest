@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     speed = 0.15;
     isMirrored = false;
 
-    acceleration = 0.15;
+    acceleration = 0.3;
     speedY = 0;
     isGrounded = false;
     energy = 100;
@@ -21,7 +21,7 @@ class MovableObject extends DrawableObject {
         sizeX: 1,
         sizeY: 1
     }
-
+    counter = 0;
     applyGravity() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -80,7 +80,7 @@ class MovableObject extends DrawableObject {
     }
 
     jump() {
-        this.speedY = 4.5;
+        this.speedY = 5.5;
     }
 
     gotHit() {
