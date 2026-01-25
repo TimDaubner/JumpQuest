@@ -296,4 +296,30 @@ button {
     }
 }
 
+@media(max-width:1440px){
+    .canvas-outerframe{
+        width: 550px;
+        height: 350px;
+    }
+    .canvas-frame{
+        width: 500px;
+        height: 300px;
+    }
+    h1{
+        display: none;
+        font-size: 38px;
+    }
+}
+
+@media(max-width:800px){
+    .canvas-outerframe{
+        width: 350px;
+        height: 350px;
+    }
+    .canvas-frame{
+        width: 300px;
+        height: 300px;
+    }
+}
+
 /* #endregion SMARTPHONES*/

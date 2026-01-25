@@ -58,7 +58,6 @@ function startGame() {
         if (!cacheSound) {
             SoundHub.pauseAll();
             this.toggleSoundImg();
-
         }
         else {
             SoundHub.playLoop(SoundHub.BACKGROUND);
@@ -121,6 +120,9 @@ function fullscreenMode() {
     }
 }
 
+//TODO-JSDOCS
+//TODO-Responsive / Mobile
+
 screen.orientation.addEventListener('change', () => {
     if (screen.orientation.type == 'landscape-primary') {
         overlay.classList.add('d_none');
@@ -129,9 +131,6 @@ screen.orientation.addEventListener('change', () => {
         overlay.classList.remove('d_none');
     }
 });
-
-//TODO-JSDOCS
-//TODO-Responsive / Mobile
 
 document.addEventListener('keydown', (event) => {
     if (event.key === 'w' || event.keyCode === 86) {
