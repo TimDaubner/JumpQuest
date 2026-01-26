@@ -339,6 +339,14 @@ button {
 }
 
 @media(max-height:600px) {
+
+    #burgermenu {
+        position: relative;
+        bottom: 145px;
+        right: 75px;
+        z-index: 11;
+    }
+
     .buttons {
         gap: 8px !important;
     }
@@ -348,14 +356,16 @@ button {
         font-size: 16px !important;
     }
 
-    .instructions{
+    .instructions {
         top: 8px;
         width: 250px;
         height: 300px;
-        >h2{
+
+        >h2 {
             font-size: 16px !important;
         }
-        >p{
+
+        >p {
             font-size: 16px !important;
             margin: 4px;
             text-align: center;
