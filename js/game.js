@@ -124,7 +124,7 @@ function fullscreenMode() {
 //TODO-Responsive / Mobile
 
 screen.orientation.addEventListener('change', () => {
-    if (screen.orientation.type == 'landscape-primary') {
+    if (screen.orientation.type == 'landscape-primary' || screen.width > 1400) {
         overlay.classList.add('d_none');
     }
     else {
