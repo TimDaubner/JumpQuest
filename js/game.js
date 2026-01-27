@@ -7,6 +7,15 @@ let intervals = [];
 let isFullscreen = false;
 let isSoundOn = true;
 
+let leftBtn;
+let rightBtn;
+let jumpBtn;
+let fireBtn;
+let buyBtn;
+
+let moveLeft = false;
+let moveRight = false;
+
 function init() {
     canvas = document.getElementById('canvas');
     overlay = document.getElementById('landscape-protection');
@@ -63,6 +72,7 @@ function startGame() {
             SoundHub.playLoop(SoundHub.BACKGROUND);
         }
     }
+    addBtnRefs();
 }
 
 function openInstructions() {
@@ -187,13 +197,81 @@ document.addEventListener('keyup', (event) => {
     }
 });
 
-function moveLeftDown(){
+function moveLeftDown() {
     console.log("Go Left");
-    
+
     controller.LEFT = true;
 }
 
-function moveLeftUp(){
+function moveLeftUp() {
     console.log("Stop Go Left");
     controller.LEFT = false;
 }
+
+function addBtnRefs() {
+    leftBtn = document.getElementById("leftBtn");
+    rightBtn = document.getElementById("rightBtn");
+    jumpBtn = document.getElementById("jumpBtn");
+    fireBtn = document.getElementById("fireBtn");
+    buyBtn = document.getElementById("fireBtn");
+    leftBtn.addEventListener("touchstart", e => {
+        e.preventDefault();
+        controller.LEFT = true;
+    });
+
+    leftBtn.addEventListener("touchend", () => {
+        controller.LEFT = false;
+    });
+
+    leftBtn.addEventListener("touchcancel", () => {
+        controller.LEFT = false;
+    });
+
+    rightBtn.addEventListener("touchstart", e => {
+        e.preventDefault();
+        controller.RIGHT = true;
+    });
+
+    rightBtn.addEventListener("touched", () => {
+        controller.RIGHT = false;
+    });
+
+    rightBtn.addEventListener("touchcancel", () => {
+        controller.RIGHT = false;
+    });
+
+    jumpBtn.addEventListener("touchstart", () => {
+        controller.JUMP = true;
+    });
+
+    jumpBtn.addEventListener("touchend", () => {
+        controller.JUMP = false;
+    });
+
+    jumpBtn.addEventListener("touchcancel", () => {
+        controller.JUMP = false;
+    });
+
+    fireBtn.addEventListener("touchstart", () => {
+        controller.ATTACK = true;
+    });
+    fireBtn.addEventListener("touched", () => {
+        controller.ATTACK = false;
+    });
+
+    fireBtn.addEventListener("touchcancel", () => {
+        controller.ATTACK = false;
+    });
+
+    buyBtn.addEventListener("touchstart", () => {
+        controller.BUY = true;
+    });
+
+    buyBtn.addEventListener("touched", () => {
+        controller.BUY = false;
+    });
+    buyBtn.addEventListener("touchcancel", () => {
+        controller.BUY = false;
+    });
+}
+

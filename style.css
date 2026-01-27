@@ -282,6 +282,32 @@ button {
     background-color: black;
 }
 
+.move,
+.action {
+    display: flex;
+    padding: 8px 0;
+}
+
+.controller {
+    display: none;
+}
+
+.controller-btn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.invert {
+    filter: invert();
+}
+
+.rotate {
+    transform: rotateZ(180deg);
+}
+
 /*#endregion NORMAL*/
 
 /* #region Impressum*/
@@ -325,15 +351,19 @@ button {
         font-size: 16px;
     }
 
-    .controller{
+    .controller {
+        display: flex;
         position: relative;
         top: -25px;
         z-index: 20;
         width: 50%;
+        gap: 15vw;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #272f4f;
+        border: solid 2px whitesmoke;
+        border-radius: 8px;
     }
 }
 
