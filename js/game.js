@@ -121,7 +121,8 @@ function fullscreenMode() {
 }
 
 //TODO-JSDOCS
-//TODO-Responsive / Mobile
+//TODO-Responsive / Mobile Buttons for controlls
+//TODO-font integration within project
 
 screen.orientation.addEventListener('change', () => {
     if (screen.orientation.type == 'landscape-primary' || screen.width > 1400) {
@@ -185,3 +186,14 @@ document.addEventListener('keyup', (event) => {
         controller.BUY = false;
     }
 });
+
+function moveLeftDown(){
+    console.log("Go Left");
+    
+    controller.LEFT = true;
+}
+
+function moveLeftUp(){
+    console.log("Stop Go Left");
+    controller.LEFT = false;
+}

@@ -41,12 +41,15 @@
     <h1 id="h1" class="rock-salt-regular">Jump Quest</h1>
     <div id="canvas_outerframe" class="canvas-outerframe">
         <canvas id="canvas" class="canvas-frame"></canvas>
-        <div class="menu " id="burgermenu" onclick="openMenu(event)"><img  src="img/GUI/PNG/google/menu.svg" alt="">
+        <div class="menu d_none" id="burgermenu" onclick="openMenu(event)"><img src="img/GUI/PNG/google/menu.svg"
+                alt="">
             <div class="upper-right d_none" id="menu" onclick="event.stopPropagation()">
-                <button class="rock-salt-regular" id="pause" onclick="pauseGame()">pause <img src="./img/GUI/PNG/google/pause.svg" alt=""></button>
+                <button class="rock-salt-regular" id="pause" onclick="pauseGame()">pause <img
+                        src="./img/GUI/PNG/google/pause.svg" alt=""></button>
                 <button class="rock-salt-regular" onclick="restartGame()">restart</button>
                 <button class="rock-salt-regular" onclick="fullscreenMode()">fullscreen</button>
-                <button class="rock-salt-regular" id="soundBtn">sound off<img id="soundImg" src="./img/GUI/PNG/google/sound_off.svg" alt=""></button>
+                <button class="rock-salt-regular" id="soundBtn">sound off<img id="soundImg"
+                        src="./img/GUI/PNG/google/sound_off.svg" alt=""></button>
             </div>
         </div>
         <div class="container" id="container">
@@ -57,6 +60,18 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="responsive controller">
+        <div class="move">
+            <button onmouseover="moveLeftDown()" onmouseup="moveLeftUp()" class="move-left">left</button>
+            <button class="move-right">right</button>
+        </div>
+        <button class="buy">buy</button>
+        <div class="action">
+            <button class="action-jump">up</button>
+            <button class="action-fire">fireball</button>
+        </div>
+
     </div>
     <div id="instructions" class="instructions d_none rock-salt-regular">
         <button onclick="closeInstructions()" class="close-btn"></button>
