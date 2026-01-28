@@ -17,6 +17,9 @@ let buyBtn;
 let moveLeft = false;
 let moveRight = false;
 
+/**
+ * Initializes the game canvas, overlay, and button handlers.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     overlay = document.getElementById('landscape-protection');
@@ -33,12 +36,19 @@ function init() {
     getSoundForAllBtns();
 }
 
+/**
+ * Detects if the current device is likely a mobile device.
+ * @returns {boolean} True if mobile, false otherwise
+ */
 function isProbablyMobile() {
     return (
         'ontouchstart' in window || navigator.maxTouchPoints > 0
     ) && window.innerWidth < 900;
 }
 
+/**
+ * Attaches click sounds to all buttons.
+ */
 function getSoundForAllBtns() {
     let buttons = document.querySelectorAll('button');
     buttons.forEach(button => {
@@ -49,9 +59,9 @@ function getSoundForAllBtns() {
     });
 }
 
-function runGame() {
-}
-
+/**
+ * Starts the game: initializes canvas, world, spawns enemies, and handles sound.
+ */
 function startGame() {
     let menu = document.getElementById('burgermenu');
     menu.classList.remove('d_none');
@@ -77,15 +87,18 @@ function startGame() {
     addBtnRefs();
 }
 
+/**
+ * Opens the instructions overlay.
+ */
 function openInstructions() {
     document.getElementById('instructions').classList.remove('d_none');
 }
 
+/**
+ * Closes the instructions overlay.
+ */
 function closeInstructions() {
     document.getElementById('instructions').classList.add('d_none');
-}
-
-function exitGame() {
 }
 
 document.addEventListener('fullscreenchange', fullscreenHandler);
@@ -93,6 +106,9 @@ document.addEventListener('webkitfullscreenchange', fullscreenHandler);
 document.addEventListener('mozfullscreenchange', fullscreenHandler);
 document.addEventListener('MSFullscreenChange', fullscreenHandler);
 
+/**
+ * Handles fullscreen toggle events.
+ */
 function fullscreenHandler() {
     if (document.fullscreenElement === canvas) {
         isFullscreen = true;
@@ -110,17 +126,26 @@ function fullscreenHandler() {
     }
 }
 
+/**
+ * Adds the 'd_none' class to hide UI elements for fullscreen mode.
+ */
 function add_D_None() {
     document.getElementById('upper_right').classList.add('d_none');
     document.getElementById('container').classList.add('d_none');
     document.getElementById('h1').classList.add('d_none');
 }
 
+/**
+ * Removes the 'd_none' class to show UI elements after exiting fullscreen.
+ */
 function remove_D_None() {
     document.getElementById('upper_right').classList.remove('d_none');
     document.getElementById('h1').classList.remove('d_none');
 }
 
+/**
+ * Enters or exits fullscreen mode.
+ */
 function fullscreenMode() {
     if (!isFullscreen) {
         canvas.style.borderRadius = '0';
@@ -131,10 +156,6 @@ function fullscreenMode() {
         document.exitFullscreen();
     }
 }
-
-//TODO-JSDOCS
-//TODO-Responsive / Mobile Buttons for controlls
-//TODO-font integration within project
 
 screen.orientation.addEventListener('change', () => {
     if (screen.orientation.type == 'landscape-primary' || screen.width > 1400) {
@@ -210,6 +231,9 @@ function moveLeftUp() {
     controller.LEFT = false;
 }
 
+/**
+ * Adds touch event listeners for mobile buttons to control the player.
+ */
 function addBtnRefs() {
     btn_controller.classList.remove('d_none');
     leftBtn = document.getElementById("leftBtn");

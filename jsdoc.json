@@ -1,0 +1,28 @@
+{
+    "source": {
+        "include": [
+            "./classes/throwable_object.class.js",
+            "./classes/moveable_object.class.js",
+            "./classes/drawable_object.class.js",
+            "./classes/collectable_object.class.js",
+            "./classes/sounds/soundhub.class.js",
+            "./classes/player/attack.class.js",
+            "./classes/player/controller.class.js",
+            "./classes/player/player.class.js",
+            "./classes/enemy/enemy.class.js",
+            "./classes/enemy/endboss.class.js",
+            "./classes/enemy/spawner.js",
+            "./classes/background/background_object.class.js",
+            "./classes/background/cloud.class.js",
+            "./classes/game/endscreen.js",
+            "./classes/game/level.class.js",
+            "./classes/game/statusbar.class.js",
+            "./classes/game/world.class.js",
+            "./js/game.js",
+            "./js/ui.js"
+        ]
+    },
+    "opts": {
+        "destination": "./out"
+    }
+}

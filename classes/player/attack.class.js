@@ -1,3 +1,9 @@
+/**
+ * Represents an attack hitbox.
+ * Used to detect collisions during an attack action.
+ *
+ * @extends DrawableObject
+ */
 class Attack extends DrawableObject {
 
     posX = 0;
@@ -18,12 +24,24 @@ class Attack extends DrawableObject {
         './img/Objects/box2.png'
     ]
 
+    /**
+     * Creates a new attack hitbox at the given position.
+     *
+     * @param {number} posX - X position of the attack
+     * @param {number} posY - Y position of the attack
+     */
     constructor(posX, posY) {
         super();
         this.posX = posX;
         this.posY = posY;
     }
 
+    /**
+     * Checks collision with another movable object.
+     *
+     * @param {MovableObject} mo - Object to check collision with
+     * @returns {boolean} True if colliding
+     */
     isColliding(mo) {
         const thisLeft = this.posX + this.offset.left;
         const thisRight = thisLeft + this.width / this.offset.sizeX;

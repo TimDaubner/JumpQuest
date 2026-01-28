@@ -1,3 +1,7 @@
+/**
+ * Handles user input states.
+ * Stores the current pressed state of control keys.
+ */
 class Controller {
     LEFT = false;
     RIGHT = false;

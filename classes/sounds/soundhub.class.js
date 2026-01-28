@@ -1,3 +1,7 @@
+/**
+ * Central sound manager for the game.
+ * Handles playback, volume control and caching of all sounds.
+ */
 class SoundHub {
     static bgVolume = 0.05;
     static otherVolume = 0.75;
@@ -22,11 +26,15 @@ class SoundHub {
         new Audio('classes/sounds/sound/player/fireball_spawn.wav')
     ];
 
-
     static allSounds = [SoundHub.BACKGROUND, SoundHub.BUTTON, SoundHub.NOISE, SoundHub.DEATH, SoundHub.COIN, SoundHub.SPRAY, SoundHub.WON, SoundHub.LOOSE, SoundHub.FIREBALL];
 
     static cachedSound;
 
+    /**
+     * Plays a sound once.
+     *
+     * @param {HTMLAudioElement} sound - Sound to be played
+     */
     static playOne(sound) {
         if (isSoundOn) {
             sound.volume = 0.1;
@@ -36,6 +44,11 @@ class SoundHub {
         }
     }
 
+    /**
+    * Plays a sound in a loop.
+    *
+    * @param {HTMLAudioElement} sound - Sound to be looped
+    */
     static playLoop(sound) {
         if (isSoundOn) {
             sound.loop = true;
@@ -46,6 +59,9 @@ class SoundHub {
         }
     }
 
+    /**
+     * Toggles all sounds on or off.
+     */
     static pauseAll() {
         if (isSoundOn) {
             this.stopAllSounds();
@@ -56,6 +72,9 @@ class SoundHub {
         }
     }
 
+    /**
+     * Stops and pauses all sounds.
+     */
     static stopAllSounds() {
         isSoundOn = false;
         SoundHub.allSounds.forEach(sound => {
@@ -72,10 +91,20 @@ class SoundHub {
         this.pauseOne(SoundHub.BOSS);
     }
 
+    /**
+     * Pauses a single sound.
+     *
+     * @param {HTMLAudioElement} sound - Sound to pause
+     */
     static pauseOne(sound) {
         sound.pause();
     }
 
+    /**
+     * Sets volume for multiple sounds using the volume slider.
+     *
+     * @param {HTMLAudioElement[]} sounds - Array of sounds
+     */
     static objSetVolume(sounds) {
         let volumeValue = document.getElementById('volume').value;
         sounds.forEach(sound => {

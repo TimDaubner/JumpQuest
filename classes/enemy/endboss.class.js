@@ -1,3 +1,9 @@
+/**
+ * Represents the final boss of the game.
+ * Handles animations, player interactions, movement, and death sequence.
+ *
+ * @extends MovableObject
+ */
 class EndBoss extends MovableObject {
     width = 128 * 1;
     height = 128 * 1;
@@ -42,6 +48,10 @@ class EndBoss extends MovableObject {
 
     oneTime = false;
     currentImg = 0;
+
+    /**
+     * Creates a new EndBoss, initializes images, position, and speed.
+     */
     constructor() {
         super().loadImg(this.IMAGES_IDLE[0]);
         this.loadImgs(this.IMAGES_IDLE);
@@ -55,6 +65,9 @@ class EndBoss extends MovableObject {
         this.speed = 0.4 + Math.random() * 0.25;
     }
 
+    /**
+     * Starts the boss animation loop and reacts to player proximity.
+     */
     animate() {
         this.checkPlayerIsDead();
         intervals.push(setInterval(() => {
@@ -72,6 +85,9 @@ class EndBoss extends MovableObject {
         }, 1000 / 6));
     }
 
+    /**
+     * Boss reaction when the player is in range.
+     */
     reactionWhenPlayerInRange() {
         if (!this.oneTime) {
             world.statusbars.push(new Statusbar(124, 144, 8, 100));
@@ -91,6 +107,9 @@ class EndBoss extends MovableObject {
         }
     }
 
+    /**
+     * Animates walking or idle depending on player position.
+     */
     checkPlayerIsDead() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -106,6 +125,10 @@ class EndBoss extends MovableObject {
         }, 1000 / 6));
     }
 
+    /**
+     * Plays death animation and stops game when finished.
+     * @param {number} index - Index of the boss in the enemies array
+     */
     playDeathAnimation(index) {
         let i = this.currentImg % this.IMAGES_DEATH.length;
         let path = this.IMAGES_DEATH[i];
@@ -118,6 +141,10 @@ class EndBoss extends MovableObject {
         }
     }
 
+    /**
+     * Stops the game when boss is defeated and shows end screen.
+     * @param {number} index - Index of the boss in the enemies array
+     */
     stopGamePlaying(index) {
         this.isDead = true;
         world.statusbars[world.statusbars.length - 1].setPercentage(0);
@@ -131,6 +158,9 @@ class EndBoss extends MovableObject {
         }, 2500);
     }
 
+    /**
+     * Sets the boss as "hit" and resets hit status after 5 seconds.
+     */
     stopHit() {
         setInterval(() => {
             if (this.isHit)
@@ -139,10 +169,18 @@ class EndBoss extends MovableObject {
         this.isHit = true;
     }
 
+    /**
+     * Checks if player is within attack distance.
+     * @returns {boolean}
+     */
     checkPlayerDistance() {
         return (this.posX - world.character.posX) < 275;
     }
 
+    /**
+     * Checks if the player is on the right side of the boss.
+     * @returns {boolean} True if player is on the right, false otherwise
+     */
     checkPlayerSide() {
         if (this.posX < world.character.posX) {
             return true;

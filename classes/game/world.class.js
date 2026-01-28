@@ -1,3 +1,7 @@
+/**
+ * Represents the game world.
+ * Handles the main game loop, drawing, collisions, score, status bars, and interactions.
+ */
 class World {
     character = new Player();
     level;
@@ -34,6 +38,12 @@ class World {
         state: 'idle', // idle | hover | active
     };
 
+    /**
+    * Creates the game world, sets up the canvas, controller, level, collectables, and starts the game loop.
+    *
+    * @param {HTMLCanvasElement} canvas - The game canvas
+    * @param {Controller} controller - Input controller instance
+    */
     constructor(canvas, controller) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -50,6 +60,9 @@ class World {
         this.run();
     }
 
+    /**
+     * Creates collectable objects (coins and sprays) and adds them to the world.
+     */
     createCollectables() {
         for (let i = 0; i < 100; i++) {
             this.collectableObjects.push(new CollectableObject(200, 25, 0));
@@ -59,6 +72,10 @@ class World {
         }
     }
 
+    /**
+     * Draws the world, including background, player, enemies, collectables, status bars, and end screens.
+     * Loops with requestAnimationFrame.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -78,6 +95,9 @@ class World {
         requestAnimationFrame(function () { self.draw(); });
     }
 
+    /**
+     * Draws all objects that need to be mapped (background, clouds, enemies, player, collectables, throwable objects, punches)
+     */
     bunchOfObjectsToMap() {
         this.addObjectToMap(this.level.backgroundObjects);
         this.addObjectToMap(this.level.clouds);
@@ -88,12 +108,18 @@ class World {
         this.addObjectToMap(this.punches);
     }
 
+    /**
+     * Draws the coin counter on the screen.
+     */
     coinCounter() {
         this.ctx.font = "8px Arial";
         this.ctx.fillStyle = "white";
         this.ctx.fillText(this.score || 0, 162, 18);
     }
 
+    /**
+     * Starts the main game logic loop for collisions and throwables.
+     */
     run() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -104,12 +130,18 @@ class World {
         }, 100));
     }
 
+    /**
+     * Checks all collisions: collectables, throwable objects, enemies
+     */
     checkCollisions() {
         this.checkCollectableItemsCollisions();
         this.checkThrowableObjectHitEnemy();
         this.checkEnemyCollisions();
     }
 
+    /**
+    * Checks collision between player and enemies
+    */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && !enemy.isDead && !world.character.isHurt()) {
@@ -118,6 +150,9 @@ class World {
         });
     }
 
+    /**
+     * Checks collision between player and collectable objects
+     */
     checkCollectableItemsCollisions() {
         this.collectableObjects.forEach((collectable, index) => {
             if (this.character.isColliding(collectable)) {
@@ -126,6 +161,9 @@ class World {
         });
     }
 
+    /**
+    * Checks collision between throwable objects and enemies
+    */
     checkThrowableObjectHitEnemy() {
         this.level.enemies.forEach((enemy, index) => {
             this.throwableObjects.forEach(throwableObject => {
@@ -137,6 +175,11 @@ class World {
         });
     }
 
+    /**
+      * Handles enemy reaction to being hit
+      * @param {MovableObject} enemy 
+      * @param {number} index 
+      */
     checkEnemyReaction(enemy, index) {
         if (enemy.energy <= 0) {
             enemy.playDeathAnimation(index);
@@ -149,6 +192,11 @@ class World {
         }
     }
 
+    /**
+    * Handles gas or coin collection
+    * @param {CollectableObject} collectable 
+    * @param {number} index 
+    */
     checkGasOrCoin(collectable, index) {
         if (collectable.id == 1 && this.character.gas < 100) {
             this.character.gas = 100;
@@ -164,6 +212,9 @@ class World {
         }
     }
 
+    /**
+     * Handles creating throwable objects (fireballs) when attacking
+     */
     checkThrowObjects() {
         if (controller.ATTACK && !this.character.isDead() && this.character.endurance >= 100 && this.character.gas > 24) {
             SoundHub.playOne(SoundHub.FIREBALL[0]);
@@ -174,28 +225,27 @@ class World {
         }
     }
 
-    // checkPunchHit() {
-    //     if (this.controller.ATTACK && !this.character.isDead() && this.character.endurance >= 100) {
-    //         let currentAttack = new Attack(this.character.posX + 50, this.character.posY);
-    //         this.punches.push = currentAttack;
-
-    //         this.level.enemies.forEach((enemy) => {
-    //             if (currentAttack.isColliding(enemy)) {
-    //             }
-    //         });
-    //     }
-    // }
-
+    /**
+     * Sets the world reference on the player
+     */
     setWorld() {
         this.character.world = this;
     }
 
+    /**
+     * Adds an array of objects to the map
+     * @param {DrawableObject[]} o 
+     */
     addObjectToMap(o) {
         o.forEach(element => {
             this.addToMap(element);
         });
     }
 
+    /**
+     * Draws a single object to the canvas, handling mirroring
+     * @param {DrawableObject} mo 
+     */
     addToMap(mo) {
         if (mo.isMirrored) {
             this.flipImage(mo);
@@ -207,6 +257,10 @@ class World {
         }
     }
 
+    /**
+     * Flips the object horizontally
+     * @param {DrawableObject} mo 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -214,6 +268,10 @@ class World {
         mo.posX = mo.posX * -1;
     }
 
+    /**
+     * Resets the flip transformation
+     * @param {DrawableObject} mo 
+     */
     flipImageBack(mo) {
         mo.posX = mo.posX * -1;
         this.ctx.restore();

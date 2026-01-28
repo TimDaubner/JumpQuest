@@ -1,3 +1,9 @@
+/**
+ * Represents the main player character.
+ * Handles movement, animations, combat, stamina and interaction with the world.
+ *
+ * @extends MovableObject
+ */
 class Player extends MovableObject {
     width = 25.6 * 5;
     height = 25.6 * 5;
@@ -82,6 +88,9 @@ class Player extends MovableObject {
 
     currentImg = 0;
 
+    /**
+     * Creates the player, loads animations and starts all player-related loops.
+     */
     constructor() {
         super().loadImg('./img/Player_Anim/Idle/idle_00.png');
         this.loadImgs(this.IMAGES_IDLE);
@@ -96,24 +105,30 @@ class Player extends MovableObject {
         this.playerJump();
     }
 
+    /**
+     * Starts all animation and state-check intervals.
+     */
     animate() {
         intervals.push(setInterval(() => {
             this.checkDeadHurtOrThrowing();
         }, 1000 / 12));
-        
+
         intervals.push(setInterval(() => {
             this.playerIsWalking();
         }, 1000 / 11));
-        
+
         intervals.push(setInterval(() => {
             this.checkPlayerIsJumping();
         }, 300));
-        
+
         intervals.push(setInterval(() => {
             this.checkWalkingAndBuy();
         }, 1000 / 11));
     }
 
+    /**
+     * Handles idle animation and buying gas.
+     */
     checkWalkingAndBuy() {
         if (isRunning) {
             if (this.isDead() || this.isHurt()) return;
@@ -128,7 +143,10 @@ class Player extends MovableObject {
             }
         }
     }
-    
+
+    /**
+     * Handles jump input.
+     */
     playerJump() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -140,6 +158,9 @@ class Player extends MovableObject {
         }, 10));
     }
 
+    /**
+     * Handles jump animation and endurance drain.
+     */
     checkPlayerIsJumping() {
         if (isRunning) {
             if (this.isDead() || this.isHurt()) return;
@@ -154,16 +175,22 @@ class Player extends MovableObject {
         }
     }
 
+    /**
+    * Handles walking animation.
+    */
     playerIsWalking() {
         if (isRunning) {
             if (this.isDead() || this.isHurt()) return;
-            
+
             if (this.world.controller.RIGHT && this.isGrounded || this.world.controller.LEFT && this.isGrounded) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }
     }
-    
+
+    /**
+     * Handles player movement and camera positioning.
+     */
     setWorldCorners() {
         intervals.push(setInterval(() => {
             if (isRunning) {
@@ -181,6 +208,9 @@ class Player extends MovableObject {
         }, 1000 / 60));
     }
 
+    /**
+     * Handles death, hurt and attack states.
+     */
     checkDeadHurtOrThrowing() {
         if (isRunning) {
             if (this.isDead()) {
@@ -196,6 +226,9 @@ class Player extends MovableObject {
         }
     }
 
+    /**
+    * Handles player death logic.
+    */
     playerIsDead() {
         if (!this.oneTime) SoundHub.playOne(SoundHub.DEATH);
         world.statusbars[0].setPercentage(this.energy);
@@ -209,6 +242,9 @@ class Player extends MovableObject {
         this.oneTime = true;
     }
 
+    /**
+     * Handles sprinting logic.
+     */
     sprint() {
         if (this.world.controller.RUN && this.isGrounded) {
             if (this.endurance > 0 && this.world.controller.LEFT || this.endurance > 0 && this.world.controller.RIGHT) {
@@ -225,6 +261,9 @@ class Player extends MovableObject {
         }
     }
 
+    /**
+     * Drains endurance while sprinting.
+     */
     sprintDrain() {
         if (this.endurance > 0) {
             this.endurance -= 0.5;
@@ -232,6 +271,9 @@ class Player extends MovableObject {
         world.statusbars[1].setPercentage(this.endurance);
     }
 
+    /**
+     * Regenerates endurance when not sprinting.
+     */
     gainEndurance() {
         if (this.endurance < 100 && this.isGrounded) {
             this.endurance++;

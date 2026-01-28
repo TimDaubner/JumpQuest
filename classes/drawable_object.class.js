@@ -1,3 +1,7 @@
+/**
+ * Base class for all drawable objects.
+ * Handles image loading and rendering on canvas.
+ */
 class DrawableObject {
     posX = 0;
     posY = 0;
@@ -6,11 +10,21 @@ class DrawableObject {
     img;
     imgCache = {};
 
+    /**
+     * Loads a single image.
+     *
+     * @param {string} path - Path to the image
+     */
     loadImg(path) {
         this.img = new Image();
         this.img.src = path;
     }
 
+    /**
+     * Loads multiple images and stores them in the image cache.
+     *
+     * @param {string[]} arr - Array of image paths
+     */
     loadImgs(arr) {
         arr.forEach(path => {
             let img = new Image();
@@ -19,10 +33,20 @@ class DrawableObject {
         });
     }
 
+     /**
+     * Draws the object on the canvas.
+     *
+     * @param {CanvasRenderingContext2D} ctx - Canvas rendering context
+     */
     draw(ctx) {
         ctx.drawImage(this.img, this.posX, this.posY, this.width, this.height);
     }
 
+    /**
+     * Draws collision frames for debugging purposes.
+     *
+     * @param {CanvasRenderingContext2D} ctx - Canvas rendering context
+     */
     drawFrame(ctx) {
         if (this instanceof Player || this instanceof Enemy || this instanceof EndBoss) {
             ctx.beginPath();

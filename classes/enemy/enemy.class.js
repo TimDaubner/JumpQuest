@@ -1,3 +1,9 @@
+/**
+ * Represents a standard enemy in the game.
+ * Handles movement, animations, hit detection, and death.
+ *
+ * @extends MovableObject
+ */
 class Enemy extends MovableObject {
     width = 128 * 0.7;
     height = 128 * 0.7;
@@ -42,6 +48,13 @@ class Enemy extends MovableObject {
     ];
 
     currentImg = 0;
+
+    /**
+     * Creates a new Enemy.
+     * @param {number} id - Unique identifier for the enemy
+     * @param {number} posX - Initial X position
+     * @param {boolean} [isInverse=false] - Whether the enemy moves to the right instead of left
+     */
     constructor(id, posX, isInverse = false) {
         super().loadImg('./img/Enemy_Anim/Idle/idle_r_00.png');
         this.isInverse = isInverse;
@@ -55,45 +68,55 @@ class Enemy extends MovableObject {
         this.speed = 0.15 + Math.random() * 0.5;
     }
 
+    /**
+     * Animates the enemy movement and walking animation.
+     */
     animate() {
         intervals.push(setInterval(() => {
             if (isRunning) {
                 if (this.isInverse) {
-                    if (this.energy > 0)this.moveRight();
+                    if (this.energy > 0) this.moveRight();
                 }
-                else{
+                else {
                     if (this.energy > 0) this.moveLeft();
                 }
             }
         }, 1000 / 60));
-intervals.push(setInterval(() => {
-    if (isRunning) {
-        if (this.energy > 0)
-            this.playAnimation(this.IMAGES_WALKING);
-    }
-}, 1000 / 6));
+        intervals.push(setInterval(() => {
+            if (isRunning) {
+                if (this.energy > 0)
+                    this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 1000 / 6));
     }
 
-playDeathAnimation(index) {
-    let i = this.currentImg % this.IMAGES_DEATH.length;
-    let path = this.IMAGES_DEATH[i];
-    this.img = this.imgCache[path];
-    if (this.IMAGES_DEATH.length - 1 > i) {
-        this.currentImg++;
+    /**
+     * Plays the death animation of the enemy.
+     * @param {number} index - Index of the enemy in the world enemies array
+     */
+    playDeathAnimation(index) {
+        let i = this.currentImg % this.IMAGES_DEATH.length;
+        let path = this.IMAGES_DEATH[i];
+        this.img = this.imgCache[path];
+        if (this.IMAGES_DEATH.length - 1 > i) {
+            this.currentImg++;
+        }
+        else {
+            this.isDead = true;
+            setTimeout(() => {
+                world.level.enemies.splice(index, 1);
+            }, 2500);
+        }
     }
-    else {
-        this.isDead = true;
-        setTimeout(() => {
-            world.level.enemies.splice(index, 1);
-        }, 2500);
-    }
-}
 
-stopHit() {
-    setInterval(() => {
-        if (this.isHit)
-            this.isHit = false;
-    }, 2000);
-    this.isHit = true;
-}
+    /**
+     * Sets the enemy as "hit" and resets hit status after 2 seconds.
+     */
+    stopHit() {
+        setInterval(() => {
+            if (this.isHit)
+                this.isHit = false;
+        }, 2000);
+        this.isHit = true;
+    }
 }
