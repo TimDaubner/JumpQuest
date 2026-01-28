@@ -274,7 +274,7 @@ button {
 }
 
 .d_none {
-    display: none;
+    display: none !important;
 }
 
 .black {
@@ -285,11 +285,13 @@ button {
 .move,
 .action {
     display: flex;
+    flex-direction: row;
     padding: 8px 0;
 }
 
 .controller {
     display: none;
+    flex-direction: row;
 }
 
 .controller-btn {
@@ -353,17 +355,17 @@ button {
 
     .controller {
         display: flex;
+        flex-direction: row;
         position: relative;
-        top: -25px;
         z-index: 20;
         width: 50%;
-        gap: 15vw;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         background-color: #272f4f;
         border: solid 2px whitesmoke;
         border-radius: 8px;
+        padding: 0px 6px;
     }
 }
 

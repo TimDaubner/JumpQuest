@@ -7,6 +7,7 @@ let intervals = [];
 let isFullscreen = false;
 let isSoundOn = true;
 
+let btn_controller;
 let leftBtn;
 let rightBtn;
 let jumpBtn;
@@ -19,6 +20,7 @@ let moveRight = false;
 function init() {
     canvas = document.getElementById('canvas');
     overlay = document.getElementById('landscape-protection');
+    btn_controller = document.getElementById('btn_controller');
     if (isProbablyMobile()) {
         document.getElementById('h1').classList.add('d_none');
         if (screen.orientation.angle === 0) {
@@ -209,11 +211,14 @@ function moveLeftUp() {
 }
 
 function addBtnRefs() {
+    btn_controller.classList.remove('d_none');
     leftBtn = document.getElementById("leftBtn");
     rightBtn = document.getElementById("rightBtn");
+    sprintBtn =document.getElementById("sprintBtn");
     jumpBtn = document.getElementById("jumpBtn");
     fireBtn = document.getElementById("fireBtn");
     buyBtn = document.getElementById("fireBtn");
+
     leftBtn.addEventListener("touchstart", e => {
         e.preventDefault();
         controller.LEFT = true;
@@ -232,7 +237,7 @@ function addBtnRefs() {
         controller.RIGHT = true;
     });
 
-    rightBtn.addEventListener("touched", () => {
+    rightBtn.addEventListener("touchend", () => {
         controller.RIGHT = false;
     });
 
@@ -240,12 +245,25 @@ function addBtnRefs() {
         controller.RIGHT = false;
     });
 
+    sprintBtn.addEventListener("touchstart",e => {
+        if(!controller.RUN){
+            sprintBtn.classList.add('invert');
+            controller.RUN = true;
+        }
+        else{
+            sprintBtn.classList.remove('invert');
+            controller.RUN = false;
+        }
+    });
+
     jumpBtn.addEventListener("touchstart", () => {
         controller.JUMP = true;
     });
 
     jumpBtn.addEventListener("touchend", () => {
-        controller.JUMP = false;
+        setTimeout(() => {
+            controller.JUMP = false;
+        }, 100);
     });
 
     jumpBtn.addEventListener("touchcancel", () => {
@@ -255,8 +273,10 @@ function addBtnRefs() {
     fireBtn.addEventListener("touchstart", () => {
         controller.ATTACK = true;
     });
-    fireBtn.addEventListener("touched", () => {
-        controller.ATTACK = false;
+    fireBtn.addEventListener("touchend", () => {
+        setTimeout(() => {
+            controller.ATTACK = false;
+        }, 100);
     });
 
     fireBtn.addEventListener("touchcancel", () => {
