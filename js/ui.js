@@ -1,5 +1,9 @@
 let isOpen = false;
 
+/**
+ * Function for open the burger menu
+ * @param {boolean} event 
+ */
 function openMenu(event) {
     if (event != null) {
         event.stopPropagation();
@@ -18,6 +22,9 @@ function openMenu(event) {
     }
 }
 
+/**
+ * Pause the main gameloop
+ */
 function pauseGame() {
     if (isRunning) {
         isRunning = false;
@@ -29,6 +36,9 @@ function pauseGame() {
     }
 }
 
+/**
+ * restart the game refresh all
+ */
 function restartGame() {
     openMenu();
     if (!isRunning) {
@@ -53,6 +63,9 @@ function restartGame() {
     }
 }
 
+/**
+ * toggle all sound
+ */
 function soundToggle() {
     SoundHub.pauseAll();
 }
@@ -63,6 +76,9 @@ document.getElementById('soundBtn').addEventListener('click', () => {
     localStorage.setItem("cacheSound", JSON.stringify(isSoundOn));
 });
 
+/**
+ * toggle sound image on button
+ */
 function toggleSoundImg() {
     if (SoundHub.isSoundOn) {
         SoundHub.isSoundOn = false;

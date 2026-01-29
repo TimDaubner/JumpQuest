@@ -25,7 +25,6 @@ function init() {
     overlay = document.getElementById('landscape-protection');
     btn_controller = document.getElementById('btn_controller');
     if (isProbablyMobile()) {
-        document.getElementById('h1').classList.add('d_none');
         if (screen.orientation.angle === 0) {
             overlay.classList.remove('d_none');
         }
@@ -63,6 +62,7 @@ function getSoundForAllBtns() {
  * Starts the game: initializes canvas, world, spawns enemies, and handles sound.
  */
 function startGame() {
+    document.getElementById('h1').classList.add('d_none');
     let menu = document.getElementById('burgermenu');
     menu.classList.remove('d_none');
     canvas.classList.add('black');
