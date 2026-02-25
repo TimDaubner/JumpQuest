@@ -48,6 +48,7 @@ p {
 .canvas-frame {
     width: 720px;
     height: 480px;
+    aspect-ratio: 1/1.5;
     background-color: black;
     z-index: 0;
     background-image: url('./img/Background_City/city 1/11.png');
@@ -62,10 +63,12 @@ p {
     align-items: center;
     width: 760px;
     height: 520px;
+    aspect-ratio: 1/1.5;
     background-color: black;
     z-index: 1;
     background-image: url('./img/GUI/PNG/Level_Menu/Window.png');
     background-position: center;
+    background-repeat: no-repeat;
     border-radius: 24px;
 }
 
@@ -109,6 +112,12 @@ p {
     background-color: #272f4f;
 }
 
+#burger {
+    width: 70px !important;
+    height: 70px !important;
+    aspect-ratio: 1/1;
+}
+
 #burgermenu img {
     position: absolute;
     width: 30px;
@@ -116,13 +125,14 @@ p {
     aspect-ratio: 1/1;
 }
 
+
 #burgermenu:hover {
     cursor: pointer;
 }
 
 .upper-right {
     position: absolute;
-    top: 0px;
+    top: -35px;
     right: 0;
     z-index: 9999;
     display: flex;
@@ -313,17 +323,6 @@ button {
 
 /*#endregion NORMAL*/
 
-/* #region Impressum*/
-.background {
-    padding: 0;
-    background-color: #3b55c0 !important;
-    background-image: none;
-    color: white;
-}
-
-/*#endregion Impressum*/
-
-
 /* #region SMARTPHONES*/
 @media only screen and (max-width: 1024px) {
     canvas {
@@ -340,20 +339,22 @@ button {
 
 @media(max-width:1440px) {
     .canvas-outerframe {
-        width: 550px;
-        height: 350px;
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
     }
 
     .canvas-frame {
-        width: 500px;
-        height: 300px;
+        width: 80vw;
+        height: 80vh;
     }
 
     .controller {
         display: flex;
         flex-direction: row;
-        position: relative;
-        width: 50%;
+        position: absolute;
+        width: 95%;
+        height: 10%;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -361,27 +362,17 @@ button {
         border: solid 2px whitesmoke;
         border-radius: 8px;
         padding: 0px 6px;
+        z-index: 100;
+        bottom: 4px;
     }
 }
 
-@media(max-height:900px){
-    h1{
+@media(max-height:900px) {
+    h1 {
         display: none;
         font-size: 16px;
         padding: 4px;
         margin: 2px;
-    }
-}
-
-@media(max-width:800px) {
-    .canvas-outerframe {
-        width: 350px;
-        height: 350px;
-    }
-
-    .canvas-frame {
-        width: 300px;
-        height: 300px;
     }
 }
 
