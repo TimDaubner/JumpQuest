@@ -85,6 +85,10 @@ function startGame() {
         }
     }
     addBtnRefs();
+    document.addEventListener('fullscreenchange', fullscreenHandler);
+    document.addEventListener('webkitfullscreenchange', fullscreenHandler);
+    document.addEventListener('mozfullscreenchange', fullscreenHandler);
+    document.addEventListener('MSFullscreenChange', fullscreenHandler);
 }
 
 /**
@@ -101,18 +105,12 @@ function closeInstructions() {
     document.getElementById('instructions').classList.add('d_none');
 }
 
-document.addEventListener('fullscreenchange', fullscreenHandler);
-document.addEventListener('webkitfullscreenchange', fullscreenHandler);
-document.addEventListener('mozfullscreenchange', fullscreenHandler);
-document.addEventListener('MSFullscreenChange', fullscreenHandler);
-
 /**
  * Handles fullscreen toggle events.
  */
 function fullscreenHandler() {
     if (document.fullscreenElement === canvas) {
         isFullscreen = true;
-        add_D_None();
         canvas.style.borderRadius = '0';
         canvas.width = screen.width * 2;
         canvas.height = screen.height * 2;
@@ -122,7 +120,6 @@ function fullscreenHandler() {
         canvas.width = 720 * 2;
         canvas.height = 480 * 2;
         world.ctx.scale(6.2, 6.2);
-        remove_D_None();
     }
 }
 
@@ -238,7 +235,7 @@ function addBtnRefs() {
     btn_controller.classList.remove('d_none');
     leftBtn = document.getElementById("leftBtn");
     rightBtn = document.getElementById("rightBtn");
-    sprintBtn =document.getElementById("sprintBtn");
+    sprintBtn = document.getElementById("sprintBtn");
     jumpBtn = document.getElementById("jumpBtn");
     fireBtn = document.getElementById("fireBtn");
     buyBtn = document.getElementById("fireBtn");
@@ -269,12 +266,12 @@ function addBtnRefs() {
         controller.RIGHT = false;
     });
 
-    sprintBtn.addEventListener("touchstart",e => {
-        if(!controller.RUN){
+    sprintBtn.addEventListener("touchstart", e => {
+        if (!controller.RUN) {
             sprintBtn.classList.add('invert');
             controller.RUN = true;
         }
-        else{
+        else {
             sprintBtn.classList.remove('invert');
             controller.RUN = false;
         }
