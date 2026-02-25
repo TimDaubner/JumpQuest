@@ -41,13 +41,17 @@
     <h1 id="h1" class="rock-salt-regular">Jump Quest</h1>
     <div id="canvas_outerframe" class="canvas-outerframe">
         <canvas id="canvas" class="canvas-frame"></canvas>
-        <div class="menu d_none" id="burgermenu" onclick="openMenu(event)"><img id="burger" src="img/GUI/PNG/google/menu.svg"
-                alt="">
-            <div class="upper-right d_none" id="menu" onclick="event.stopPropagation()">
+        <div class="menu d_none" id="burgermenu" onclick="openMenu(event)"><img id="burger"
+                src="img/GUI/PNG/google/menu.svg" alt="">
+                <div class="upper-right d_none" id="menu" onclick="event.stopPropagation()">
+                    <button class="rock-salt-regular" onclick="backToMenu()">back to main <img
+                            src="./img/GUI/PNG/google/back.svg" alt=""></button>
                 <button class="rock-salt-regular" id="pause" onclick="pauseGame()">pause <img
                         src="./img/GUI/PNG/google/pause.svg" alt=""></button>
-                <button class="rock-salt-regular" onclick="restartGame()">restart <img src="./img/GUI/PNG/google/restart.svg" alt=""></button>
-                <button class="rock-salt-regular" onclick="fullscreenMode()">fullscreen <img src="./img/GUI/PNG/google/fullscreen.svg" alt=""></button>
+                <button class="rock-salt-regular" onclick="restartGame()">restart <img
+                        src="./img/GUI/PNG/google/restart.svg" alt=""></button>
+                <button class="rock-salt-regular" onclick="fullscreenMode()">fullscreen <img
+                        src="./img/GUI/PNG/google/fullscreen.svg" alt=""></button>
                 <button class="rock-salt-regular" id="soundBtn">sound off<img id="soundImg"
                         src="./img/GUI/PNG/google/sound_off.svg" alt=""></button>
             </div>
@@ -56,21 +60,27 @@
             <div class="buttons">
                 <button onclick="startGame()" class="start-btn rock-salt-regular">START</button>
                 <button onclick="openInstructions()" class="settings-btn"></button>
-                <a class="link rock-salt-regular" href="impressum/impressum.html">Impressum</a>
+                <a class="link rock-salt-regular" target="_blank" href="impressum/impressum.html">Impressum</a>
             </div>
         </div>
     </div>
     </div>
     <div id="btn_controller" class="d_none responsive controller">
         <div class="move">
-            <button id="leftBtn" class="move-left controller-btn"><img class="arrow invert" src="img/GUI/PNG/google/controls/left.svg" alt=""></button>
-            <button id="rightBtn" class="move-right controller-btn"><img class="arrow rotate invert" src="img/GUI/PNG/google/controls/left.svg" alt=""></button>
+            <button id="leftBtn" class="move-left controller-btn"><img class="arrow invert"
+                    src="img/GUI/PNG/google/controls/left.svg" alt=""></button>
+            <button id="rightBtn" class="move-right controller-btn"><img class="arrow rotate invert"
+                    src="img/GUI/PNG/google/controls/left.svg" alt=""></button>
         </div>
-        <button id="buyBtn" class="buy controller-btn"><img class="invert" src="img/GUI/PNG/google/controls/buy.svg" alt="buy"></button>
+        <button id="buyBtn" class="buy controller-btn"><img class="invert" src="img/GUI/PNG/google/controls/buy.svg"
+                alt="buy"></button>
         <div class="action">
-            <button id="sprintBtn" class="action-sprint controller-btn"><img class="invert" src="img/GUI/PNG/google/controls/sprint.svg" alt=""></button>
-            <button id="jumpBtn" class="action-jump controller-btn"><img class="arrow invert" src="img/GUI/PNG/google/controls/jump.svg" alt=""></button>
-            <button id="fireBtn" class="action-fire controller-btn"><img class="arrow rotate invert" src="img/GUI/PNG/google/controls/shoot.svg" alt=""></button>
+            <button id="sprintBtn" class="action-sprint controller-btn"><img class="invert"
+                    src="img/GUI/PNG/google/controls/sprint.svg" alt=""></button>
+            <button id="jumpBtn" class="action-jump controller-btn"><img class="arrow invert"
+                    src="img/GUI/PNG/google/controls/jump.svg" alt=""></button>
+            <button id="fireBtn" class="action-fire controller-btn"><img class="arrow rotate invert"
+                    src="img/GUI/PNG/google/controls/shoot.svg" alt=""></button>
         </div>
     </div>
     <div id="instructions" class="instructions d_none rock-salt-regular">

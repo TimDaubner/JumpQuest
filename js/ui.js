@@ -1,5 +1,13 @@
 let isOpen = false;
 
+function backToMenu(event){
+    if (event != null) {
+        event.stopPropagation();
+    }
+    document.getElementById('container').classList.remove('d_none');
+    stopGame();
+}
+
 /**
  * Function for open the burger menu
  * @param {boolean} event 

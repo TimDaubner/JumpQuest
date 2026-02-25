@@ -345,8 +345,13 @@ button {
         padding: 8px;
     }
 
+    .upper-right {
+    gap: 0;
+    }
+
     .upper-right button {
         font-size: 14px;
+        margin: 0;
     }
 
     .canvas-outerframe {

@@ -92,6 +92,20 @@ function startGame() {
 }
 
 /**
+ * Stops the Game and goes back t main menu
+ */
+function stopGame() {
+    document.getElementById('h1').classList.remove('d_none');
+    let menu = document.getElementById('burgermenu');
+    menu.classList.add('d_none');
+    document.getElementById('container').classList.remove('d_none');
+    intervals.forEach(interval => {
+        clearInterval(interval);
+    });
+    openMenu();
+}
+
+/**
  * Opens the instructions overlay.
  */
 function openInstructions() {
