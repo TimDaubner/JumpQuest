@@ -32,6 +32,7 @@ h1 {
     background-color: #272f4f;
     border-radius: 24px;
     border: solid 4px #dcf3f2;
+    z-index: 100;
 }
 
 h2 {
@@ -68,7 +69,6 @@ p {
     z-index: 1;
     background-image: url('./img/GUI/PNG/Level_Menu/Window.png');
     background-position: center;
-    background-repeat: no-repeat;
     border-radius: 24px;
 }
 
@@ -262,7 +262,7 @@ button {
     flex-direction: column;
     padding: 16px;
     border: solid 4px #262d4a;
-    z-index: 10;
+    z-index: 101;
 }
 
 .close-btn {
@@ -338,6 +338,17 @@ button {
 }
 
 @media(max-width:1440px) {
+    h1 {
+        position: absolute;
+        top: 32px;
+        margin-top: 32px;
+        padding: 8px;
+    }
+
+    .upper-right button {
+        font-size: 14px;
+    }
+
     .canvas-outerframe {
         width: 100vw;
         height: 100vh;
@@ -367,12 +378,17 @@ button {
     }
 }
 
-@media(max-height:900px) {
+@media(max-height:600px) {
     h1 {
-        display: none;
-        font-size: 16px;
-        padding: 4px;
-        margin: 2px;
+        top: 0;
+        font-size: 3rem;
+    }
+}
+
+@media(max-height:500px) {
+    h1 {
+        top: 0;
+        font-size: 0.8rem;
     }
 }
 
