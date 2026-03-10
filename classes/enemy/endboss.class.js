@@ -198,7 +198,6 @@ class EndBoss extends MovableObject {
     }
 
     checkPlayerDistanceForHit() {
-        console.log(Math.abs(this.posX - world.character.posX));
         return Math.abs(this.posX - world.character.posX) < 35;
     }
 
