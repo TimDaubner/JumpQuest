@@ -1,11 +1,14 @@
 let isOpen = false;
 
-function backToMenu(event){
+function backToMenu(event) {
     if (event != null) {
         event.stopPropagation();
     }
     document.getElementById('container').classList.remove('d_none');
     stopGame();
+    cancelAnimationFrame(world.animationFrameId);
+    world.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.classList.remove('black');
 }
 
 /**

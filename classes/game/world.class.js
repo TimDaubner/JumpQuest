@@ -37,6 +37,7 @@ class World {
         label: 'Click me!',
         state: 'idle', // idle | hover | active
     };
+    animationFrameId;
 
     /**
     * Creates the game world, sets up the canvas, controller, level, collectables, and starts the game loop.
@@ -92,7 +93,7 @@ class World {
         this.coinCounter();
 
         let self = this;
-        requestAnimationFrame(function () { self.draw(); });
+        this.animationFrameId = requestAnimationFrame(() => this.draw());
     }
 
     /**
