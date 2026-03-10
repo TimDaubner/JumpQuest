@@ -293,6 +293,10 @@ button {
     background-color: black;
 }
 
+.endscreen {
+    z-index: 100;
+}
+
 .move,
 .action {
     display: flex;

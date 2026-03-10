@@ -45,6 +45,14 @@ class EndBoss extends MovableObject {
         './img/Boss/Dead/dead_04.png',
     ];
 
+    IMAGES_ATTACK = [
+        './img/Boss/Attack/attack_00.png',
+        './img/Boss/Attack/attack_01.png',
+        './img/Boss/Attack/attack_02.png',
+        './img/Boss/Attack/attack_03.png',
+        './img/Boss/Attack/attack_04.png',
+    ];
+
 
     oneTime = false;
     currentImg = 0;
@@ -57,6 +65,7 @@ class EndBoss extends MovableObject {
         this.loadImgs(this.IMAGES_IDLE);
         this.loadImgs(this.IMAGES_WALKING);
         this.loadImgs(this.IMAGES_DEATH);
+        this.loadImgs(this.IMAGES_ATTACK);
         this.animate();
 
         this.posX = 2600;
@@ -97,6 +106,7 @@ class EndBoss extends MovableObject {
             spawnLateGameEnemy();
         }
         world.statusbars[world.statusbars.length - 1].setPercentage(this.energy / 10);
+        this.checkPlayerForHit();
         if (this.checkPlayerSide()) {
             this.posX += Math.random() * 10;
             this.isMirrored = true;
@@ -104,6 +114,12 @@ class EndBoss extends MovableObject {
         else {
             this.posX -= Math.random() * 10;
             this.isMirrored = false;
+        }
+    }
+
+    checkPlayerForHit() {
+        if (this.checkPlayerDistanceForHit() && !world.character.isDead()) {
+            this.playAnimation(this.IMAGES_ATTACK);
         }
     }
 
@@ -155,6 +171,10 @@ class EndBoss extends MovableObject {
             SoundHub.pauseOne(SoundHub.BOSS);
             SoundHub.pauseOne(SoundHub.BACKGROUND);
             SoundHub.playOne(SoundHub.WON);
+            setTimeout(() => {
+                document.getElementById('container_end').classList.add('endscreen');
+            }, 5000);
+
         }, 2500);
     }
 
@@ -175,6 +195,11 @@ class EndBoss extends MovableObject {
      */
     checkPlayerDistance() {
         return (this.posX - world.character.posX) < 275;
+    }
+
+    checkPlayerDistanceForHit() {
+        console.log(Math.abs(this.posX - world.character.posX));
+        return Math.abs(this.posX - world.character.posX) < 35;
     }
 
     /**

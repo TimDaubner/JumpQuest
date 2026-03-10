@@ -9,6 +9,7 @@ function backToMenu(event) {
     cancelAnimationFrame(world.animationFrameId);
     world.ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvas.classList.remove('black');
+    SoundHub.stopAllSounds();
 }
 
 /**
@@ -51,7 +52,9 @@ function pauseGame() {
  * restart the game refresh all
  */
 function restartGame() {
-    openMenu();
+    document.getElementById('container_end').classList.remove('endscreen');
+    if (isOpen) openMenu();
+
     if (!isRunning) {
         isRunning = true;
         document.getElementById('pause').innerHTML = `pause <img src="./img/GUI/PNG/google/pause.svg" alt="pause">`;

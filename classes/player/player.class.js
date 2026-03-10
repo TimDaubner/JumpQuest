@@ -238,7 +238,10 @@ class Player extends MovableObject {
             isRunning = false;
             SoundHub.pauseOne(SoundHub.BACKGROUND);
             SoundHub.playOne(SoundHub.LOOSE);
-        }, 2500)
+            setTimeout(() => {
+                document.getElementById('container_end').classList.add('endscreen');
+            }, 5000);
+        }, 2500);
         this.oneTime = true;
     }
 
