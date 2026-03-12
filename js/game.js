@@ -20,8 +20,9 @@ let moveRight = false;
 
 /**
  * Initializes the game canvas, overlay, and button handlers.
- */
+*/
 function init() {
+
     canvas = document.getElementById('canvas');
     canvasOuterframe = document.getElementById('canvas_outerframe');
     overlay = document.getElementById('landscape-protection');
@@ -41,6 +42,8 @@ function init() {
             canvas.classList.remove('resize');
         }
     });
+
+    document.getElementById('start_btn').removeAttribute('disabled', false);
 }
 
 /**
