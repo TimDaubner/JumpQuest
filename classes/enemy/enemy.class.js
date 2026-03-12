@@ -10,6 +10,7 @@ class Enemy extends MovableObject {
     id;
     isHit = false;
     isDead = false;
+    isDying = false;
     offset = {
         top: 40,
         left: 34,
@@ -95,19 +96,27 @@ class Enemy extends MovableObject {
      * @param {number} index - Index of the enemy in the world enemies array
      */
     playDeathAnimation(index) {
-        let i = this.currentImg % this.IMAGES_DEATH.length;
-        let path = this.IMAGES_DEATH[i];
-        this.img = this.imgCache[path];
-        if (this.IMAGES_DEATH.length - 1 > i) {
+        this.currentImg = 0;
+
+        let deathInterval = setInterval(() => {
+            let path = this.IMAGES_DEATH[this.currentImg];
+            this.img = this.imgCache[path];
+
             this.currentImg++;
-        }
-        else {
-            this.isDead = true;
-            setTimeout(() => {
-                world.level.enemies.splice(index, 1);
-            }, 2500);
-        }
+
+            if (this.currentImg >= this.IMAGES_DEATH.length) {
+                clearInterval(deathInterval);
+                this.isDead = true;
+
+                setTimeout(() => {
+                    world.level.enemies.splice(index, 1);
+                }, 2500);
+            }
+
+        }, 150);
     }
+
+
 
     /**
      * Sets the enemy as "hit" and resets hit status after 2 seconds.
@@ -116,7 +125,7 @@ class Enemy extends MovableObject {
         setInterval(() => {
             if (this.isHit)
                 this.isHit = false;
-        }, 2000);
+        }, 1800);
         this.isHit = true;
     }
 }

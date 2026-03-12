@@ -172,7 +172,7 @@ class World {
             this.throwableObjects.forEach(throwableObject => {
                 if (throwableObject.isColliding(enemy)) {
                     this.checkEnemyReaction(enemy, index);
-                    enemy.stopHit();
+                    if (index == 0) return;
                 }
             });
         });
@@ -184,14 +184,12 @@ class World {
       * @param {number} index 
       */
     checkEnemyReaction(enemy, index) {
-        if (enemy.energy <= 0) {
+        if (enemy.energy <= 0 && !enemy.isDying) {
+            enemy.isDying = true;
             enemy.playDeathAnimation(index);
         }
-        if (!enemy.isHit) {
+        else if (!enemy.isHit) {
             enemy.energy -= 50;
-        }
-        if (enemy.energy <= 0) {
-            enemy.playDeathAnimation(index);
         }
     }
 

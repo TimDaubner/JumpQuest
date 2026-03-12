@@ -13,7 +13,7 @@ class Player extends MovableObject {
     speed = 0.7;
     adjustValue = 1;
     endurance = 100;
-    gas = 100;
+    gas = 10000;
     isAttacking = false;
     oneTime = false;
     offset = {

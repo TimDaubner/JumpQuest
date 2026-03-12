@@ -13,7 +13,7 @@ class EndBoss extends MovableObject {
         sizeX: 6,
         sizeY: 1.8
     }
-    energy = 1000;
+    energy = 100;
     isDead = false;
     IMAGES_IDLE = [
         './img/Boss/Idle/idle_r_00.png',
@@ -55,6 +55,7 @@ class EndBoss extends MovableObject {
 
 
     oneTime = false;
+    oneTimeDeath = false;
     currentImg = 0;
 
     /**
@@ -68,7 +69,7 @@ class EndBoss extends MovableObject {
         this.loadImgs(this.IMAGES_ATTACK);
         this.animate();
 
-        this.posX = 2600;
+        this.posX = 260;
         this.posX += Math.random() * 200;
         this.posY = 25;
         this.speed = 0.4 + Math.random() * 0.25;
@@ -146,15 +147,25 @@ class EndBoss extends MovableObject {
      * @param {number} index - Index of the boss in the enemies array
      */
     playDeathAnimation(index) {
-        let i = this.currentImg % this.IMAGES_DEATH.length;
-        let path = this.IMAGES_DEATH[i];
-        this.img = this.imgCache[path];
-        if (this.IMAGES_DEATH.length - 1 > i) {
+        this.currentImg = 0;
+
+        let deathInterval = setInterval(() => {
+            let path = this.IMAGES_DEATH[this.currentImg];
+            this.img = this.imgCache[path];
+
             this.currentImg++;
-        }
-        else {
-            this.stopGamePlaying(index);
-        }
+
+            if (this.currentImg >= this.IMAGES_DEATH.length) {
+                clearInterval(deathInterval);
+            }
+            else {
+                this.stopGamePlaying(index);
+                setTimeout(() => {
+                    clearInterval(deathInterval);
+                }, 1000);
+            }
+        }, 150);
+
     }
 
     /**
@@ -162,6 +173,8 @@ class EndBoss extends MovableObject {
      * @param {number} index - Index of the boss in the enemies array
      */
     stopGamePlaying(index) {
+        if (this.oneTimeDeath) return;
+        this.oneTimeDeath = true;
         this.isDead = true;
         world.statusbars[world.statusbars.length - 1].setPercentage(0);
         world.cacheTimeout.push(
