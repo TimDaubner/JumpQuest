@@ -72,7 +72,6 @@ function getSoundForAllBtns() {
 function startGame() {
     document.getElementById('h1').classList.add('d_none');
     if (window.innerWidth < 1400) {
-        console.log("Scaler");
         document.getElementById('canvas').classList.add('smaller-height');
     }
     let menu = document.getElementById('burgermenu');
@@ -148,8 +147,6 @@ function remove_D_None() {
  */
 function fullscreenMode() {
     if (!isFullscreen) {
-        console.log("FULL");
-
         canvas.classList.add('resize');
         canvas.style.borderRadius = '0';
         canvasOuterframe.requestFullscreen().catch(err => {
@@ -157,7 +154,6 @@ function fullscreenMode() {
         });
         isFullscreen = true;
     } else {
-        console.log("SMALL");
         canvas.classList.remove('resize');
         document.exitFullscreen();
         isFullscreen = false;
