@@ -103,7 +103,7 @@ p {
 
 #burgermenu {
     position: relative;
-    bottom: 220px;
+    bottom: 0px;
     right: 75px;
     z-index: 21;
 }
@@ -362,11 +362,12 @@ button {
         width: 100vw;
         height: 100vh;
         border-radius: 0;
+        align-items: normal;
     }
 
     .canvas-frame {
-        width: 80vw;
-        height: 80vh;
+        width: 100vw;
+        height: 100vh;
     }
 
     .controller {
@@ -385,7 +386,15 @@ button {
         z-index: 100;
         bottom: 4px;
     }
+
+
 }
+
+.smaller-height {
+    height: 90vh;
+}
+
+.burger-menu-pos {}
 
 @media(max-height:600px) {
     h1 {
@@ -401,12 +410,16 @@ button {
     }
 }
 
-@media(max-height:1400px) {
+@media(max-width:1400px) {
     #burgermenu {
-        position: relative;
-        bottom: 145px;
-        right: 75px;
-        z-index: 11;
+        bottom: -10vh !important;
+        z-index: 101;
+    }
+}
+
+@media(max-width:4400px) {
+    #burgermenu {
+        bottom: 200px;
     }
 }
 

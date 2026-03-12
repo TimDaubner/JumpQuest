@@ -63,6 +63,10 @@ function getSoundForAllBtns() {
  */
 function startGame() {
     document.getElementById('h1').classList.add('d_none');
+    if (window.innerWidth < 1400) {
+        console.log("Scaler");
+        document.getElementById('canvas').classList.add('smaller-height');
+    }
     let menu = document.getElementById('burgermenu');
     menu.classList.remove('d_none');
     canvas.classList.add('black');
@@ -232,13 +236,10 @@ document.addEventListener('keyup', (event) => {
 });
 
 function moveLeftDown() {
-    console.log("Go Left");
-
     controller.LEFT = true;
 }
 
 function moveLeftUp() {
-    console.log("Stop Go Left");
     controller.LEFT = false;
 }
 
