@@ -164,18 +164,17 @@ class EndBoss extends MovableObject {
     stopGamePlaying(index) {
         this.isDead = true;
         world.statusbars[world.statusbars.length - 1].setPercentage(0);
-        setTimeout(() => {
-            world.level.enemies.splice(index, 1);
-            isRunning = false;
-            world.endScreen.push(new EndScreen(90, 55, 0));
-            SoundHub.pauseOne(SoundHub.BOSS);
-            SoundHub.pauseOne(SoundHub.BACKGROUND);
-            SoundHub.playOne(SoundHub.WON);
+        world.cacheTimeout.push(
             setTimeout(() => {
+                world.level.enemies.splice(index, 1);
+                isRunning = false;
+                world.endScreen.push(new EndScreen(90, 55, 0));
+                SoundHub.pauseOne(SoundHub.BOSS);
+                SoundHub.pauseOne(SoundHub.BACKGROUND);
+                SoundHub.playOne(SoundHub.WON);
                 document.getElementById('container_end').classList.add('endscreen');
-            }, 5000);
-
-        }, 2500);
+            }, 2500)
+        );
     }
 
     /**

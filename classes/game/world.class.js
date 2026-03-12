@@ -10,6 +10,7 @@ class World {
     controller;
     camera_x;
     score = 0;
+    cacheTimeout = [];
     statusbars = [
         new Statusbar(10, 10, 0, 100),
         new Statusbar(10, 20, 1, 100),

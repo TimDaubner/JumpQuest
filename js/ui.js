@@ -52,7 +52,9 @@ function pauseGame() {
  * restart the game refresh all
  */
 function restartGame() {
-    document.getElementById('container_end').classList.remove('endscreen');
+    world.cacheTimeout.forEach(timeoutID => {
+        clearTimeout(timeoutID);
+    });
     if (isOpen) openMenu();
 
     if (!isRunning) {
@@ -71,6 +73,7 @@ function restartGame() {
 
     controller = new Controller();
     startGame();
+    document.getElementById('container_end').classList.remove('endscreen');
     if (SoundHub.isSoundOn) {
         SoundHub.isSoundOn = false;
         document.getElementById('soundBtn').innerHTML = `sound off <img src="./img/GUI/PNG/google/sound_off.svg" alt="run">`;

@@ -234,14 +234,14 @@ class Player extends MovableObject {
         world.statusbars[0].setPercentage(this.energy);
         this.playDeathAnimation(this.IMAGES_DEAD);
         world.endScreen.push(new EndScreen(90, 55, 1));
-        setTimeout(() => {
-            isRunning = false;
-            SoundHub.pauseOne(SoundHub.BACKGROUND);
-            SoundHub.playOne(SoundHub.LOOSE);
+        world.cacheTimeout.push(
             setTimeout(() => {
-                document.getElementById('container_end').classList.add('endscreen');
-            }, 5000);
-        }, 2500);
+                isRunning = false;
+                SoundHub.pauseOne(SoundHub.BACKGROUND);
+                SoundHub.playOne(SoundHub.LOOSE);
+            }, 2500)
+        );
+        document.getElementById('container_end').classList.add('endscreen');
         this.oneTime = true;
     }
 
