@@ -244,81 +244,103 @@ function addBtnRefs() {
     sprintBtn = document.getElementById("sprintBtn");
     jumpBtn = document.getElementById("jumpBtn");
     fireBtn = document.getElementById("fireBtn");
-    buyBtn = document.getElementById("fireBtn");
+    buyBtn = document.getElementById("buyBtn");
 
     leftBtn.addEventListener("touchstart", e => {
         e.preventDefault();
         controller.LEFT = true;
+        clickChangeStyle(leftBtn, controller.LEFT);
     });
 
     leftBtn.addEventListener("touchend", () => {
         controller.LEFT = false;
-    });
-
-    leftBtn.addEventListener("touchcancel", () => {
-        controller.LEFT = false;
+        leftBtn.style = "background-color:none";
+        clickChangeStyle(leftBtn, controller.LEFT);
     });
 
     rightBtn.addEventListener("touchstart", e => {
         e.preventDefault();
         controller.RIGHT = true;
+        clickChangeStyle(rightBtn, controller.RIGHT);
     });
 
     rightBtn.addEventListener("touchend", () => {
         controller.RIGHT = false;
-    });
-
-    rightBtn.addEventListener("touchcancel", () => {
-        controller.RIGHT = false;
+        clickChangeStyle(rightBtn, controller.RIGHT);
     });
 
     sprintBtn.addEventListener("touchstart", e => {
-        if (!controller.RUN) {
-            sprintBtn.classList.add('invert');
-            controller.RUN = true;
-        }
-        else {
-            sprintBtn.classList.remove('invert');
-            controller.RUN = false;
-        }
+        e.preventDefault();
+        controller.RUN = true;
+        clickChangeStyle(sprintBtn, controller.RUN);
     });
 
-    jumpBtn.addEventListener("touchstart", () => {
+    sprintBtn.addEventListener("touchend", () => {
+        controller.RUN = false;
+        clickChangeStyle(sprintBtn, controller.RUN);
+    });
+
+    jumpBtn.addEventListener("touchstart", e => {
+        e.preventDefault();
         controller.JUMP = true;
+        clickChangeStyle(jumpBtn, controller.JUMP);
     });
 
     jumpBtn.addEventListener("touchend", () => {
         setTimeout(() => {
             controller.JUMP = false;
+            clickChangeStyle(jumpBtn, controller.JUMP);
         }, 100);
     });
 
     jumpBtn.addEventListener("touchcancel", () => {
         controller.JUMP = false;
+        clickChangeStyle(jumpBtn, controller.JUMP);
     });
 
-    fireBtn.addEventListener("touchstart", () => {
+    fireBtn.addEventListener("touchstart", e => {
+        e.preventDefault();
         controller.ATTACK = true;
+        clickChangeStyle(fireBtn, controller.ATTACK);
     });
+
     fireBtn.addEventListener("touchend", () => {
         setTimeout(() => {
             controller.ATTACK = false;
+            clickChangeStyle(fireBtn, controller.ATTACK);
         }, 100);
     });
 
     fireBtn.addEventListener("touchcancel", () => {
         controller.ATTACK = false;
+        clickChangeStyle(fireBtn, controller.ATTACK);
     });
 
-    buyBtn.addEventListener("touchstart", () => {
+    buyBtn.addEventListener("touchstart", e => {
+        e.preventDefault();
         controller.BUY = true;
+        clickChangeStyle(buyBtn, controller.BUY);
     });
 
-    buyBtn.addEventListener("touched", () => {
+    buyBtn.addEventListener("touchend", () => {
         controller.BUY = false;
+        clickChangeStyle(buyBtn, controller.BUY);
     });
+
     buyBtn.addEventListener("touchcancel", () => {
         controller.BUY = false;
+        clickChangeStyle(buyBtn, controller.BUY);
     });
 }
 
+
+function clickChangeStyle(btn, press) {
+    if (press) {
+        btn.style = "background-color:black";
+        btn.firstChild.style = "filter:none";
+    }
+    else {
+        btn.style = "background-color:none";
+        btn.firstChild.style = "filter:invert()";
+    }
+}

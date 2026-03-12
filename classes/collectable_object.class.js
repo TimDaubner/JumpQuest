@@ -28,7 +28,7 @@ class CollectableObject extends MovableObject {
         this.posX = posX;
         this.posX += Math.random() * 2500;
         this.posY = posY;
-        this.posY += (Math.random() * 100) + 20;
+        this.posY += (Math.random() * 100) + 10;
         this.checkSprayer(img);
         this.height = 10;
     }
