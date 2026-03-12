@@ -1,4 +1,5 @@
 let canvas;
+let canvasOuterframe;
 let overlay;
 let world;
 let controller = new Controller();
@@ -22,6 +23,7 @@ let moveRight = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
+    canvasOuterframe = document.getElementById('canvas_outerframe');
     overlay = document.getElementById('landscape-protection');
     btn_controller = document.getElementById('btn_controller');
     if (isProbablyMobile()) {
@@ -89,10 +91,6 @@ function startGame() {
         }
     }
     addBtnRefs();
-    document.addEventListener('fullscreenchange', fullscreenHandler);
-    document.addEventListener('webkitfullscreenchange', fullscreenHandler);
-    document.addEventListener('mozfullscreenchange', fullscreenHandler);
-    document.addEventListener('MSFullscreenChange', fullscreenHandler);
 }
 
 /**
@@ -124,37 +122,18 @@ function closeInstructions() {
 }
 
 /**
- * Handles fullscreen toggle events.
- */
-function fullscreenHandler() {
-    if (document.fullscreenElement === canvas) {
-        isFullscreen = true;
-        canvas.style.borderRadius = '0';
-        canvas.width = screen.width * 2;
-        canvas.height = screen.height * 2;
-        world.ctx.scale(14, 14);
-    } else {
-        isFullscreen = false;
-        canvas.width = 720 * 2;
-        canvas.height = 480 * 2;
-        world.ctx.scale(6.2, 6.2);
-    }
-}
-
-/**
  * Adds the 'd_none' class to hide UI elements for fullscreen mode.
  */
 function add_D_None() {
-    document.getElementById('upper_right').classList.add('d_none');
-    document.getElementById('container').classList.add('d_none');
+    document.getElementById('burgermenu').classList.add('fix');
     document.getElementById('h1').classList.add('d_none');
 }
 
 /**
  * Removes the 'd_none' class to show UI elements after exiting fullscreen.
- */
+*/
 function remove_D_None() {
-    document.getElementById('upper_right').classList.remove('d_none');
+    document.getElementById('burgermenu').classList.remove('fix');
     document.getElementById('h1').classList.remove('d_none');
 }
 
@@ -163,14 +142,30 @@ function remove_D_None() {
  */
 function fullscreenMode() {
     if (!isFullscreen) {
+        console.log("FULL");
+
+        canvas.classList.add('resize');
         canvas.style.borderRadius = '0';
-        canvas.requestFullscreen().catch(err => {
+        canvasOuterframe.requestFullscreen().catch(err => {
             console.error("Failed to enter fullscreen:", err);
         });
+        isFullscreen = true;
     } else {
+        console.log("SMALL");
+        canvas.classList.remove('resize');
         document.exitFullscreen();
+        isFullscreen = false;
     }
 }
+
+/**
+ * exits fullscreen mode with escape.
+ */
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        canvas.classList.remove('resize');
+    }
+});
 
 screen.orientation.addEventListener('change', () => {
     if (screen.orientation.type == 'landscape-primary' || screen.width > 1400) {

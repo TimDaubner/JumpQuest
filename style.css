@@ -325,6 +325,11 @@ button {
     transform: rotateZ(180deg);
 }
 
+.resize {
+    width: 100vw;
+    height: 100vh;
+}
+
 /*#endregion NORMAL*/
 
 /* #region SMARTPHONES*/
