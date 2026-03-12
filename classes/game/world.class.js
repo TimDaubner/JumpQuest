@@ -16,6 +16,7 @@ class World {
         new Statusbar(10, 20, 1, 100),
         new Statusbar(10, 30, 2, 100),
         new Statusbar(3, 7, 3, 10),
+        new Statusbar(3, 17, 9, 9),
         new Statusbar(150, 10, 4, 10),
         new Statusbar(4, 27, 7, 7),
     ];

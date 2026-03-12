@@ -11,7 +11,8 @@ class CollectableObject extends MovableObject {
         './img/Objects/sprayer.png',
         './img/Objects/crystal.png',
         './img/Objects/key.png',
-        './img/Objects/heart.png'
+        './img/Objects/heart.png',
+        './img/Objects/blitz.png'
     ];
 
     /**

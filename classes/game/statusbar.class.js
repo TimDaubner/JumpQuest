@@ -13,7 +13,8 @@ class Statusbar extends DrawableObject {
         './img/Objects/crystal.png',
         './img/Objects/key.png',
         './img/Objects/sprayer.png',
-        './img/GUI/PNG/Main_UI/Boss_HP_Bar_2.png'
+        './img/GUI/PNG/Main_UI/Boss_HP_Bar_2.png',
+        './img/Objects/blitz.png'
     ];
 
     percentage = 100;
@@ -51,7 +52,7 @@ class Statusbar extends DrawableObject {
      * @returns {number} Height of the status bar
      */
     checkHeight(img) {
-        if ('./img/Objects/heart.png' === this.IMAGE_BARS[img] || './img/Objects/coin.png' === this.IMAGE_BARS[img] || './img/Objects/sprayer.png' === this.IMAGE_BARS[img]) {
+        if ('./img/Objects/blitz.png' === this.IMAGE_BARS[img] || './img/Objects/heart.png' === this.IMAGE_BARS[img] || './img/Objects/coin.png' === this.IMAGE_BARS[img] || './img/Objects/sprayer.png' === this.IMAGE_BARS[img]) {
             return 10;
         }
         else {
