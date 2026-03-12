@@ -417,8 +417,12 @@ button {
 
 @media(max-width:1400px) {
     #burgermenu {
-        bottom: -10vh !important;
+        bottom: 0 !important;
         z-index: 101;
+    }
+
+    .upper-right {
+        top: 5vh;
     }
 }
 
