@@ -35,6 +35,12 @@ function init() {
         }
     }
     getSoundForAllBtns();
+
+    document.addEventListener('fullscreenchange', () => {
+        if (!document.fullscreenElement) {
+            canvas.classList.remove('resize');
+        }
+    });
 }
 
 /**
@@ -157,15 +163,6 @@ function fullscreenMode() {
         isFullscreen = false;
     }
 }
-
-/**
- * exits fullscreen mode with escape.
- */
-document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) {
-        canvas.classList.remove('resize');
-    }
-});
 
 screen.orientation.addEventListener('change', () => {
     if (screen.orientation.type == 'landscape-primary' || screen.width > 1400) {
