@@ -13,7 +13,7 @@ class EndBoss extends MovableObject {
         sizeX: 6,
         sizeY: 1.8
     }
-    energy = 100;
+    energy = 1000;
     isDead = false;
     IMAGES_IDLE = [
         './img/Boss/Idle/idle_r_00.png',
@@ -69,7 +69,7 @@ class EndBoss extends MovableObject {
         this.loadImgs(this.IMAGES_ATTACK);
         this.animate();
 
-        this.posX = 260;
+        this.posX = 2600;
         this.posX += Math.random() * 200;
         this.posY = 25;
         this.speed = 0.4 + Math.random() * 0.25;
