@@ -38,15 +38,44 @@ function createEnemies(times) {
  * @param {number} times - Number of background segments to create
  */
 function createBackground(times) {
-    for (let i = -1; i < times; i++) {
-        bgo.push(new BackgroundObject("img/Background_City/city 1/1_bg.png", 299 * i, 0, false, null, 0));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/2_sun.png", 299 * i, 0, false, null, 0));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/4_shadow_skyline.png", 299 * i, 0, false, null, 0));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/5_skyline.png", 299 * i, 0, false, null, 0));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/6_smog.png", 299 * i, 0, true, "left", 0.022));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/7_cars.png", 299 * i, 0, true, "right", 0.01));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/8_skyscrappers.png", 299 * i - 1, 0, false, null));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/10_shops.png", 299 * i, 0, false, null, 0));
-        bgo.push(new BackgroundObject("img/Background_City/city 1/9_smallsmog.png", 299 * i, 0, true, "right", 0.05));
-    }
+    const layers = [
+        { img: "img/Background_City/city 1/1_bg.png", xOffset: 0, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/2_sun.png", xOffset: 0, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/4_shadow_skyline.png", xOffset: 0, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/5_skyline.png", xOffset: 0, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/6_smog.png", xOffset: 0, move: true, dir: "left", speed: 0.022 },
+        { img: "img/Background_City/city 1/7_cars.png", xOffset: 0, move: true, dir: "right", speed: 0.01 },
+        { img: "img/Background_City/city 1/8_skyscrappers.png", xOffset: -1, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/10_shops.png", xOffset: 0, move: false, dir: null, speed: 0 },
+        { img: "img/Background_City/city 1/9_smallsmog.png", xOffset: 0, move: true, dir: "right", speed: 0.05 }
+    ];
+
+    layers.forEach(layer => {
+        for (let i = -1; i < times; i++) {
+            // if (layer.dir == 'right') {
+            //     bgo.push(
+            //         new BackgroundObject(
+            //             layer.img,
+            //             299 * i + layer.xOffset,
+            //             0,
+            //             layer.move,
+            //             layer.dir,
+            //             layer.speed
+            //         )
+            //     );
+            // }
+            // else {
+            bgo.push(
+                new BackgroundObject(
+                    layer.img,
+                    299 * i + layer.xOffset,
+                    0,
+                    layer.move,
+                    layer.dir,
+                    layer.speed
+                )
+            );
+            // }
+        }
+    });
 }

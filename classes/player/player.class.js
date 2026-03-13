@@ -5,7 +5,7 @@
  * @extends MovableObject
  */
 class Player extends MovableObject {
-    width = 25.6 * 5;
+    width = 25.6 * 5; dd
     height = 25.6 * 5;
     posX = 0;
     posY = 22;
@@ -13,7 +13,7 @@ class Player extends MovableObject {
     speed = 0.7;
     adjustValue = 1;
     endurance = 100;
-    gas = 10000;
+    gas = 100;
     isAttacking = false;
     oneTime = false;
     offset = {

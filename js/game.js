@@ -87,7 +87,7 @@ function startGame() {
     posX = world.character.posX;
     posY = world.character.posY;
     isRunning = true;
-    spawnEnemy();
+    // spawnEnemy();
     if (localStorage.getItem("cacheSound")) {
         const cacheSound = JSON.parse(localStorage.getItem("cacheSound"));
         if (!cacheSound) {

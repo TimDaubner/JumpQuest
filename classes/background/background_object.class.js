@@ -24,10 +24,10 @@ class BackgroundObject extends MovableObject {
         this.speed = speed;
         if (isMoving) {
             if (direction === "right") {
-                this.moveRight(300);
+                this.moveRight(300, 20);
             }
             if (direction === "left") {
-                this.moveLeft(300);
+                this.moveLeft(300, 20);
             }
         }
     }
@@ -37,28 +37,36 @@ class BackgroundObject extends MovableObject {
      * Wraps around when reaching the given width.
      * @param {number} width - Width after which the object wraps
      */
-    moveLeft(width) {
+    moveLeft(width, tiles) {
+        const levelWidth = width * tiles;
+
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.posX <= -width) {
-                    this.posX = width - 1 + this.posX;
-                }
+
                 this.posX -= this.speed;
+
+                if (this.posX <= -width) {
+                    this.posX += levelWidth;
+                }
+
             }
         }, 1000 / 60));
     }
 
-    moveRight(width) {
+    moveRight(width, tiles) {
+        const levelWidth = width * tiles;
+
         intervals.push(setInterval(() => {
             if (isRunning) {
-                if (this.posX >= width) {
-                    this.posX = -width + 1 + this.posX;
 
-                }
                 this.posX += this.speed;
+
+                if (this.posX >= levelWidth) {
+                    this.posX -= levelWidth;
+                }
+
             }
         }, 1000 / 60));
     }
-
 
 }
